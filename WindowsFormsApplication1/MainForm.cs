@@ -17,7 +17,9 @@ namespace SafeFolder
         #region Member Variables
         private string _safeFolderPath = @"c:\SafeFolder";
         private FileSystemWatcher _fileSysWatcher;
+        private static EncryptionPreferencesManager _encryptionPrefManager = new EncryptionPreferencesManager();
         private int _activeRowIndex = -1;
+        
         #endregion
 
         #region Properties
@@ -224,37 +226,14 @@ namespace SafeFolder
         }
 
 
-        private static EncryptForm encryptForm = null;
+        
+
         private static List<string> ShowEncryptForm()
         {
             List<string> emailList = new List<string>();
-            try
-            {
-                if (encryptForm == null)
-                {
-                    encryptForm = new EncryptForm();
-                    //encryptForm.FormClosed += delegate { encryptForm = null; };
-                }
-                encryptForm.ShowDialog();
-                if (encryptForm.DialogResult == DialogResult.OK)
-                {
-                    emailList = (from string e in encryptForm.EmailList.CheckedItems
-                                      select e).ToList<string>();
 
-                }
-            }
-            catch
-            {
-                System.Diagnostics.Debugger.Break();
-            }
-            finally
-            {
-                if (encryptForm != null)
-                {
-                    encryptForm.Dispose();
-                    encryptForm = null;
-                }
-            }
+            emailList = _encryptionPrefManager.ShowEncryptForm();
+
             return emailList;
         }
 

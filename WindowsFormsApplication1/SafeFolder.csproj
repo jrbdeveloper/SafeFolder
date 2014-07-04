@@ -50,6 +50,7 @@
     <Compile Include="EncryptForm.Designer.cs">
       <DependentUpon>EncryptForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="EncryptionPreferencesManager.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
