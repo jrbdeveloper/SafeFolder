@@ -232,7 +232,8 @@ namespace SafeFolder
         {
             List<string> emailList = new List<string>();
 
-            emailList = _encryptionPrefManager.ShowEncryptForm();
+             _encryptionPrefManager.ShowEncryptForm();
+             emailList = _encryptionPrefManager.emailList;
 
             return emailList;
         }
@@ -254,7 +255,7 @@ namespace SafeFolder
         /// </summary>
         private void FileExtensionFilter()
         {
-           // List<string> emailList = ShowEncryptForm();
+          List<string> emailList = ShowEncryptForm();
             DirectoryInfo dirInfo = new DirectoryInfo(_safeFolderPath);
             foreach (var item in dirInfo.GetFiles("*.*"))
             {
