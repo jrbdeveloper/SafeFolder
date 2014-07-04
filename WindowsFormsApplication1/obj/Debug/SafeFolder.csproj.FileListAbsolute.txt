@@ -6,3 +6,12 @@ C:\Users\jabe\documents\visual studio 2013\Projects\WindowsFormsApplication1\Win
 C:\Users\jabe\documents\visual studio 2013\Projects\WindowsFormsApplication1\WindowsFormsApplication1\obj\Debug\SafeFolder.csproj.GenerateResource.Cache
 C:\Users\jabe\documents\visual studio 2013\Projects\WindowsFormsApplication1\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.exe
 C:\Users\jabe\documents\visual studio 2013\Projects\WindowsFormsApplication1\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.pdb
+D:\_Core Tech\SafeFolder\WindowsFormsApplication1\bin\Debug\WindowsFormsApplication1.exe.config
+D:\_Core Tech\SafeFolder\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.exe
+D:\_Core Tech\SafeFolder\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.pdb
+D:\_Core Tech\SafeFolder\WindowsFormsApplication1\bin\Debug\WindowsFormsApplication1.exe
+D:\_Core Tech\SafeFolder\WindowsFormsApplication1\bin\Debug\WindowsFormsApplication1.pdb
+D:\_Core Tech\SafeFolder\WindowsFormsApplication1\obj\Debug\SafeFolder.SafeFolder.resources
+D:\_Core Tech\SafeFolder\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.Properties.Resources.resources
+D:\_Core Tech\SafeFolder\WindowsFormsApplication1\obj\Debug\SafeFolder.csproj.GenerateResource.Cache
+D:\_Core Tech\SafeFolder\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.EncryptForm.resources

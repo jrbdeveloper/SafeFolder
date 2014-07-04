@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using WindowsFormsApplication1;
 
 namespace SafeFolder
 {
@@ -16,6 +17,10 @@ namespace SafeFolder
         #region Member Variables
         private string _safeFolderPath = @"c:\SafeFolder";
         private FileSystemWatcher _fileSysWatcher;
+        #endregion
+
+        #region Properties
+        public List<string> EmailAdressses { get; set; }
         #endregion
 
         #region Constructor
@@ -33,6 +38,7 @@ namespace SafeFolder
 
             InitializeTrayMenu();
             InitializeFileSystemWatcher();
+            EmailAdressses = new List<string>();
         }
 
         private void addServiceLocation_Click(object sender, EventArgs e)
@@ -161,6 +167,43 @@ namespace SafeFolder
             this.notifyIcon1.ContextMenu = new ContextMenu();
             this.notifyIcon1.ContextMenu.MenuItems.Add(new MenuItem("Show Safe Folder", new EventHandler(ShowSafeFolder)));
             this.notifyIcon1.ContextMenu.MenuItems.Add(new MenuItem("Show Configuration", new EventHandler(ShowConfigurationForm)));
+            this.notifyIcon1.ContextMenu.MenuItems.Add(new MenuItem("Test", new EventHandler(ShowEncryptForm)));
+        }
+
+        private void ShowEncryptForm(object sender, EventArgs e)
+        {
+            ShowEncryptForm();
+        }
+
+
+        private static EncryptForm encryptForm = null;
+        private static List<string> ShowEncryptForm()
+        {
+            List<string> emailList = new List<string>();
+            try
+            {
+                if (encryptForm == null)
+                {
+                    encryptForm = new EncryptForm();
+                    //encryptForm.FormClosed += delegate { encryptForm = null; };
+                }
+                encryptForm.ShowDialog();
+                if (encryptForm.DialogResult == DialogResult.OK)
+                {
+                    emailList = (from string e in encryptForm.EmailList.CheckedItems
+                                      select e).ToList<string>();
+
+                }
+            }
+            catch
+            {
+                System.Diagnostics.Debugger.Break();
+            }
+            finally
+            {
+                encryptForm.Dispose();
+            }
+            return emailList;
         }
 
         /// <summary>
@@ -180,6 +223,7 @@ namespace SafeFolder
         /// </summary>
         private void FileExtensionFilter()
         {
+            List<string> emailList = ShowEncryptForm();
             DirectoryInfo dirInfo = new DirectoryInfo(_safeFolderPath);
             foreach (var item in dirInfo.GetFiles("*.*"))
             {
@@ -188,9 +232,16 @@ namespace SafeFolder
                     var newFileName = item.FullName;
                     newFileName += ".safe";
 
-                    File.Move(item.FullName, newFileName);
+                    EncryptFiles(item, newFileName);
                 }
             }
+        }
+
+        private void EncryptFiles(FileInfo item, string newFileName)
+        {
+            //This fakes the encryption
+            //EmailAdressses  This property contains the addresses to encrypt for
+            File.Move(item.FullName, newFileName);
         }
         #endregion
                 

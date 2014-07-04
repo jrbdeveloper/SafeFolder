@@ -42,13 +42,13 @@
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.configurationList = new System.Windows.Forms.DataGridView();
-            this.closeButton = new System.Windows.Forms.Button();
-            this.isDefaultCheck = new System.Windows.Forms.CheckBox();
             this.configNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.localFilePath = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.emailAddressColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.serviceLocationPath = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.isDefaultColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.closeButton = new System.Windows.Forms.Button();
+            this.isDefaultCheck = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.configurationList)).BeginInit();
             this.SuspendLayout();
             // 
@@ -129,7 +129,7 @@
             // notifyIcon1
             // 
             this.notifyIcon1.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIcon1.Icon")));
-            this.notifyIcon1.Text = "notifyIcon1";
+            this.notifyIcon1.Text = "Safe Folder";
             this.notifyIcon1.Visible = true;
             // 
             // menuStrip1
@@ -161,27 +161,6 @@
             this.configurationList.TabIndex = 5;
             this.configurationList.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.configurationList_RowEnter);
             // 
-            // closeButton
-            // 
-            this.closeButton.Location = new System.Drawing.Point(560, 107);
-            this.closeButton.Name = "closeButton";
-            this.closeButton.Size = new System.Drawing.Size(75, 23);
-            this.closeButton.TabIndex = 14;
-            this.closeButton.Text = "Close";
-            this.closeButton.UseVisualStyleBackColor = true;
-            this.closeButton.Click += new System.EventHandler(this.closeButton_Click);
-            // 
-            // isDefaultCheck
-            // 
-            this.isDefaultCheck.AutoSize = true;
-            this.isDefaultCheck.Location = new System.Drawing.Point(476, 111);
-            this.isDefaultCheck.Name = "isDefaultCheck";
-            this.isDefaultCheck.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.isDefaultCheck.Size = new System.Drawing.Size(71, 17);
-            this.isDefaultCheck.TabIndex = 15;
-            this.isDefaultCheck.Text = "Is Default";
-            this.isDefaultCheck.UseVisualStyleBackColor = true;
-            // 
             // configNameColumn
             // 
             this.configNameColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
@@ -212,6 +191,27 @@
             this.isDefaultColumn.HeaderText = "Is Default";
             this.isDefaultColumn.Name = "isDefaultColumn";
             this.isDefaultColumn.ReadOnly = true;
+            // 
+            // closeButton
+            // 
+            this.closeButton.Location = new System.Drawing.Point(560, 107);
+            this.closeButton.Name = "closeButton";
+            this.closeButton.Size = new System.Drawing.Size(75, 23);
+            this.closeButton.TabIndex = 14;
+            this.closeButton.Text = "Close";
+            this.closeButton.UseVisualStyleBackColor = true;
+            this.closeButton.Click += new System.EventHandler(this.closeButton_Click);
+            // 
+            // isDefaultCheck
+            // 
+            this.isDefaultCheck.AutoSize = true;
+            this.isDefaultCheck.Location = new System.Drawing.Point(476, 111);
+            this.isDefaultCheck.Name = "isDefaultCheck";
+            this.isDefaultCheck.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.isDefaultCheck.Size = new System.Drawing.Size(71, 17);
+            this.isDefaultCheck.TabIndex = 15;
+            this.isDefaultCheck.Text = "Is Default";
+            this.isDefaultCheck.UseVisualStyleBackColor = true;
             // 
             // SafeFolder
             // 
