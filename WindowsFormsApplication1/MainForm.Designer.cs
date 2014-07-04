@@ -143,6 +143,8 @@
             // configurationList
             // 
             this.configurationList.AllowUserToDeleteRows = false;
+            this.configurationList.AllowUserToResizeColumns = false;
+            this.configurationList.AllowUserToResizeRows = false;
             this.configurationList.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.configurationList.BackgroundColor = System.Drawing.SystemColors.MenuBar;
             this.configurationList.BorderStyle = System.Windows.Forms.BorderStyle.None;
