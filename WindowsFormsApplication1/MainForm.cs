@@ -17,6 +17,19 @@ namespace SafeFolder
         #region Member Variables
         private string _safeFolderPath = @"c:\SafeFolder";
         private FileSystemWatcher _fileSysWatcher;
+        private int _activeRowIndex = -1;
+        #endregion
+
+        #region Properties
+        private DataGridView Grid
+        {
+            get { return (DataGridView)configurationList; }
+        }
+
+        private int GridRowCount
+        {
+            get { return configurationList.Rows.Count; }
+        }
         #endregion
 
         #region Properties
@@ -43,34 +56,28 @@ namespace SafeFolder
 
         private void addServiceLocation_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(configName.Text) || string.IsNullOrEmpty(localPath.Text) || string.IsNullOrEmpty(emailAddress.Text) || string.IsNullOrEmpty(servicePath.Text))
+            DataGridViewRow row = null;
+            if (GridRowCount > 2 && _activeRowIndex != -1)
             {
-                MessageBox.Show("You must complete all fields.");
+                ResetDefaultConfiguration();
+                row = SetRowValues();
+                ClearFields();
             }
             else
             {
-                var row = (DataGridViewRow)configurationList.Rows[0].Clone();
-
-                if (isDefaultCheck.Checked)
+                if (string.IsNullOrEmpty(configName.Text) || string.IsNullOrEmpty(localPath.Text) || string.IsNullOrEmpty(emailAddress.Text) || string.IsNullOrEmpty(servicePath.Text))
                 {
-                    ResetDefaultConfiguration();
+                    MessageBox.Show("You must complete all fields.");
                 }
-                
-                row.Cells[0].Value = configName.Text;
-                row.Cells[1].Value = localPath.Text;
-                row.Cells[2].Value = emailAddress.Text;
-                row.Cells[3].Value = servicePath.Text;
-                row.Cells[4].Value = isDefaultCheck.Checked;
-                configurationList.Rows.Add(row);
-
-                configName.Text = string.Empty;
-                localPath.Text = string.Empty;
-                emailAddress.Text = string.Empty;
-                servicePath.Text = string.Empty;
-                isDefaultCheck.Checked = false;
-            }            
+                else
+                {
+                    configurationList.Rows.Add(SetRowValues());
+                    _activeRowIndex = -1;
+                    ClearFields();                    
+                }
+            }
         }
-
+        
         private void fileSysWatcher_Created(object sender, FileSystemEventArgs e)
         {
             FileExtensionFilter();
@@ -115,27 +122,51 @@ namespace SafeFolder
             localPath.Text = grid.Rows[e.RowIndex].Cells[1].Value.ToString();
             emailAddress.Text = grid.Rows[e.RowIndex].Cells[2].Value.ToString();
             servicePath.Text = grid.Rows[e.RowIndex].Cells[3].Value.ToString();
-            isDefaultCheck.Checked = bool.Parse(grid.Rows[e.RowIndex].Cells[4].Value.ToString()); 
+            isDefaultCheck.Checked = bool.Parse(grid.Rows[e.RowIndex].Cells[4].Value.ToString());
+
+            _activeRowIndex = e.RowIndex;
         }
         #endregion
 
         #region Private Methods
+        private void ClearFields()
+        {
+            configName.Text = string.Empty;
+            localPath.Text = string.Empty;
+            emailAddress.Text = string.Empty;
+            servicePath.Text = string.Empty;
+            isDefaultCheck.Checked = false;
+        }
+
+        private DataGridViewRow SetRowValues()
+        {
+            var row = (DataGridViewRow)configurationList.Rows[0].Clone();
+
+            row.Cells[0].Value = configName.Text;
+            row.Cells[1].Value = localPath.Text;
+            row.Cells[2].Value = emailAddress.Text;
+            row.Cells[3].Value = servicePath.Text;
+            row.Cells[4].Value = isDefaultCheck.Checked;
+
+            return row;
+        }
+
         /// <summary>
         /// Method to check the grid for rows that are marked as default and update them because we want a new default
         /// </summary>
         private void ResetDefaultConfiguration()
         {
-            foreach (var rowItem in configurationList.Rows)
+            foreach (var item in configurationList.Rows)
             {
-                var currentRow = (DataGridViewRow)rowItem;
+                var row = (DataGridViewRow)item;
 
-                if (currentRow.Cells[4].Value != null)
+                if (row.Cells[4].Value != null)
                 {
-                    var isDefaultChecked = bool.Parse(currentRow.Cells[4].Value.ToString());
+                    var isDefaultChecked = bool.Parse(row.Cells[4].Value.ToString());
 
-                    if (isDefaultChecked)
+                    if(isDefaultChecked)
                     {
-                        currentRow.Cells[4].Value = false;
+                        row.Cells[4].Value = false;
                     }
                 }
             }
