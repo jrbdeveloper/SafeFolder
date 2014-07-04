@@ -80,12 +80,29 @@ namespace SafeFolder
         
         private void fileSysWatcher_Created(object sender, FileSystemEventArgs e)
         {
-            FileExtensionFilter();
+            FileOrFolderChanged(e);        
         }
 
         private void fileSysWatcher_Changed(object sender, FileSystemEventArgs e)
         {
-            FileExtensionFilter();
+            FileOrFolderChanged(e);        
+        }
+
+        private void FileOrFolderChanged(FileSystemEventArgs e)
+        {
+            if (e.ChangeType == WatcherChangeTypes.Created)
+            {
+                if (Directory.Exists(e.FullPath))
+                {
+                    // a new directory was created
+                    //MWS: TODO  code for Folders being added
+                }
+                else
+                {
+                    //A file was creeated
+                    FileExtensionFilter();
+                }
+            }
         }
 
         private void ShowSafeFolder(object sender, EventArgs e)
@@ -232,7 +249,11 @@ namespace SafeFolder
             }
             finally
             {
-                encryptForm.Dispose();
+                if (encryptForm != null)
+                {
+                    encryptForm.Dispose();
+                    encryptForm = null;
+                }
             }
             return emailList;
         }
@@ -254,7 +275,7 @@ namespace SafeFolder
         /// </summary>
         private void FileExtensionFilter()
         {
-            List<string> emailList = ShowEncryptForm();
+           // List<string> emailList = ShowEncryptForm();
             DirectoryInfo dirInfo = new DirectoryInfo(_safeFolderPath);
             foreach (var item in dirInfo.GetFiles("*.*"))
             {

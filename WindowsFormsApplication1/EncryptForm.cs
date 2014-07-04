@@ -30,5 +30,10 @@ namespace WindowsFormsApplication1
             lstRecipients.Items.Add(txtEmailAddress.Text, true);
             txtEmailAddress.Text = "";
         }
+
+        private void btnEncrypt_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }

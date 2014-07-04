@@ -68,6 +68,7 @@
             this.btnEncrypt.TabIndex = 3;
             this.btnEncrypt.Text = "Encrypt";
             this.btnEncrypt.UseVisualStyleBackColor = true;
+            this.btnEncrypt.Click += new System.EventHandler(this.btnEncrypt_Click);
             // 
             // EncryptForm
             // 
