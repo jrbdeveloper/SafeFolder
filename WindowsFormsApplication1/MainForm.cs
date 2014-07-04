@@ -217,7 +217,7 @@ namespace SafeFolder
             this.notifyIcon1.ContextMenu = new ContextMenu();
             this.notifyIcon1.ContextMenu.MenuItems.Add(new MenuItem("Show Safe Folder", new EventHandler(ShowSafeFolder)));
             this.notifyIcon1.ContextMenu.MenuItems.Add(new MenuItem("Show Configuration", new EventHandler(ShowConfigurationForm)));
-            this.notifyIcon1.ContextMenu.MenuItems.Add(new MenuItem("Test", new EventHandler(ShowEncryptForm)));
+            //this.notifyIcon1.ContextMenu.MenuItems.Add(new MenuItem("Test", new EventHandler(ShowEncryptForm)));
         }
 
         private void ShowEncryptForm(object sender, EventArgs e)
