@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using WindowsFormsApplication1;
+using SafeFolder.Classes;
 
 namespace SafeFolder
 {
@@ -145,6 +145,16 @@ namespace SafeFolder
 
             _activeRowIndex = e.RowIndex;
         }
+
+        private void Exit(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void ShowEncryptForm(object sender, EventArgs e)
+        {
+            ShowEncryptForm();
+        }
         #endregion
 
         #region Private Methods
@@ -175,10 +185,8 @@ namespace SafeFolder
         /// </summary>
         private void ResetDefaultConfiguration()
         {
-            foreach (var item in configurationList.Rows)
+            foreach (DataGridViewRow row in configurationList.Rows)
             {
-                var row = (DataGridViewRow)item;
-
                 if (row.Cells[4].Value != null)
                 {
                     var isDefaultChecked = bool.Parse(row.Cells[4].Value.ToString());
@@ -217,16 +225,10 @@ namespace SafeFolder
             this.notifyIcon1.ContextMenu = new ContextMenu();
             this.notifyIcon1.ContextMenu.MenuItems.Add(new MenuItem("Show Safe Folder", new EventHandler(ShowSafeFolder)));
             this.notifyIcon1.ContextMenu.MenuItems.Add(new MenuItem("Show Configuration", new EventHandler(ShowConfigurationForm)));
-            //this.notifyIcon1.ContextMenu.MenuItems.Add(new MenuItem("Test", new EventHandler(ShowEncryptForm)));
+            this.notifyIcon1.ContextMenu.MenuItems.Add(new MenuItem("Encrypt Files", new EventHandler(ShowEncryptForm)));
+            this.notifyIcon1.ContextMenu.MenuItems.Add("-");
+            this.notifyIcon1.ContextMenu.MenuItems.Add(new MenuItem("Quit Safe Folder", new EventHandler(Exit)));
         }
-
-        private void ShowEncryptForm(object sender, EventArgs e)
-        {
-            ShowEncryptForm();
-        }
-
-
-        
 
         private static List<string> ShowEncryptForm()
         {

@@ -49,20 +49,26 @@
             this.isDefaultColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.closeButton = new System.Windows.Forms.Button();
             this.isDefaultCheck = new System.Windows.Forms.CheckBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.firstName = new System.Windows.Forms.TextBox();
+            this.lastName = new System.Windows.Forms.TextBox();
+            this.password = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.configurationList)).BeginInit();
             this.SuspendLayout();
             // 
             // localPath
             // 
-            this.localPath.Location = new System.Drawing.Point(476, 34);
+            this.localPath.Location = new System.Drawing.Point(518, 56);
             this.localPath.Name = "localPath";
-            this.localPath.Size = new System.Drawing.Size(271, 20);
-            this.localPath.TabIndex = 1;
+            this.localPath.Size = new System.Drawing.Size(229, 20);
+            this.localPath.TabIndex = 5;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(371, 37);
+            this.label1.Location = new System.Drawing.Point(413, 59);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(99, 13);
             this.label1.TabIndex = 1;
@@ -71,7 +77,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(369, 74);
+            this.label2.Location = new System.Drawing.Point(411, 85);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(101, 13);
             this.label2.TabIndex = 3;
@@ -79,17 +85,17 @@
             // 
             // servicePath
             // 
-            this.servicePath.Location = new System.Drawing.Point(476, 71);
+            this.servicePath.Location = new System.Drawing.Point(518, 82);
             this.servicePath.Name = "servicePath";
-            this.servicePath.Size = new System.Drawing.Size(271, 20);
-            this.servicePath.TabIndex = 3;
+            this.servicePath.Size = new System.Drawing.Size(229, 20);
+            this.servicePath.TabIndex = 6;
             // 
             // addServiceLocation
             // 
-            this.addServiceLocation.Location = new System.Drawing.Point(641, 107);
+            this.addServiceLocation.Location = new System.Drawing.Point(641, 115);
             this.addServiceLocation.Name = "addServiceLocation";
             this.addServiceLocation.Size = new System.Drawing.Size(106, 23);
-            this.addServiceLocation.TabIndex = 4;
+            this.addServiceLocation.TabIndex = 9;
             this.addServiceLocation.Text = "Save Configuration";
             this.addServiceLocation.UseVisualStyleBackColor = true;
             this.addServiceLocation.Click += new System.EventHandler(this.addServiceLocation_Click);
@@ -97,7 +103,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(14, 73);
+            this.label3.Location = new System.Drawing.Point(11, 85);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(80, 13);
             this.label3.TabIndex = 7;
@@ -105,7 +111,7 @@
             // 
             // emailAddress
             // 
-            this.emailAddress.Location = new System.Drawing.Point(123, 70);
+            this.emailAddress.Location = new System.Drawing.Point(97, 82);
             this.emailAddress.Name = "emailAddress";
             this.emailAddress.Size = new System.Drawing.Size(229, 20);
             this.emailAddress.TabIndex = 2;
@@ -113,7 +119,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(14, 35);
+            this.label4.Location = new System.Drawing.Point(409, 33);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(103, 13);
             this.label4.TabIndex = 10;
@@ -121,10 +127,10 @@
             // 
             // configName
             // 
-            this.configName.Location = new System.Drawing.Point(123, 32);
+            this.configName.Location = new System.Drawing.Point(518, 30);
             this.configName.Name = "configName";
             this.configName.Size = new System.Drawing.Size(229, 20);
-            this.configName.TabIndex = 0;
+            this.configName.TabIndex = 4;
             // 
             // notifyIcon1
             // 
@@ -196,10 +202,10 @@
             // 
             // closeButton
             // 
-            this.closeButton.Location = new System.Drawing.Point(560, 107);
+            this.closeButton.Location = new System.Drawing.Point(560, 115);
             this.closeButton.Name = "closeButton";
             this.closeButton.Size = new System.Drawing.Size(75, 23);
-            this.closeButton.TabIndex = 14;
+            this.closeButton.TabIndex = 8;
             this.closeButton.Text = "Close";
             this.closeButton.UseVisualStyleBackColor = true;
             this.closeButton.Click += new System.EventHandler(this.closeButton_Click);
@@ -207,19 +213,73 @@
             // isDefaultCheck
             // 
             this.isDefaultCheck.AutoSize = true;
-            this.isDefaultCheck.Location = new System.Drawing.Point(476, 111);
+            this.isDefaultCheck.Location = new System.Drawing.Point(476, 119);
             this.isDefaultCheck.Name = "isDefaultCheck";
             this.isDefaultCheck.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.isDefaultCheck.Size = new System.Drawing.Size(71, 17);
-            this.isDefaultCheck.TabIndex = 15;
+            this.isDefaultCheck.TabIndex = 7;
             this.isDefaultCheck.Text = "Is Default";
             this.isDefaultCheck.UseVisualStyleBackColor = true;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(31, 33);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(60, 13);
+            this.label5.TabIndex = 16;
+            this.label5.Text = "First Name:";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(30, 59);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(61, 13);
+            this.label6.TabIndex = 17;
+            this.label6.Text = "Last Name:";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(35, 113);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(56, 13);
+            this.label7.TabIndex = 18;
+            this.label7.Text = "Password:";
+            // 
+            // firstName
+            // 
+            this.firstName.Location = new System.Drawing.Point(97, 30);
+            this.firstName.Name = "firstName";
+            this.firstName.Size = new System.Drawing.Size(229, 20);
+            this.firstName.TabIndex = 0;
+            // 
+            // lastName
+            // 
+            this.lastName.Location = new System.Drawing.Point(97, 56);
+            this.lastName.Name = "lastName";
+            this.lastName.Size = new System.Drawing.Size(229, 20);
+            this.lastName.TabIndex = 1;
+            // 
+            // password
+            // 
+            this.password.Location = new System.Drawing.Point(97, 110);
+            this.password.Name = "password";
+            this.password.Size = new System.Drawing.Size(229, 20);
+            this.password.TabIndex = 3;
             // 
             // SafeFolder
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(759, 304);
+            this.Controls.Add(this.password);
+            this.Controls.Add(this.lastName);
+            this.Controls.Add(this.firstName);
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.label5);
             this.Controls.Add(this.isDefaultCheck);
             this.Controls.Add(this.closeButton);
             this.Controls.Add(this.configurationList);
@@ -267,6 +327,12 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn serviceLocationPath;
         private System.Windows.Forms.DataGridViewTextBoxColumn isDefaultColumn;
         private System.Windows.Forms.CheckBox isDefaultCheck;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.TextBox firstName;
+        private System.Windows.Forms.TextBox lastName;
+        private System.Windows.Forms.TextBox password;
     }
 }
 
