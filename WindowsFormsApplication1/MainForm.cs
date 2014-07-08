@@ -18,8 +18,9 @@ namespace SafeFolder
         private string _safeFolderPath = @"c:\SafeFolder";
         private FileSystemWatcher _fileSysWatcher;
         private static EncryptionPreferencesManager _encryptionPrefManager = new EncryptionPreferencesManager();
+        private EncryptionService _encryptionService = new EncryptionService();
         private int _activeRowIndex = -1;
-        
+        private List<string> _emailList;
         #endregion
 
         #region Properties
@@ -32,10 +33,12 @@ namespace SafeFolder
         {
             get { return configurationList.Rows.Count; }
         }
-        #endregion
 
-        #region Properties
-        public List<string> EmailAdressses { get; set; }
+        public List<string> EmailAdressses 
+        { 
+            get { return _emailList ?? new List<string>(); } 
+            set { _emailList = value; } 
+        }
         #endregion
 
         #region Constructor
@@ -101,6 +104,9 @@ namespace SafeFolder
                 }
                 else
                 {
+                    _encryptionService.FileLocation = e.FullPath;
+                    _encryptionService.EncryptFile();
+
                     //A file was creeated
                     FileExtensionFilter();
                 }
@@ -257,7 +263,7 @@ namespace SafeFolder
         /// </summary>
         private void FileExtensionFilter()
         {
-          List<string> emailList = ShowEncryptForm();
+            List<string> emailList = ShowEncryptForm();
             DirectoryInfo dirInfo = new DirectoryInfo(_safeFolderPath);
             foreach (var item in dirInfo.GetFiles("*.*"))
             {
