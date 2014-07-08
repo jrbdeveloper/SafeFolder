@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using WindowsFormsApplication1;
 
 namespace SafeFolder
 {
@@ -16,7 +17,9 @@ namespace SafeFolder
         #region Member Variables
         private string _safeFolderPath = @"c:\SafeFolder";
         private FileSystemWatcher _fileSysWatcher;
+        private static EncryptionPreferencesManager _encryptionPrefManager = new EncryptionPreferencesManager();
         private int _activeRowIndex = -1;
+        
         #endregion
 
         #region Properties
@@ -29,6 +32,10 @@ namespace SafeFolder
         {
             get { return configurationList.Rows.Count; }
         }
+        #endregion
+
+        #region Properties
+        public List<string> EmailAdressses { get; set; }
         #endregion
 
         #region Constructor
@@ -46,6 +53,7 @@ namespace SafeFolder
 
             InitializeTrayMenu();
             InitializeFileSystemWatcher();
+            EmailAdressses = new List<string>();
         }
 
         private void addServiceLocation_Click(object sender, EventArgs e)
@@ -74,12 +82,29 @@ namespace SafeFolder
         
         private void fileSysWatcher_Created(object sender, FileSystemEventArgs e)
         {
-            FileExtensionFilter();
+            FileOrFolderChanged(e);        
         }
 
         private void fileSysWatcher_Changed(object sender, FileSystemEventArgs e)
         {
-            FileExtensionFilter();
+            FileOrFolderChanged(e);        
+        }
+
+        private void FileOrFolderChanged(FileSystemEventArgs e)
+        {
+            if (e.ChangeType == WatcherChangeTypes.Created)
+            {
+                if (Directory.Exists(e.FullPath))
+                {
+                    // a new directory was created
+                    //MWS: TODO  code for Folders being added
+                }
+                else
+                {
+                    //A file was creeated
+                    FileExtensionFilter();
+                }
+            }
         }
 
         private void ShowSafeFolder(object sender, EventArgs e)
@@ -192,6 +217,25 @@ namespace SafeFolder
             this.notifyIcon1.ContextMenu = new ContextMenu();
             this.notifyIcon1.ContextMenu.MenuItems.Add(new MenuItem("Show Safe Folder", new EventHandler(ShowSafeFolder)));
             this.notifyIcon1.ContextMenu.MenuItems.Add(new MenuItem("Show Configuration", new EventHandler(ShowConfigurationForm)));
+            //this.notifyIcon1.ContextMenu.MenuItems.Add(new MenuItem("Test", new EventHandler(ShowEncryptForm)));
+        }
+
+        private void ShowEncryptForm(object sender, EventArgs e)
+        {
+            ShowEncryptForm();
+        }
+
+
+        
+
+        private static List<string> ShowEncryptForm()
+        {
+            List<string> emailList = new List<string>();
+
+             _encryptionPrefManager.ShowEncryptForm();
+             emailList = _encryptionPrefManager.emailList;
+
+            return emailList;
         }
 
         /// <summary>
@@ -211,6 +255,7 @@ namespace SafeFolder
         /// </summary>
         private void FileExtensionFilter()
         {
+          List<string> emailList = ShowEncryptForm();
             DirectoryInfo dirInfo = new DirectoryInfo(_safeFolderPath);
             foreach (var item in dirInfo.GetFiles("*.*"))
             {
@@ -219,9 +264,16 @@ namespace SafeFolder
                     var newFileName = item.FullName;
                     newFileName += ".safe";
 
-                    File.Move(item.FullName, newFileName);
+                    EncryptFiles(item, newFileName);
                 }
             }
+        }
+
+        private void EncryptFiles(FileInfo item, string newFileName)
+        {
+            //This fakes the encryption
+            //EmailAdressses  This property contains the addresses to encrypt for
+            File.Move(item.FullName, newFileName);
         }
         #endregion
                 
