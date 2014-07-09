@@ -1,19 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using SafeFolder.Classes;
-using SafeFolder.Entities;
+using SafeFolder.Data;
+using File = System.IO.File;
 
 namespace SafeFolder
 {
-    public partial class SafeFolder : Form
+    public partial class SafeFolderForm : Form
     {
         #region Member Variables
         private string _safeFolderPath = @"c:\SafeFolder";
@@ -28,12 +23,12 @@ namespace SafeFolder
         #region Properties
         private DataGridView Grid
         {
-            get { return (DataGridView)configurationList; }
+            get { return configurationList; }
         }
 
         private int GridRowCount
         {
-            get { return configurationList.RowCount; }
+            get { return Grid.RowCount; }
         }
 
         public List<string> EmailAdressses 
@@ -44,7 +39,7 @@ namespace SafeFolder
         #endregion
 
         #region Constructor
-        public SafeFolder()
+        public SafeFolderForm()
         {
             InitializeComponent();
         }
@@ -53,38 +48,36 @@ namespace SafeFolder
         #region Event Handlers
         private void SafeFolder_Load(object sender, EventArgs e)
         {
-            this.ShowInTaskbar = false;
+            ShowInTaskbar = false;
             CreateIfNotExists(_safeFolderPath);
 
             InitializeTrayMenu();
             InitializeFileSystemWatcher();
             EmailAdressses = new List<string>();
+
+            Grid.DataSource = _configManager.GetAllConfigurations();
         }
 
         private void addServiceLocation_Click(object sender, EventArgs e)
         {
-            DataGridViewRow row = null;
             if (GridRowCount > 2 && _activeRowIndex != -1)
             {
                 ResetDefaultConfiguration();
-                row = CreateRecord();
+                CreateRecord();
                 ClearFields();
             }
             else
             {
-                if (string.IsNullOrEmpty(configName.Text) || string.IsNullOrEmpty(localPath.Text) || string.IsNullOrEmpty(emailAddress.Text) || string.IsNullOrEmpty(servicePath.Text))
+                if (string.IsNullOrEmpty(configName.Text) || string.IsNullOrEmpty(localPath.Text) ||
+                    string.IsNullOrEmpty(emailAddress.Text) || string.IsNullOrEmpty(servicePath.Text))
                 {
                     MessageBox.Show("You must complete all fields.");
                 }
                 else
                 {
-                    row = CreateRecord();
-                    if (row.Cells.Count > 0) 
-                    {
-                        configurationList.Rows.Add(row);
-                        _activeRowIndex = -1;
-                        ClearFields(); 
-                    }                  
+                    CreateRecord();
+                    _activeRowIndex = -1;
+                    ClearFields();
                 }
             }
         }
@@ -128,34 +121,34 @@ namespace SafeFolder
 
         private void ShowConfigurationForm(object sender, EventArgs e)
         {
-            this.WindowState = FormWindowState.Normal;
-            this.Show();
+            WindowState = FormWindowState.Normal;
+            Show();
         }
 
         private void SafeFolder_Resize(object sender, EventArgs e)
         {
-            if (this.WindowState == FormWindowState.Minimized)
+            if (WindowState == FormWindowState.Minimized)
             {
                 notifyIcon1.Visible = true;
-                this.Hide();
+                Hide();
             }
         }
 
         private void closeButton_Click(object sender, EventArgs e)
         {
-            this.Hide();
+            Hide();
         }
 
         private void configurationList_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
-            var grid = (DataGridView)sender;
-            configName.Text = grid.Rows[e.RowIndex].Cells[0].Value.ToString();
-            localPath.Text = grid.Rows[e.RowIndex].Cells[1].Value.ToString();
-            emailAddress.Text = grid.Rows[e.RowIndex].Cells[2].Value.ToString();
-            servicePath.Text = grid.Rows[e.RowIndex].Cells[3].Value.ToString();
-            isDefaultCheck.Checked = bool.Parse(grid.Rows[e.RowIndex].Cells[4].Value.ToString());
+            //var grid = (DataGridView)sender;
+            //configName.Text = grid.Rows[e.RowIndex].Cells[0].Value.ToString();
+            //localPath.Text = grid.Rows[e.RowIndex].Cells[1].Value.ToString();
+            //emailAddress.Text = grid.Rows[e.RowIndex].Cells[2].Value.ToString();
+            //servicePath.Text = grid.Rows[e.RowIndex].Cells[3].Value.ToString();
+            //isDefaultCheck.Checked = bool.Parse(grid.Rows[e.RowIndex].Cells[4].Value.ToString());
 
-            _activeRowIndex = e.RowIndex;
+            //_activeRowIndex = e.RowIndex;
         }
 
         private void Exit(object sender, EventArgs e)
@@ -179,43 +172,45 @@ namespace SafeFolder
             isDefaultCheck.Checked = false;
         }
 
-        private void HydrateConfigurationManager()
+        //private void HydrateConfigurationManager()
+        //{
+        //    _configManager.Owner.FirstName = firstName.Text;
+        //    _configManager.Owner.LastName = lastName.Text;
+        //    _configManager.Owner.Password = password.Text;
+        //    _configManager.Owner.EmailAddress = emailAddress.Text;
+        //    _configManager.Owner.Configurations.Add(new Configuration
+        //    {
+        //        Name = configName.Text,
+        //        LocalFilePath = localPath.Text,
+        //        ServicePath = servicePath.Text,
+        //        IsDefault = isDefaultCheck.Checked
+        //    });
+        //}
+
+        private void CreateRecord()
         {
-            _configManager.Owner.FirstName = firstName.Text;
-            _configManager.Owner.LastName = lastName.Text;
-            _configManager.Owner.Password = password.Text;
-            _configManager.Owner.EmailAddress = emailAddress.Text;
-            _configManager.Owner.Configurations.Add(new Configuration
+            var newConfig = new Configuration
             {
-                //Id = Grid.RowCount + 1,
                 Name = configName.Text,
-                LocalPath = localPath.Text,
+                LocalFilePath = localPath.Text,
                 ServicePath = servicePath.Text,
-                IsDefault = isDefaultCheck.Checked
-            });
-        }
+                IsDefault = isDefaultCheck.Checked,
+                OwnerProfile = new OwnerProfile
+                {
+                    FirstName = firstName.Text,
+                    LastName = lastName.Text,
+                    EmailAddress = emailAddress.Text,
+                    Password = password.Text
+                }
+            };
 
-        private DataGridViewRow CreateRecord()
-        {
-            var row = (DataGridViewRow)configurationList.Rows[0].Clone();
-            HydrateConfigurationManager();            
-
-            if (_configManager.Save())
+            try
             {
-                row.Cells[0].Value = configName.Text;
-                row.Cells[1].Value = localPath.Text;
-                row.Cells[2].Value = emailAddress.Text;
-                row.Cells[3].Value = servicePath.Text;
-                row.Cells[4].Value = isDefaultCheck.Checked;
-
-                return row;
+                _configManager.Save(newConfig);
             }
-            else 
+            catch (Exception ex)
             {
-                MessageBox.Show("An error occured while trying to save.");
             }
-
-            return new DataGridViewRow();
         }
 
         /// <summary>
@@ -260,12 +255,12 @@ namespace SafeFolder
         /// </summary>
         private void InitializeTrayMenu()
         {
-            this.notifyIcon1.ContextMenu = new ContextMenu();
-            this.notifyIcon1.ContextMenu.MenuItems.Add(new MenuItem("Show Safe Folder", new EventHandler(ShowSafeFolder)));
-            this.notifyIcon1.ContextMenu.MenuItems.Add(new MenuItem("Show Configuration", new EventHandler(ShowConfigurationForm)));
-            this.notifyIcon1.ContextMenu.MenuItems.Add(new MenuItem("Encrypt Files", new EventHandler(ShowEncryptForm)));
-            this.notifyIcon1.ContextMenu.MenuItems.Add("-");
-            this.notifyIcon1.ContextMenu.MenuItems.Add(new MenuItem("Quit Safe Folder", new EventHandler(Exit)));
+            notifyIcon1.ContextMenu = new ContextMenu();
+            notifyIcon1.ContextMenu.MenuItems.Add(new MenuItem("Show Safe Folder", ShowSafeFolder));
+            notifyIcon1.ContextMenu.MenuItems.Add(new MenuItem("Show Configuration", ShowConfigurationForm));
+            notifyIcon1.ContextMenu.MenuItems.Add(new MenuItem("Encrypt Files", ShowEncryptForm));
+            notifyIcon1.ContextMenu.MenuItems.Add("-");
+            notifyIcon1.ContextMenu.MenuItems.Add(new MenuItem("Quit Safe Folder", Exit));
         }
 
         private static List<string> ShowEncryptForm()
@@ -316,7 +311,7 @@ namespace SafeFolder
             File.Move(item.FullName, newFileName);
         }
         #endregion
-                
+       
         //void fileSysWatcher_Renamed(object sender, RenamedEventArgs e)
         //{
         //    MessageBox.Show("File Renamed");

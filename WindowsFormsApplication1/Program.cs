@@ -16,7 +16,7 @@ namespace SafeFolder
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new SafeFolder());
+            Application.Run(new SafeFolderForm());
         }
     }
 }

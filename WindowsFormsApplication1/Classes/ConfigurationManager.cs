@@ -1,23 +1,20 @@
-﻿using SafeFolder.Entities;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using SafeFolder.Data;
 
 namespace SafeFolder.Classes
 {
     public class ConfigurationManager
     {
         #region Member Variables
-        private Owner _owner;
+        private OwnerProfile _owner;
         #endregion
 
         #region Properties
 
-        public Owner Owner 
+        public OwnerProfile Owner 
         { 
-            get { return _owner ?? (_owner = new Owner()); }
+            get { return _owner ?? (_owner = new OwnerProfile()); }
             set { _owner = value; } 
         }
         
@@ -29,9 +26,21 @@ namespace SafeFolder.Classes
         #endregion
 
         #region Public Methods
-        public bool Save()
+        public void Save(Configuration config)
         {
-            return true;
+            using (var data = new SafeFolderEntities())
+            {
+                data.Configurations.Add(config);
+                data.SaveChanges();
+            }
+        }
+
+        public List<Configuration> GetAllConfigurations()
+        {
+            using (var data = new SafeFolderEntities())
+            {
+                return data.Configurations.ToList();
+            }
         }
 
         public Configuration GetById(int Id)

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="39d0515ba432442e891541bb2831018d" Name="Diagram1">
+        <EntityTypeShape EntityType="SafeFolderModel.AddressBook" Width="1.5" PointX="0.75" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="SafeFolderModel.Configuration" Width="1.5" PointX="5" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="SafeFolderModel.FileRecipient" Width="1.5" PointX="3" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="SafeFolderModel.File" Width="1.5" PointX="0.75" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="SafeFolderModel.OwnerProfile" Width="1.5" PointX="2.75" PointY="4" IsExpanded="true" />
+        <AssociationConnector Association="SafeFolderModel.FK_FileRecipients_AddressBook" ManuallyRouted="false" />
+        <AssociationConnector Association="SafeFolderModel.FK_Configurations_OwnerProfile" ManuallyRouted="false" />
+        <AssociationConnector Association="SafeFolderModel.FK_FileRecipients_Files" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

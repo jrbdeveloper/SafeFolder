@@ -1,8 +1,9 @@
-﻿CREATE TABLE [dbo].[OwnerProfile]
-(
-	[ProfileId] INT NOT NULL PRIMARY KEY,
-	[FirstName] varchar(25) not null,
-	[LastName] varchar(25) not null,
-	[EmailAddress] varchar(50) not null,
-	[Password] varchar(25) not null
-)
+﻿CREATE TABLE [dbo].[OwnerProfile] (
+    [ProfileId]    INT          NOT NULL IDENTITY,
+    [FirstName]    VARCHAR (25) NOT NULL,
+    [LastName]     VARCHAR (25) NOT NULL,
+    [EmailAddress] VARCHAR (50) NOT NULL,
+    [Password]     VARCHAR (25) NOT NULL,
+    PRIMARY KEY CLUSTERED ([ProfileId] ASC)
+);
+

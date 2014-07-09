@@ -1,10 +1,11 @@
-﻿CREATE TABLE [dbo].[Files]
-(
-	[Id] INT NOT NULL PRIMARY KEY,
-	[Name] varchar(50) not null,
-	[Path] varchar(50) not null,
-	[CanCopy] bit not null,
-	[CanDelete] bit not null,
-	[CanModify] bit not null,
-	[CanForward] bit not null
-)
+﻿CREATE TABLE [dbo].[Files] (
+    [Id]         INT          NOT NULL IDENTITY,
+    [Name]       VARCHAR (50) NOT NULL,
+    [Path]       VARCHAR (50) NOT NULL,
+    [CanCopy]    BIT          NOT NULL,
+    [CanDelete]  BIT          NOT NULL,
+    [CanModify]  BIT          NOT NULL,
+    [CanForward] BIT          NOT NULL,
+    PRIMARY KEY CLUSTERED ([Id] ASC)
+);
+
