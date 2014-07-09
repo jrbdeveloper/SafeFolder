@@ -19,10 +19,7 @@ namespace SafeFolder
 
         public CheckedListBox EmailList
         {
-            get
-            {
-                return lstRecipients;
-            }
+            get { return lstRecipients; }
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
@@ -33,7 +30,13 @@ namespace SafeFolder
 
         private void btnEncrypt_Click(object sender, EventArgs e)
         {
+            ///TODO: Call the encryption service here to collect all the info about the file and encrypt it
             this.Close();
+        }
+
+        private void EncryptForm_Load(object sender, EventArgs e)
+        {
+            ///TODO: Get the list of existing email addresses from the database and load the list box
         }
     }
 }

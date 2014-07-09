@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using SafeFolder.Classes;
+using SafeFolder.Entities;
 
 namespace SafeFolder
 {
@@ -19,6 +20,7 @@ namespace SafeFolder
         private FileSystemWatcher _fileSysWatcher;
         private static EncryptionPreferencesManager _encryptionPrefManager = new EncryptionPreferencesManager();
         private EncryptionService _encryptionService = new EncryptionService();
+        private ConfigurationManager _configManager = new ConfigurationManager();
         private int _activeRowIndex = -1;
         private List<string> _emailList;
         #endregion
@@ -31,7 +33,7 @@ namespace SafeFolder
 
         private int GridRowCount
         {
-            get { return configurationList.Rows.Count; }
+            get { return configurationList.RowCount; }
         }
 
         public List<string> EmailAdressses 
@@ -65,7 +67,7 @@ namespace SafeFolder
             if (GridRowCount > 2 && _activeRowIndex != -1)
             {
                 ResetDefaultConfiguration();
-                row = SetRowValues();
+                row = CreateRecord();
                 ClearFields();
             }
             else
@@ -76,9 +78,13 @@ namespace SafeFolder
                 }
                 else
                 {
-                    configurationList.Rows.Add(SetRowValues());
-                    _activeRowIndex = -1;
-                    ClearFields();                    
+                    row = CreateRecord();
+                    if (row.Cells.Count > 0) 
+                    {
+                        configurationList.Rows.Add(row);
+                        _activeRowIndex = -1;
+                        ClearFields(); 
+                    }                  
                 }
             }
         }
@@ -137,7 +143,7 @@ namespace SafeFolder
 
         private void closeButton_Click(object sender, EventArgs e)
         {
-            this.Close();
+            this.Hide();
         }
 
         private void configurationList_RowEnter(object sender, DataGridViewCellEventArgs e)
@@ -173,17 +179,43 @@ namespace SafeFolder
             isDefaultCheck.Checked = false;
         }
 
-        private DataGridViewRow SetRowValues()
+        private void HydrateConfigurationManager()
+        {
+            _configManager.Owner.FirstName = firstName.Text;
+            _configManager.Owner.LastName = lastName.Text;
+            _configManager.Owner.Password = password.Text;
+            _configManager.Owner.EmailAddress = emailAddress.Text;
+            _configManager.Owner.Configurations.Add(new Configuration
+            {
+                //Id = Grid.RowCount + 1,
+                Name = configName.Text,
+                LocalPath = localPath.Text,
+                ServicePath = servicePath.Text,
+                IsDefault = isDefaultCheck.Checked
+            });
+        }
+
+        private DataGridViewRow CreateRecord()
         {
             var row = (DataGridViewRow)configurationList.Rows[0].Clone();
+            HydrateConfigurationManager();            
 
-            row.Cells[0].Value = configName.Text;
-            row.Cells[1].Value = localPath.Text;
-            row.Cells[2].Value = emailAddress.Text;
-            row.Cells[3].Value = servicePath.Text;
-            row.Cells[4].Value = isDefaultCheck.Checked;
+            if (_configManager.Save())
+            {
+                row.Cells[0].Value = configName.Text;
+                row.Cells[1].Value = localPath.Text;
+                row.Cells[2].Value = emailAddress.Text;
+                row.Cells[3].Value = servicePath.Text;
+                row.Cells[4].Value = isDefaultCheck.Checked;
 
-            return row;
+                return row;
+            }
+            else 
+            {
+                MessageBox.Show("An error occured while trying to save.");
+            }
+
+            return new DataGridViewRow();
         }
 
         /// <summary>

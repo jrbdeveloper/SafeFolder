@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SafeFolder.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,17 +9,17 @@ namespace SafeFolder.Classes
 {
     public class ConfigurationManager
     {
-        #region Properties
-        
-        public string UserFirstName { get; set; }
-        
-        public string UserLastName { get; set; }
-        
-        public string UserEmailAddress { get; set; }
-        
-        public string UserPassword { get; set; }
+        #region Member Variables
+        private Owner _owner;
+        #endregion
 
-        public List<Config> Configurations { get; set; }
+        #region Properties
+
+        public Owner Owner 
+        { 
+            get { return _owner ?? (_owner = new Owner()); }
+            set { _owner = value; } 
+        }
         
         #endregion
 
@@ -33,26 +34,18 @@ namespace SafeFolder.Classes
             return true;
         }
 
-        public Config GetById(int Id)
+        public Configuration GetById(int Id)
         {
-            return new Config();
+            return new Configuration();
+        }
+
+        public Configuration GetDefault()
+        {
+            return new Configuration();
         }
         #endregion
 
         #region Private Methods
         #endregion
-
-        public class Config
-        {
-            public int ConfigurationId { get; set; }
-
-            public string ConfigurationName { get; set; }
-
-            public string LocalFilePath { get; set; }
-
-            public string ServiceFilePath { get; set; }
-
-            public bool IsDefault { get; set; }
-        }
     }
 }
