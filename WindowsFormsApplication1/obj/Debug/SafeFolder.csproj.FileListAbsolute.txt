@@ -22,3 +22,4 @@ C:\Users\jabe\Documents\Visual Studio 2013\Projects\WindowsFormsApplication1\Win
 C:\Users\jabe\Documents\Visual Studio 2013\Projects\WindowsFormsApplication1\WindowsFormsApplication1\obj\Debug\SafeFolder.exe
 C:\Users\jabe\Documents\Visual Studio 2013\Projects\WindowsFormsApplication1\WindowsFormsApplication1\obj\Debug\SafeFolder.pdb
 C:\Users\jabe\Documents\Visual Studio 2013\Projects\WindowsFormsApplication1\WindowsFormsApplication1\obj\Debug\SafeFolder.SafeFolderForm.resources
+C:\Users\jabe\Documents\Visual Studio 2013\Projects\WindowsFormsApplication1\WindowsFormsApplication1\obj\Debug\SafeFolder.csprojResolveAssemblyReference.cache

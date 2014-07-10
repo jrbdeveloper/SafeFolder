@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using SafeFolder.Data;
 
 namespace SafeFolder.Classes
@@ -8,6 +9,7 @@ namespace SafeFolder.Classes
     {
         #region Member Variables
         private OwnerProfile _owner;
+        private Configuration _defaultConfiguration;
         #endregion
 
         #region Properties
@@ -17,7 +19,11 @@ namespace SafeFolder.Classes
             get { return _owner ?? (_owner = new OwnerProfile()); }
             set { _owner = value; } 
         }
-        
+
+        public Configuration DefaultConfiguration
+        {
+            get { return _defaultConfiguration ?? (_defaultConfiguration = GetDefaultConfiguratoin()); }
+        }
         #endregion
 
         #region Constructor
@@ -43,14 +49,24 @@ namespace SafeFolder.Classes
             }
         }
 
-        public Configuration GetById(int Id)
+        public Configuration GetById(int id)
         {
-            return new Configuration();
+            using (var data = new SafeFolderEntities())
+            {
+                var result = from config in data.Configurations.Where(x => x.Id == id) select config;
+
+                return result.FirstOrDefault();
+            }
         }
 
-        public Configuration GetDefault()
+        public Configuration GetDefaultConfiguratoin()
         {
-            return new Configuration();
+            using (var data = new SafeFolderEntities())
+            {
+                var result = from config in data.Configurations.Where(x => x.IsDefault) select config;
+
+                return result.FirstOrDefault();
+            }
         }
         #endregion
 

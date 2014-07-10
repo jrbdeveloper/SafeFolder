@@ -172,21 +172,6 @@ namespace SafeFolder
             isDefaultCheck.Checked = false;
         }
 
-        //private void HydrateConfigurationManager()
-        //{
-        //    _configManager.Owner.FirstName = firstName.Text;
-        //    _configManager.Owner.LastName = lastName.Text;
-        //    _configManager.Owner.Password = password.Text;
-        //    _configManager.Owner.EmailAddress = emailAddress.Text;
-        //    _configManager.Owner.Configurations.Add(new Configuration
-        //    {
-        //        Name = configName.Text,
-        //        LocalFilePath = localPath.Text,
-        //        ServicePath = servicePath.Text,
-        //        IsDefault = isDefaultCheck.Checked
-        //    });
-        //}
-
         private void CreateRecord()
         {
             var newConfig = new Configuration
@@ -210,6 +195,7 @@ namespace SafeFolder
             }
             catch (Exception ex)
             {
+                throw new Exception(ex.Message);
             }
         }
 
@@ -237,12 +223,19 @@ namespace SafeFolder
         /// </summary>
         private void InitializeFileSystemWatcher()
         {
-            _fileSysWatcher = new FileSystemWatcher();
-            _fileSysWatcher.Path = _safeFolderPath;
+            _fileSysWatcher = new FileSystemWatcher
+            {
+                Path = _safeFolderPath,
+                Filter = "*.*",
+                NotifyFilter =
+                    NotifyFilters.CreationTime |
+                    NotifyFilters.LastAccess |
+                    NotifyFilters.LastWrite |
+                    NotifyFilters.FileName |
+                    NotifyFilters.DirectoryName,
+            };
 
             //TODO: Adjust these filters if we're not getting the write notification/triggers
-            _fileSysWatcher.NotifyFilter = NotifyFilters.CreationTime | NotifyFilters.LastAccess | NotifyFilters.LastWrite | NotifyFilters.FileName | NotifyFilters.DirectoryName;
-            _fileSysWatcher.Filter = "*.*";
             _fileSysWatcher.Changed += fileSysWatcher_Changed;
             _fileSysWatcher.Created += fileSysWatcher_Created;
             //fileSysWatcher.Deleted += fileSysWatcher_Deleted;
