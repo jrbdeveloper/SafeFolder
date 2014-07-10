@@ -10,7 +10,7 @@ namespace SafeFolder
     public partial class EncryptForm : Form
     {
         #region Member Variables
-        private readonly EncryptionService _encryptionService = new EncryptionService();
+        private readonly EncryptionManager _encryptionService = new EncryptionManager();
         private List<FileRecipient> _recipients; 
         #endregion
 

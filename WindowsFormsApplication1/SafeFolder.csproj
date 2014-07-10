@@ -71,7 +71,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Classes\ConfigurationManager.cs" />
-    <Compile Include="Classes\EncryptionService.cs" />
+    <Compile Include="Classes\EncryptionManager.cs" />
     <Compile Include="Data\AddressBook.cs">
       <DependentUpon>Model1.tt</DependentUpon>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -116,7 +116,6 @@
     <Compile Include="EncryptForm.Designer.cs">
       <DependentUpon>EncryptForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Classes\EncryptionPreferencesManager.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -36,7 +36,10 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.FullFileName = new System.Windows.Forms.Label();
-            this.ActionPermissionList = new System.Windows.Forms.CheckedListBox();
+            this.canSaveCheck = new System.Windows.Forms.CheckBox();
+            this.canForwardCheck = new System.Windows.Forms.CheckBox();
+            this.canPrintCheck = new System.Windows.Forms.CheckBox();
+            this.canCopyCheck = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // lstRecipients
@@ -44,7 +47,7 @@
             this.lstRecipients.FormattingEnabled = true;
             this.lstRecipients.Location = new System.Drawing.Point(84, 44);
             this.lstRecipients.Name = "lstRecipients";
-            this.lstRecipients.Size = new System.Drawing.Size(197, 184);
+            this.lstRecipients.Size = new System.Drawing.Size(197, 139);
             this.lstRecipients.TabIndex = 0;
             // 
             // txtEmailAddress
@@ -66,7 +69,7 @@
             // 
             // btnEncrypt
             // 
-            this.btnEncrypt.Location = new System.Drawing.Point(403, 205);
+            this.btnEncrypt.Location = new System.Drawing.Point(358, 161);
             this.btnEncrypt.Name = "btnEncrypt";
             this.btnEncrypt.Size = new System.Drawing.Size(75, 23);
             this.btnEncrypt.TabIndex = 3;
@@ -77,52 +80,82 @@
             // label1
             // 
             this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(17, 18);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(48, 13);
+            this.label1.Size = new System.Drawing.Size(56, 13);
             this.label1.TabIndex = 4;
             this.label1.Text = "Address:";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(328, 22);
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(320, 18);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(26, 13);
+            this.label2.Size = new System.Drawing.Size(31, 13);
             this.label2.TabIndex = 5;
             this.label2.Text = "File:";
             // 
             // FullFileName
             // 
             this.FullFileName.AutoSize = true;
-            this.FullFileName.Location = new System.Drawing.Point(355, 22);
+            this.FullFileName.Location = new System.Drawing.Point(351, 19);
             this.FullFileName.MaximumSize = new System.Drawing.Size(120, 0);
             this.FullFileName.Name = "FullFileName";
             this.FullFileName.Size = new System.Drawing.Size(35, 13);
             this.FullFileName.TabIndex = 6;
             this.FullFileName.Text = "label3";
             // 
-            // ActionPermissionList
+            // canSaveCheck
             // 
-            this.ActionPermissionList.BackColor = System.Drawing.SystemColors.Menu;
-            this.ActionPermissionList.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.ActionPermissionList.FormattingEnabled = true;
-            this.ActionPermissionList.Items.AddRange(new object[] {
-            "Can Copy",
-            "Can Delete",
-            "Can Modify",
-            "Can Forward"});
-            this.ActionPermissionList.Location = new System.Drawing.Point(358, 66);
-            this.ActionPermissionList.Name = "ActionPermissionList";
-            this.ActionPermissionList.Size = new System.Drawing.Size(120, 90);
-            this.ActionPermissionList.TabIndex = 9;
+            this.canSaveCheck.AutoSize = true;
+            this.canSaveCheck.Location = new System.Drawing.Point(358, 53);
+            this.canSaveCheck.Name = "canSaveCheck";
+            this.canSaveCheck.Size = new System.Drawing.Size(73, 17);
+            this.canSaveCheck.TabIndex = 7;
+            this.canSaveCheck.Text = "Can Save";
+            this.canSaveCheck.UseVisualStyleBackColor = true;
+            // 
+            // canForwardCheck
+            // 
+            this.canForwardCheck.AutoSize = true;
+            this.canForwardCheck.Location = new System.Drawing.Point(358, 77);
+            this.canForwardCheck.Name = "canForwardCheck";
+            this.canForwardCheck.Size = new System.Drawing.Size(86, 17);
+            this.canForwardCheck.TabIndex = 8;
+            this.canForwardCheck.Text = "Can Forward";
+            this.canForwardCheck.UseVisualStyleBackColor = true;
+            // 
+            // canPrintCheck
+            // 
+            this.canPrintCheck.AutoSize = true;
+            this.canPrintCheck.Location = new System.Drawing.Point(358, 101);
+            this.canPrintCheck.Name = "canPrintCheck";
+            this.canPrintCheck.Size = new System.Drawing.Size(69, 17);
+            this.canPrintCheck.TabIndex = 9;
+            this.canPrintCheck.Text = "Can Print";
+            this.canPrintCheck.UseVisualStyleBackColor = true;
+            // 
+            // canCopyCheck
+            // 
+            this.canCopyCheck.AutoSize = true;
+            this.canCopyCheck.Location = new System.Drawing.Point(358, 125);
+            this.canCopyCheck.Name = "canCopyCheck";
+            this.canCopyCheck.Size = new System.Drawing.Size(72, 17);
+            this.canCopyCheck.TabIndex = 10;
+            this.canCopyCheck.Text = "Can Copy";
+            this.canCopyCheck.UseVisualStyleBackColor = true;
             // 
             // EncryptForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(509, 243);
-            this.Controls.Add(this.ActionPermissionList);
+            this.ClientSize = new System.Drawing.Size(509, 197);
+            this.Controls.Add(this.canCopyCheck);
+            this.Controls.Add(this.canPrintCheck);
+            this.Controls.Add(this.canForwardCheck);
+            this.Controls.Add(this.canSaveCheck);
             this.Controls.Add(this.FullFileName);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -136,7 +169,7 @@
             this.Name = "EncryptForm";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Encrypt Files";
+            this.Text = "Encrypt File";
             this.TopMost = true;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.EncryptForm_FormClosing);
             this.Load += new System.EventHandler(this.EncryptForm_Load);
@@ -154,6 +187,9 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label FullFileName;
-        private System.Windows.Forms.CheckedListBox ActionPermissionList;
+        private System.Windows.Forms.CheckBox canSaveCheck;
+        private System.Windows.Forms.CheckBox canForwardCheck;
+        private System.Windows.Forms.CheckBox canPrintCheck;
+        private System.Windows.Forms.CheckBox canCopyCheck;
     }
 }

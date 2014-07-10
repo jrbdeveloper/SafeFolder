@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Windows.Forms;
 using SafeFolder.Classes;
@@ -156,32 +155,14 @@ namespace SafeFolder
                 };
 
                 _configurationManager.SaveConfiguration(newConfig);
+                Grid.DataSource = _configurationManager.GetAllConfigurations();
             }
             catch (Exception ex)
             {
                 throw new Exception(ex.Message);
             }
         }
-
-        /// <summary>
-        /// Method to check the grid for rows that are marked as default and update them because we want a new default
-        /// </summary>
-        private void ResetDefaultConfiguration()
-        {
-            foreach (DataGridViewRow row in configurationList.Rows)
-            {
-                if (row.Cells[4].Value != null)
-                {
-                    var isDefaultChecked = bool.Parse(row.Cells[4].Value.ToString());
-
-                    if(isDefaultChecked)
-                    {
-                        row.Cells[4].Value = false;
-                    }
-                }
-            }
-        }
-
+        
         /// <summary>
         /// Method to create a file system watcher so that we can monitor when files are added
         /// </summary>

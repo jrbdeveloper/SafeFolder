@@ -62,16 +62,6 @@ namespace SafeFolder.Classes
             }
         }
 
-        public int SaveOwner(OwnerProfile owner)
-        {
-            using (var data = new SafeFolderEntities())
-            {
-                data.OwnerProfiles.Add(owner);
-                data.SaveChanges();
-                return owner.Id;
-            }
-        }
-
         public List<Configuration> GetAllConfigurations()
         {
             using (var data = new SafeFolderEntities())

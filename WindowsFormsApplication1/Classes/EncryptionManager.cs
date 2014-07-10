@@ -3,7 +3,7 @@ using System.IO;
 
 namespace SafeFolder.Classes
 {
-    public class EncryptionService
+    public class EncryptionManager
     {
         #region Member Variables
         private readonly ConfigurationManager _configurationManager = new ConfigurationManager();
