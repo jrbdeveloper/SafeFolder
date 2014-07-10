@@ -155,7 +155,7 @@ namespace SafeFolder
                     }
                 };
 
-                _configurationManager.Save(newConfig);
+                _configurationManager.SaveConfiguration(newConfig);
             }
             catch (Exception ex)
             {

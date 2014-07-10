@@ -7,24 +7,26 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SafeFolder.Data
+namespace SafeFolder.Tests
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class OwnerProfile
+    public partial class File
     {
-        public OwnerProfile()
+        public File()
         {
-            this.Configurations = new HashSet<Configuration>();
+            this.FileRecipients = new HashSet<FileRecipient>();
         }
     
         public int Id { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public string EmailAddress { get; set; }
-        public string Password { get; set; }
+        public string Name { get; set; }
+        public string Path { get; set; }
+        public bool CanCopy { get; set; }
+        public bool CanDelete { get; set; }
+        public bool CanModify { get; set; }
+        public bool CanForward { get; set; }
     
-        public virtual ICollection<Configuration> Configurations { get; set; }
+        public virtual ICollection<FileRecipient> FileRecipients { get; set; }
     }
 }

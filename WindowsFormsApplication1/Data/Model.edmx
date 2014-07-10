@@ -45,9 +45,9 @@
         </EntityType>
         <EntityType Name="OwnerProfile">
           <Key>
-            <PropertyRef Name="ProfileId" />
+            <PropertyRef Name="Id" />
           </Key>
-          <Property Name="ProfileId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="FirstName" Type="varchar" MaxLength="25" Nullable="false" />
           <Property Name="LastName" Type="varchar" MaxLength="25" Nullable="false" />
           <Property Name="EmailAddress" Type="varchar" MaxLength="50" Nullable="false" />
@@ -58,7 +58,7 @@
           <End Role="Configurations" Type="Self.Configurations" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="OwnerProfile">
-              <PropertyRef Name="ProfileId" />
+              <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="Configurations">
               <PropertyRef Name="OwnerId" />
@@ -157,9 +157,9 @@
         </EntityType>
         <EntityType Name="OwnerProfile">
           <Key>
-            <PropertyRef Name="ProfileId" />
+            <PropertyRef Name="Id" />
           </Key>
-          <Property Name="ProfileId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="FirstName" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="LastName" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="EmailAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
@@ -183,7 +183,7 @@
           <End Role="Configurations" Type="Self.Configuration" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="OwnerProfile">
-              <PropertyRef Name="ProfileId" />
+              <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="Configurations">
               <PropertyRef Name="OwnerId" />
@@ -272,7 +272,7 @@
           <EntitySetMapping Name="OwnerProfiles">
             <EntityTypeMapping TypeName="SafeFolderModel.OwnerProfile">
               <MappingFragment StoreEntitySet="OwnerProfile">
-                <ScalarProperty Name="ProfileId" ColumnName="ProfileId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="FirstName" ColumnName="FirstName" />
                 <ScalarProperty Name="LastName" ColumnName="LastName" />
                 <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />

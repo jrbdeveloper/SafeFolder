@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using System.Security.Cryptography;
 using SafeFolder.Data;
 
 namespace SafeFolder.Classes
@@ -50,12 +49,26 @@ namespace SafeFolder.Classes
         #endregion
 
         #region Public Methods
-        public void Save(Configuration config)
+        public void SaveConfiguration(Configuration config)
         {
             using (var data = new SafeFolderEntities())
             {
                 data.Configurations.Add(config);
+
+                if (data.ChangeTracker.HasChanges())
+                {
+                    var result = data.SaveChanges();
+                }
+            }
+        }
+
+        public int SaveOwner(OwnerProfile owner)
+        {
+            using (var data = new SafeFolderEntities())
+            {
+                data.OwnerProfiles.Add(owner);
                 data.SaveChanges();
+                return owner.Id;
             }
         }
 

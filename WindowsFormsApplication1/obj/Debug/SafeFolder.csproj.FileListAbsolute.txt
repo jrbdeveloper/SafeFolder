@@ -7,6 +7,17 @@ D:\_Core Tech\SafeFolder\WindowsFormsApplication1\obj\Debug\SafeFolder.SafeFolde
 D:\_Core Tech\SafeFolder\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.Properties.Resources.resources
 D:\_Core Tech\SafeFolder\WindowsFormsApplication1\obj\Debug\SafeFolder.csproj.GenerateResource.Cache
 D:\_Core Tech\SafeFolder\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.EncryptForm.resources
+C:\Users\jabe\Documents\Visual Studio 2013\Projects\WindowsFormsApplication1\WindowsFormsApplication1\bin\Debug\Data\AddressBook.cs
+C:\Users\jabe\Documents\Visual Studio 2013\Projects\WindowsFormsApplication1\WindowsFormsApplication1\bin\Debug\Data\Configuration.cs
+C:\Users\jabe\Documents\Visual Studio 2013\Projects\WindowsFormsApplication1\WindowsFormsApplication1\bin\Debug\Data\File.cs
+C:\Users\jabe\Documents\Visual Studio 2013\Projects\WindowsFormsApplication1\WindowsFormsApplication1\bin\Debug\Data\FileRecipient.cs
+C:\Users\jabe\Documents\Visual Studio 2013\Projects\WindowsFormsApplication1\WindowsFormsApplication1\bin\Debug\Data\Model1.Context.cs
+C:\Users\jabe\Documents\Visual Studio 2013\Projects\WindowsFormsApplication1\WindowsFormsApplication1\bin\Debug\Data\Model.Designer.cs
+C:\Users\jabe\Documents\Visual Studio 2013\Projects\WindowsFormsApplication1\WindowsFormsApplication1\bin\Debug\Data\Model1.cs
+C:\Users\jabe\Documents\Visual Studio 2013\Projects\WindowsFormsApplication1\WindowsFormsApplication1\bin\Debug\Data\OwnerProfile.cs
+C:\Users\jabe\Documents\Visual Studio 2013\Projects\WindowsFormsApplication1\WindowsFormsApplication1\bin\Debug\Data\Model1.Context.tt
+C:\Users\jabe\Documents\Visual Studio 2013\Projects\WindowsFormsApplication1\WindowsFormsApplication1\bin\Debug\Data\Model.edmx.diagram
+C:\Users\jabe\Documents\Visual Studio 2013\Projects\WindowsFormsApplication1\WindowsFormsApplication1\bin\Debug\Data\Model1.tt
 C:\Users\jabe\Documents\Visual Studio 2013\Projects\WindowsFormsApplication1\WindowsFormsApplication1\bin\Debug\SafeFolder.mdf
 C:\Users\jabe\Documents\Visual Studio 2013\Projects\WindowsFormsApplication1\WindowsFormsApplication1\bin\Debug\SafeFolder_log.ldf
 C:\Users\jabe\Documents\Visual Studio 2013\Projects\WindowsFormsApplication1\WindowsFormsApplication1\bin\Debug\SafeFolder.exe.config
@@ -16,7 +27,6 @@ C:\Users\jabe\Documents\Visual Studio 2013\Projects\WindowsFormsApplication1\Win
 C:\Users\jabe\Documents\Visual Studio 2013\Projects\WindowsFormsApplication1\WindowsFormsApplication1\bin\Debug\EntityFramework.SqlServer.dll
 C:\Users\jabe\Documents\Visual Studio 2013\Projects\WindowsFormsApplication1\WindowsFormsApplication1\bin\Debug\EntityFramework.xml
 C:\Users\jabe\Documents\Visual Studio 2013\Projects\WindowsFormsApplication1\WindowsFormsApplication1\bin\Debug\EntityFramework.SqlServer.xml
-C:\Users\jabe\Documents\Visual Studio 2013\Projects\WindowsFormsApplication1\WindowsFormsApplication1\obj\Debug\SafeFolder.csprojResolveAssemblyReference.cache
 C:\Users\jabe\Documents\Visual Studio 2013\Projects\WindowsFormsApplication1\WindowsFormsApplication1\obj\Debug\SafeFolder.EncryptForm.resources
 C:\Users\jabe\Documents\Visual Studio 2013\Projects\WindowsFormsApplication1\WindowsFormsApplication1\obj\Debug\SafeFolder.SafeFolderForm.resources
 C:\Users\jabe\Documents\Visual Studio 2013\Projects\WindowsFormsApplication1\WindowsFormsApplication1\obj\Debug\SafeFolder.Properties.Resources.resources
