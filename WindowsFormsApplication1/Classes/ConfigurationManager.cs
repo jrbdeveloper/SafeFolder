@@ -22,7 +22,25 @@ namespace SafeFolder.Classes
 
         public Configuration DefaultConfiguration
         {
-            get { return _defaultConfiguration ?? (_defaultConfiguration = GetDefaultConfiguratoin()); }
+            get
+            {
+                if (_defaultConfiguration == null)
+                {
+                    if (GetDefaultConfiguratoin() == null)
+                    {
+                        _defaultConfiguration = new Configuration
+                        {
+                            LocalFilePath = @"c:\SafeFolder"
+                        };
+                    }
+                    else
+                    {
+                        _defaultConfiguration = GetDefaultConfiguratoin();
+                    }
+                }
+
+                return _defaultConfiguration;
+            }
         }
         #endregion
 

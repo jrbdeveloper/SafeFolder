@@ -137,6 +137,8 @@
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Encrypt Files";
+            this.TopMost = true;
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.EncryptForm_FormClosing);
             this.Load += new System.EventHandler(this.EncryptForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

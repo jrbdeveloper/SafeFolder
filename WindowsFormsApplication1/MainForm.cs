@@ -4,37 +4,20 @@ using System.IO;
 using System.Windows.Forms;
 using SafeFolder.Classes;
 using SafeFolder.Data;
-using File = System.IO.File;
 
 namespace SafeFolder
 {
     public partial class SafeFolderForm : Form
     {
         #region Member Variables
-        private string _safeFolderPath = @"c:\SafeFolder";
         private FileSystemWatcher _fileSysWatcher;
-        private static EncryptionPreferencesManager _encryptionPrefManager = new EncryptionPreferencesManager();
-        private EncryptionService _encryptionService = new EncryptionService();
-        private ConfigurationManager _configManager = new ConfigurationManager();
-        private int _activeRowIndex = -1;
-        private List<string> _emailList;
+        private readonly ConfigurationManager _configurationManager = new ConfigurationManager();
         #endregion
 
         #region Properties
         private DataGridView Grid
         {
             get { return configurationList; }
-        }
-
-        private int GridRowCount
-        {
-            get { return Grid.RowCount; }
-        }
-
-        public List<string> EmailAdressses 
-        { 
-            get { return _emailList ?? new List<string>(); } 
-            set { _emailList = value; } 
         }
         #endregion
 
@@ -49,36 +32,25 @@ namespace SafeFolder
         private void SafeFolder_Load(object sender, EventArgs e)
         {
             ShowInTaskbar = false;
-            CreateIfNotExists(_safeFolderPath);
+            CreateIfNotExists(_configurationManager.DefaultConfiguration.LocalFilePath);
 
             InitializeTrayMenu();
             InitializeFileSystemWatcher();
-            EmailAdressses = new List<string>();
 
-            Grid.DataSource = _configManager.GetAllConfigurations();
+            Grid.DataSource = _configurationManager.GetAllConfigurations();
         }
 
         private void addServiceLocation_Click(object sender, EventArgs e)
         {
-            if (GridRowCount > 2 && _activeRowIndex != -1)
+            if (string.IsNullOrEmpty(configName.Text) || string.IsNullOrEmpty(localPath.Text) ||
+                string.IsNullOrEmpty(emailAddress.Text) || string.IsNullOrEmpty(servicePath.Text))
             {
-                ResetDefaultConfiguration();
-                CreateRecord();
-                ClearFields();
+                MessageBox.Show("You must complete all fields.");
             }
             else
             {
-                if (string.IsNullOrEmpty(configName.Text) || string.IsNullOrEmpty(localPath.Text) ||
-                    string.IsNullOrEmpty(emailAddress.Text) || string.IsNullOrEmpty(servicePath.Text))
-                {
-                    MessageBox.Show("You must complete all fields.");
-                }
-                else
-                {
-                    CreateRecord();
-                    _activeRowIndex = -1;
-                    ClearFields();
-                }
+                CreateRecord();
+                ClearFields();
             }
         }
         
@@ -103,20 +75,16 @@ namespace SafeFolder
                 }
                 else
                 {
-                    _encryptionService.FileLocation = e.FullPath;
-                    _encryptionService.EncryptFile();
-
-                    //A file was creeated
-                    FileExtensionFilter();
+                    var encryptionForm = new EncryptForm {FileName = e.FullPath};
+                    encryptionForm.ShowDialog();
                 }
             }
         }
 
         private void ShowSafeFolder(object sender, EventArgs e)
         {
-            CreateIfNotExists(_safeFolderPath);
-
-            System.Diagnostics.Process.Start("explorer.exe", _safeFolderPath);
+            CreateIfNotExists(_configurationManager.DefaultConfiguration.LocalFilePath);
+            System.Diagnostics.Process.Start("explorer.exe", _configurationManager.DefaultConfiguration.LocalFilePath);
         }
 
         private void ShowConfigurationForm(object sender, EventArgs e)
@@ -156,10 +124,6 @@ namespace SafeFolder
             Application.Exit();
         }
 
-        private void ShowEncryptForm(object sender, EventArgs e)
-        {
-            ShowEncryptForm();
-        }
         #endregion
 
         #region Private Methods
@@ -174,24 +138,24 @@ namespace SafeFolder
 
         private void CreateRecord()
         {
-            var newConfig = new Configuration
-            {
-                Name = configName.Text,
-                LocalFilePath = localPath.Text,
-                ServicePath = servicePath.Text,
-                IsDefault = isDefaultCheck.Checked,
-                OwnerProfile = new OwnerProfile
-                {
-                    FirstName = firstName.Text,
-                    LastName = lastName.Text,
-                    EmailAddress = emailAddress.Text,
-                    Password = password.Text
-                }
-            };
-
             try
             {
-                _configManager.Save(newConfig);
+                var newConfig = new Configuration
+                {
+                    Name = configName.Text,
+                    LocalFilePath = localPath.Text,
+                    ServicePath = servicePath.Text,
+                    IsDefault = isDefaultCheck.Checked,
+                    OwnerProfile = new OwnerProfile
+                    {
+                        FirstName = firstName.Text,
+                        LastName = lastName.Text,
+                        EmailAddress = emailAddress.Text,
+                        Password = password.Text
+                    }
+                };
+
+                _configurationManager.Save(newConfig);
             }
             catch (Exception ex)
             {
@@ -225,7 +189,7 @@ namespace SafeFolder
         {
             _fileSysWatcher = new FileSystemWatcher
             {
-                Path = _safeFolderPath,
+                Path = _configurationManager.DefaultConfiguration.LocalFilePath,
                 Filter = "*.*",
                 NotifyFilter =
                     NotifyFilters.CreationTime |
@@ -238,8 +202,6 @@ namespace SafeFolder
             //TODO: Adjust these filters if we're not getting the write notification/triggers
             _fileSysWatcher.Changed += fileSysWatcher_Changed;
             _fileSysWatcher.Created += fileSysWatcher_Created;
-            //fileSysWatcher.Deleted += fileSysWatcher_Deleted;
-            //fileSysWatcher.Renamed += fileSysWatcher_Renamed;
             _fileSysWatcher.EnableRaisingEvents = true;
         }
 
@@ -251,19 +213,8 @@ namespace SafeFolder
             notifyIcon1.ContextMenu = new ContextMenu();
             notifyIcon1.ContextMenu.MenuItems.Add(new MenuItem("Show Safe Folder", ShowSafeFolder));
             notifyIcon1.ContextMenu.MenuItems.Add(new MenuItem("Show Configuration", ShowConfigurationForm));
-            notifyIcon1.ContextMenu.MenuItems.Add(new MenuItem("Encrypt Files", ShowEncryptForm));
             notifyIcon1.ContextMenu.MenuItems.Add("-");
             notifyIcon1.ContextMenu.MenuItems.Add(new MenuItem("Quit Safe Folder", Exit));
-        }
-
-        private static List<string> ShowEncryptForm()
-        {
-            List<string> emailList = new List<string>();
-
-             _encryptionPrefManager.ShowEncryptForm();
-             emailList = _encryptionPrefManager.emailList;
-
-            return emailList;
         }
 
         /// <summary>
@@ -278,41 +229,6 @@ namespace SafeFolder
             }
         }
 
-        /// <summary>
-        /// Method to rename each file in the directory that doesn't have the .safe extension
-        /// </summary>
-        private void FileExtensionFilter()
-        {
-            List<string> emailList = ShowEncryptForm();
-            DirectoryInfo dirInfo = new DirectoryInfo(_safeFolderPath);
-            foreach (var item in dirInfo.GetFiles("*.*"))
-            {
-                if (item.Extension != ".safe")
-                {
-                    var newFileName = item.FullName;
-                    newFileName += ".safe";
-
-                    EncryptFiles(item, newFileName);
-                }
-            }
-        }
-
-        private void EncryptFiles(FileInfo item, string newFileName)
-        {
-            //This fakes the encryption
-            //EmailAdressses  This property contains the addresses to encrypt for
-            File.Move(item.FullName, newFileName);
-        }
         #endregion
-       
-        //void fileSysWatcher_Renamed(object sender, RenamedEventArgs e)
-        //{
-        //    MessageBox.Show("File Renamed");
-        //}
-
-        //void fileSysWatcher_Deleted(object sender, FileSystemEventArgs e)
-        //{
-        //    MessageBox.Show("File Delete");
-        //}
     }
 }

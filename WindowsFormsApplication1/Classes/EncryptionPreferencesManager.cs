@@ -14,8 +14,6 @@ namespace SafeFolder.Classes
         public List<string> emailList = new List<string>();
         public static EncryptForm EncryptPreferencesForm = null;
         
-
-
         public List<string> ShowEncryptForm()
         {           
             try
