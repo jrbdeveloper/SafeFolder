@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Windows.Forms;
 using SafeFolder.Classes;
 using SafeFolder.Data;
@@ -10,7 +9,8 @@ namespace SafeFolder
     public partial class EncryptForm : Form
     {
         #region Member Variables
-        private readonly EncryptionManager _encryptionService = new EncryptionManager();
+        private readonly EncryptionManager _encryptionManager = new EncryptionManager();
+        private readonly AddressBookManager _addressBookManager = new AddressBookManager();
         private List<FileRecipient> _recipients; 
         #endregion
 
@@ -23,6 +23,11 @@ namespace SafeFolder
             get { return _recipients ?? (_recipients = new List<FileRecipient>()); }
             set { _recipients = value; }
         }
+
+        public CheckedListBox EmailList
+        {
+            get { return lstRecipients; }
+        }
         #endregion
 
         #region Constructor
@@ -32,29 +37,18 @@ namespace SafeFolder
         }
         #endregion
 
-        public CheckedListBox EmailList
-        {
-            get { return lstRecipients; }
-        }
-
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            lstRecipients.Items.Add(txtEmailAddress.Text, true);
-
-            var recipient = new FileRecipient
+            var address = new AddressBook
             {
-                AddressBook = new AddressBook
-                {
-                    EmailAddress = txtEmailAddress.Text
-                },
-                File = new Data.File
-                {
-                    Name = FileName,
-                    Path = ""
-                }
+                EmailAddress = txtEmailAddress.Text
             };
 
-            Recipients.Add(recipient);
+            _addressBookManager.SaveAddress(address);
+
+            LoadAddressList();
+
+            AddRecipientToList(address);
 
             txtEmailAddress.Text = "";
         }
@@ -70,7 +64,7 @@ namespace SafeFolder
                 FileRecipients = Recipients
             };
 
-            _encryptionService.EncryptFile(file);
+            _encryptionManager.EncryptFile(file);
             Hide();
         }
 
@@ -78,12 +72,37 @@ namespace SafeFolder
         {
             FullFileName.Text = FileName;
 
-            ///TODO: Get the list of existing email addresses from the database and load the list box
+            LoadAddressList();
         }
 
         private void EncryptForm_FormClosing(object sender, FormClosingEventArgs e)
         {
            
         }
+
+        #region Private Methods
+        private void LoadAddressList()
+        {
+            foreach (var item in _addressBookManager.GetAllAddresses())
+            {
+                lstRecipients.Items.Add(item.EmailAddress, true);
+            }
+        }
+
+        private void AddRecipientToList(AddressBook addressBookItem)
+        {
+            var recipient = new FileRecipient
+            {
+                AddressBook = addressBookItem,
+                File = new Data.File
+                {
+                    Name = FileName,
+                    Path = ""
+                }
+            };
+
+            Recipients.Add(recipient);
+        }
+        #endregion
     }
 }

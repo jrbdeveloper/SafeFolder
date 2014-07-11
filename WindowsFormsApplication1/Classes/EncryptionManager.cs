@@ -13,7 +13,8 @@ namespace SafeFolder.Classes
 
         public void EncryptFile(Data.File file) 
         {
-            FileExtensionFilter(file);
+            var newFileName = file.Name + ".safe";
+            File.Move(file.Name, newFileName);
         }
 
         public void DecryptFile() 
@@ -21,25 +22,19 @@ namespace SafeFolder.Classes
             //File.Decrypt(FileLocation);
         }
 
-        /// <summary>
-        /// Method to rename each file in the directory that doesn't have the .safe extension
-        /// </summary>
-        private void FileExtensionFilter(Data.File file)
-        {
-            var newFileName = file.Name + ".safe";
-            File.Move(file.Name, newFileName);
+        //private void FileExtensionFilter(Data.File file)
+        //{
+        //    var dirInfo = new DirectoryInfo(_configurationManager.DefaultConfiguration.LocalFilePath);
+        //    foreach (var item in dirInfo.GetFiles("*.*"))
+        //    {
+        //        if (item.Extension != ".safe")
+        //        {
+        //            var newFileName = item.FullName;
+        //            newFileName += ".safe";
 
-            //var dirInfo = new DirectoryInfo(_configurationManager.DefaultConfiguration.LocalFilePath);
-            //foreach (var item in dirInfo.GetFiles("*.*"))
-            //{
-            //    if (item.Extension != ".safe")
-            //    {
-            //        var newFileName = item.FullName;
-            //        newFileName += ".safe";
-
-            //        File.Move(item.FullName, newFileName);
-            //    }
-            //}
-        }
+        //            File.Move(item.FullName, newFileName);
+        //        }
+        //    }
+        //}
     }
 }

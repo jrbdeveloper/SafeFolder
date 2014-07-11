@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using SafeFolder.Data;
+using SafeFolder.Data.Repositories;
 
 namespace SafeFolder.Classes
 {
@@ -9,6 +9,7 @@ namespace SafeFolder.Classes
         #region Member Variables
         private OwnerProfile _owner;
         private Configuration _defaultConfiguration;
+        private readonly ConfigurationRepo _configurationRepo = new ConfigurationRepo();
         #endregion
 
         #region Properties
@@ -25,7 +26,7 @@ namespace SafeFolder.Classes
             {
                 if (_defaultConfiguration == null)
                 {
-                    if (GetDefaultConfiguratoin() == null)
+                    if (GetDefaultConfiguration() == null)
                     {
                         _defaultConfiguration = new Configuration
                         {
@@ -34,7 +35,7 @@ namespace SafeFolder.Classes
                     }
                     else
                     {
-                        _defaultConfiguration = GetDefaultConfiguratoin();
+                        _defaultConfiguration = GetDefaultConfiguration();
                     }
                 }
 
@@ -44,50 +45,27 @@ namespace SafeFolder.Classes
         #endregion
 
         #region Constructor
-        public ConfigurationManager()
-        { }
         #endregion
 
         #region Public Methods
         public void SaveConfiguration(Configuration config)
         {
-            using (var data = new SafeFolderEntities())
-            {
-                data.Configurations.Add(config);
-
-                if (data.ChangeTracker.HasChanges())
-                {
-                    var result = data.SaveChanges();
-                }
-            }
+            var result = _configurationRepo.Save(config);
         }
 
         public List<Configuration> GetAllConfigurations()
         {
-            using (var data = new SafeFolderEntities())
-            {
-                return data.Configurations.ToList();
-            }
+            return _configurationRepo.GetAll();
         }
 
         public Configuration GetById(int id)
         {
-            using (var data = new SafeFolderEntities())
-            {
-                var result = from config in data.Configurations.Where(x => x.Id == id) select config;
-
-                return result.FirstOrDefault();
-            }
+            return _configurationRepo.GetById(id);
         }
 
-        public Configuration GetDefaultConfiguratoin()
+        public Configuration GetDefaultConfiguration()
         {
-            using (var data = new SafeFolderEntities())
-            {
-                var result = from config in data.Configurations.Where(x => x.IsDefault) select config;
-
-                return result.FirstOrDefault();
-            }
+            return _configurationRepo.GetDefault();
         }
         #endregion
 
