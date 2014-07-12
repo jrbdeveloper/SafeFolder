@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.IO;
 using System.Windows.Forms;
 using SafeFolder.Classes;
@@ -103,7 +104,7 @@ namespace SafeFolder
 
         private void closeButton_Click(object sender, EventArgs e)
         {
-            Hide();
+            WindowState = FormWindowState.Minimized;
         }
 
         private void configurationList_RowEnter(object sender, DataGridViewCellEventArgs e)
@@ -210,6 +211,17 @@ namespace SafeFolder
             }
         }
 
-        #endregion
+        private void SafeFolderForm_FormClosing(object sender, CancelEventArgs e)
+        {
+            if (WindowState == FormWindowState.Minimized)
+            {
+                Application.Exit();
+            }
+            else
+            {
+                e.Cancel = true;
+            }
+        }
+        #endregion 
     }
 }

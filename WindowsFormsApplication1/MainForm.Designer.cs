@@ -42,6 +42,14 @@
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.configurationList = new System.Windows.Forms.DataGridView();
+            this.closeButton = new System.Windows.Forms.Button();
+            this.isDefaultCheck = new System.Windows.Forms.CheckBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.firstName = new System.Windows.Forms.TextBox();
+            this.lastName = new System.Windows.Forms.TextBox();
+            this.password = new System.Windows.Forms.TextBox();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -51,14 +59,6 @@
             this.ownerProfileDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.configurationBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.configurationBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.closeButton = new System.Windows.Forms.Button();
-            this.isDefaultCheck = new System.Windows.Forms.CheckBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.firstName = new System.Windows.Forms.TextBox();
-            this.lastName = new System.Windows.Forms.TextBox();
-            this.password = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.configurationList)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.configurationBindingSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.configurationBindingSource)).BeginInit();
@@ -179,66 +179,6 @@
             this.configurationList.TabIndex = 5;
             this.configurationList.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.configurationList_RowEnter);
             // 
-            // dataGridViewTextBoxColumn1
-            // 
-            this.dataGridViewTextBoxColumn1.DataPropertyName = "Id";
-            this.dataGridViewTextBoxColumn1.HeaderText = "Id";
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            this.dataGridViewTextBoxColumn1.ReadOnly = true;
-            this.dataGridViewTextBoxColumn1.Visible = false;
-            // 
-            // dataGridViewTextBoxColumn2
-            // 
-            this.dataGridViewTextBoxColumn2.DataPropertyName = "OwnerId";
-            this.dataGridViewTextBoxColumn2.HeaderText = "OwnerId";
-            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-            this.dataGridViewTextBoxColumn2.ReadOnly = true;
-            this.dataGridViewTextBoxColumn2.Visible = false;
-            // 
-            // dataGridViewTextBoxColumn3
-            // 
-            this.dataGridViewTextBoxColumn3.DataPropertyName = "Name";
-            this.dataGridViewTextBoxColumn3.HeaderText = "Name";
-            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
-            this.dataGridViewTextBoxColumn3.ReadOnly = true;
-            // 
-            // localFilePathDataGridViewTextBoxColumn
-            // 
-            this.localFilePathDataGridViewTextBoxColumn.DataPropertyName = "LocalFilePath";
-            this.localFilePathDataGridViewTextBoxColumn.HeaderText = "Local File Path";
-            this.localFilePathDataGridViewTextBoxColumn.Name = "localFilePathDataGridViewTextBoxColumn";
-            this.localFilePathDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // servicePathDataGridViewTextBoxColumn
-            // 
-            this.servicePathDataGridViewTextBoxColumn.DataPropertyName = "ServicePath";
-            this.servicePathDataGridViewTextBoxColumn.HeaderText = "Service Path";
-            this.servicePathDataGridViewTextBoxColumn.Name = "servicePathDataGridViewTextBoxColumn";
-            this.servicePathDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // dataGridViewCheckBoxColumn1
-            // 
-            this.dataGridViewCheckBoxColumn1.DataPropertyName = "IsDefault";
-            this.dataGridViewCheckBoxColumn1.HeaderText = "Is Default";
-            this.dataGridViewCheckBoxColumn1.Name = "dataGridViewCheckBoxColumn1";
-            this.dataGridViewCheckBoxColumn1.ReadOnly = true;
-            // 
-            // ownerProfileDataGridViewTextBoxColumn
-            // 
-            this.ownerProfileDataGridViewTextBoxColumn.DataPropertyName = "OwnerProfile";
-            this.ownerProfileDataGridViewTextBoxColumn.HeaderText = "OwnerProfile";
-            this.ownerProfileDataGridViewTextBoxColumn.Name = "ownerProfileDataGridViewTextBoxColumn";
-            this.ownerProfileDataGridViewTextBoxColumn.ReadOnly = true;
-            this.ownerProfileDataGridViewTextBoxColumn.Visible = false;
-            // 
-            // configurationBindingSource1
-            // 
-            this.configurationBindingSource1.DataSource = typeof(SafeFolder.Data.Configuration);
-            // 
-            // configurationBindingSource
-            // 
-            this.configurationBindingSource.DataSource = typeof(SafeFolder.Data.Configuration);
-            // 
             // closeButton
             // 
             this.closeButton.Location = new System.Drawing.Point(560, 115);
@@ -308,6 +248,66 @@
             this.password.Size = new System.Drawing.Size(229, 20);
             this.password.TabIndex = 3;
             // 
+            // dataGridViewTextBoxColumn1
+            // 
+            this.dataGridViewTextBoxColumn1.DataPropertyName = "Id";
+            this.dataGridViewTextBoxColumn1.HeaderText = "Id";
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.dataGridViewTextBoxColumn1.ReadOnly = true;
+            this.dataGridViewTextBoxColumn1.Visible = false;
+            // 
+            // dataGridViewTextBoxColumn2
+            // 
+            this.dataGridViewTextBoxColumn2.DataPropertyName = "OwnerId";
+            this.dataGridViewTextBoxColumn2.HeaderText = "OwnerId";
+            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            this.dataGridViewTextBoxColumn2.ReadOnly = true;
+            this.dataGridViewTextBoxColumn2.Visible = false;
+            // 
+            // dataGridViewTextBoxColumn3
+            // 
+            this.dataGridViewTextBoxColumn3.DataPropertyName = "Name";
+            this.dataGridViewTextBoxColumn3.HeaderText = "Name";
+            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+            this.dataGridViewTextBoxColumn3.ReadOnly = true;
+            // 
+            // localFilePathDataGridViewTextBoxColumn
+            // 
+            this.localFilePathDataGridViewTextBoxColumn.DataPropertyName = "LocalFilePath";
+            this.localFilePathDataGridViewTextBoxColumn.HeaderText = "Local File Path";
+            this.localFilePathDataGridViewTextBoxColumn.Name = "localFilePathDataGridViewTextBoxColumn";
+            this.localFilePathDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // servicePathDataGridViewTextBoxColumn
+            // 
+            this.servicePathDataGridViewTextBoxColumn.DataPropertyName = "ServicePath";
+            this.servicePathDataGridViewTextBoxColumn.HeaderText = "Service Path";
+            this.servicePathDataGridViewTextBoxColumn.Name = "servicePathDataGridViewTextBoxColumn";
+            this.servicePathDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // dataGridViewCheckBoxColumn1
+            // 
+            this.dataGridViewCheckBoxColumn1.DataPropertyName = "IsDefault";
+            this.dataGridViewCheckBoxColumn1.HeaderText = "Is Default";
+            this.dataGridViewCheckBoxColumn1.Name = "dataGridViewCheckBoxColumn1";
+            this.dataGridViewCheckBoxColumn1.ReadOnly = true;
+            // 
+            // ownerProfileDataGridViewTextBoxColumn
+            // 
+            this.ownerProfileDataGridViewTextBoxColumn.DataPropertyName = "OwnerProfile";
+            this.ownerProfileDataGridViewTextBoxColumn.HeaderText = "OwnerProfile";
+            this.ownerProfileDataGridViewTextBoxColumn.Name = "ownerProfileDataGridViewTextBoxColumn";
+            this.ownerProfileDataGridViewTextBoxColumn.ReadOnly = true;
+            this.ownerProfileDataGridViewTextBoxColumn.Visible = false;
+            // 
+            // configurationBindingSource1
+            // 
+            this.configurationBindingSource1.DataSource = typeof(SafeFolder.Data.Configuration);
+            // 
+            // configurationBindingSource
+            // 
+            this.configurationBindingSource.DataSource = typeof(SafeFolder.Data.Configuration);
+            // 
             // SafeFolderForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -334,9 +334,15 @@
             this.Controls.Add(this.menuStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "SafeFolderForm";
+            this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Safe Folder";
+            this.TopMost = true;
             this.WindowState = System.Windows.Forms.FormWindowState.Minimized;
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.SafeFolderForm_FormClosing);
             this.Load += new System.EventHandler(this.SafeFolder_Load);
             this.Resize += new System.EventHandler(this.SafeFolder_Resize);
             ((System.ComponentModel.ISupportInitialize)(this.configurationList)).EndInit();

@@ -46,6 +46,8 @@ namespace SafeFolder
 
             _addressBookManager.SaveAddress(address);
 
+            lstRecipients.Items.Clear();
+
             LoadAddressList();
 
             AddRecipientToList(address);
