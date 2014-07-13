@@ -1,16 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
-using SafeFolder.Classes;
-using SafeFolder.Data;
+using SafeFolder.Core.Entities;
+using SafeFolder.Domain;
 
 namespace SafeFolder
 {
-    public partial class EncryptForm : Form
+    public partial class FileForm : Form
     {
         #region Member Variables
-        private readonly EncryptionManager _encryptionManager = new EncryptionManager();
+        private readonly FileManager _fileManager = new FileManager();
         private readonly AddressBookManager _addressBookManager = new AddressBookManager();
+        private readonly ConfigurationManager _configurationManager = new ConfigurationManager();
+
         private List<FileRecipient> _recipients; 
         #endregion
 
@@ -23,21 +25,16 @@ namespace SafeFolder
             get { return _recipients ?? (_recipients = new List<FileRecipient>()); }
             set { _recipients = value; }
         }
-
-        public CheckedListBox EmailList
-        {
-            get { return lstRecipients; }
-        }
         #endregion
 
         #region Constructor
-        public EncryptForm()
+        public FileForm()
         {
             InitializeComponent();
         }
         #endregion
 
-        private void btnAdd_Click(object sender, EventArgs e)
+        private void btnAddAddress_Click(object sender, EventArgs e)
         {
             var address = new AddressBook
             {
@@ -45,39 +42,36 @@ namespace SafeFolder
             };
 
             _addressBookManager.SaveAddress(address);
-
-            lstRecipients.Items.Clear();
-
-            LoadAddressList();
-
             AddRecipientToList(address);
+            LoadAddressList();
 
             txtEmailAddress.Text = "";
         }
 
-        private void btnEncrypt_Click(object sender, EventArgs e)
+        private void btnSaveFile_Click(object sender, EventArgs e)
         {
-            ///TODO: Call the encryption service here to collect all the info about the file and encrypt it
-
-            var file = new Data.File
+            var file = new File
             {
                 Name = FileName,
-                Path = "",
+                Path = _configurationManager.DefaultConfiguration.LocalFilePath,
+                CanCopy = canCopyCheck.Checked,
+                CanForward = canForwardCheck.Checked,
                 FileRecipients = Recipients
             };
 
-            _encryptionManager.EncryptFile(file);
-            Hide();
+            _fileManager.SaveFile(file);
+            Close();
+            //Hide();
         }
 
-        private void EncryptForm_Load(object sender, EventArgs e)
+        private void FileForm_Load(object sender, EventArgs e)
         {
             FullFileName.Text = FileName;
 
             LoadAddressList();
         }
 
-        private void EncryptForm_FormClosing(object sender, FormClosingEventArgs e)
+        private void FileForm_FormClosing(object sender, FormClosingEventArgs e)
         {
            
         }
@@ -85,6 +79,8 @@ namespace SafeFolder
         #region Private Methods
         private void LoadAddressList()
         {
+            lstRecipients.Items.Clear();
+
             foreach (var item in _addressBookManager.GetAllAddresses())
             {
                 lstRecipients.Items.Add(item.EmailAddress, true);
@@ -96,7 +92,7 @@ namespace SafeFolder
             var recipient = new FileRecipient
             {
                 AddressBook = addressBookItem,
-                File = new Data.File
+                File = new File
                 {
                     Name = FileName,
                     Path = ""

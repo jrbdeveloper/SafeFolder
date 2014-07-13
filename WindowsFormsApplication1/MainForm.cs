@@ -2,8 +2,8 @@
 using System.ComponentModel;
 using System.IO;
 using System.Windows.Forms;
-using SafeFolder.Classes;
-using SafeFolder.Data;
+using SafeFolder.Core.Entities;
+using SafeFolder.Domain;
 
 namespace SafeFolder
 {
@@ -75,7 +75,7 @@ namespace SafeFolder
                 }
                 else
                 {
-                    var encryptionForm = new EncryptForm {FileName = e.FullPath};
+                    var encryptionForm = new FileForm {FileName = e.FullPath};
                     encryptionForm.ShowDialog();
                 }
             }
@@ -124,6 +124,17 @@ namespace SafeFolder
             Application.Exit();
         }
 
+        private void SafeFolderForm_FormClosing(object sender, CancelEventArgs e)
+        {
+            if (WindowState == FormWindowState.Minimized)
+            {
+                Application.Exit();
+            }
+            else
+            {
+                e.Cancel = true;
+            }
+        }
         #endregion
 
         #region Private Methods
@@ -211,17 +222,6 @@ namespace SafeFolder
             }
         }
 
-        private void SafeFolderForm_FormClosing(object sender, CancelEventArgs e)
-        {
-            if (WindowState == FormWindowState.Minimized)
-            {
-                Application.Exit();
-            }
-            else
-            {
-                e.Cancel = true;
-            }
-        }
         #endregion 
     }
 }

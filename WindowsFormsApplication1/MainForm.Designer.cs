@@ -50,17 +50,13 @@
             this.firstName = new System.Windows.Forms.TextBox();
             this.lastName = new System.Windows.Forms.TextBox();
             this.password = new System.Windows.Forms.TextBox();
-            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.localFilePathDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.servicePathDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewCheckBoxColumn1 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.ownerProfileDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.configurationBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.configurationBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewCheckBoxColumn2 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.configurationList)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.configurationBindingSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.configurationBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
@@ -163,14 +159,12 @@
             this.configurationList.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.configurationList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.configurationList.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dataGridViewTextBoxColumn1,
-            this.dataGridViewTextBoxColumn2,
-            this.dataGridViewTextBoxColumn3,
-            this.localFilePathDataGridViewTextBoxColumn,
-            this.servicePathDataGridViewTextBoxColumn,
-            this.dataGridViewCheckBoxColumn1,
-            this.ownerProfileDataGridViewTextBoxColumn});
-            this.configurationList.DataSource = this.configurationBindingSource1;
+            this.dataGridViewTextBoxColumn4,
+            this.dataGridViewTextBoxColumn5,
+            this.dataGridViewTextBoxColumn6,
+            this.dataGridViewCheckBoxColumn2,
+            this.dataGridViewTextBoxColumn7});
+            this.configurationList.DataSource = this.configurationBindingSource;
             this.configurationList.Location = new System.Drawing.Point(0, 149);
             this.configurationList.MultiSelect = false;
             this.configurationList.Name = "configurationList";
@@ -248,65 +242,45 @@
             this.password.Size = new System.Drawing.Size(229, 20);
             this.password.TabIndex = 3;
             // 
-            // dataGridViewTextBoxColumn1
-            // 
-            this.dataGridViewTextBoxColumn1.DataPropertyName = "Id";
-            this.dataGridViewTextBoxColumn1.HeaderText = "Id";
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            this.dataGridViewTextBoxColumn1.ReadOnly = true;
-            this.dataGridViewTextBoxColumn1.Visible = false;
-            // 
-            // dataGridViewTextBoxColumn2
-            // 
-            this.dataGridViewTextBoxColumn2.DataPropertyName = "OwnerId";
-            this.dataGridViewTextBoxColumn2.HeaderText = "OwnerId";
-            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-            this.dataGridViewTextBoxColumn2.ReadOnly = true;
-            this.dataGridViewTextBoxColumn2.Visible = false;
-            // 
-            // dataGridViewTextBoxColumn3
-            // 
-            this.dataGridViewTextBoxColumn3.DataPropertyName = "Name";
-            this.dataGridViewTextBoxColumn3.HeaderText = "Name";
-            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
-            this.dataGridViewTextBoxColumn3.ReadOnly = true;
-            // 
-            // localFilePathDataGridViewTextBoxColumn
-            // 
-            this.localFilePathDataGridViewTextBoxColumn.DataPropertyName = "LocalFilePath";
-            this.localFilePathDataGridViewTextBoxColumn.HeaderText = "Local File Path";
-            this.localFilePathDataGridViewTextBoxColumn.Name = "localFilePathDataGridViewTextBoxColumn";
-            this.localFilePathDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // servicePathDataGridViewTextBoxColumn
-            // 
-            this.servicePathDataGridViewTextBoxColumn.DataPropertyName = "ServicePath";
-            this.servicePathDataGridViewTextBoxColumn.HeaderText = "Service Path";
-            this.servicePathDataGridViewTextBoxColumn.Name = "servicePathDataGridViewTextBoxColumn";
-            this.servicePathDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // dataGridViewCheckBoxColumn1
-            // 
-            this.dataGridViewCheckBoxColumn1.DataPropertyName = "IsDefault";
-            this.dataGridViewCheckBoxColumn1.HeaderText = "Is Default";
-            this.dataGridViewCheckBoxColumn1.Name = "dataGridViewCheckBoxColumn1";
-            this.dataGridViewCheckBoxColumn1.ReadOnly = true;
-            // 
-            // ownerProfileDataGridViewTextBoxColumn
-            // 
-            this.ownerProfileDataGridViewTextBoxColumn.DataPropertyName = "OwnerProfile";
-            this.ownerProfileDataGridViewTextBoxColumn.HeaderText = "OwnerProfile";
-            this.ownerProfileDataGridViewTextBoxColumn.Name = "ownerProfileDataGridViewTextBoxColumn";
-            this.ownerProfileDataGridViewTextBoxColumn.ReadOnly = true;
-            this.ownerProfileDataGridViewTextBoxColumn.Visible = false;
-            // 
-            // configurationBindingSource1
-            // 
-            this.configurationBindingSource1.DataSource = typeof(SafeFolder.Data.Configuration);
-            // 
             // configurationBindingSource
             // 
-            this.configurationBindingSource.DataSource = typeof(SafeFolder.Data.Configuration);
+            this.configurationBindingSource.DataSource = typeof(SafeFolder.Core.Entities.Configuration);
+            // 
+            // dataGridViewTextBoxColumn4
+            // 
+            this.dataGridViewTextBoxColumn4.DataPropertyName = "Name";
+            this.dataGridViewTextBoxColumn4.HeaderText = "Name";
+            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
+            this.dataGridViewTextBoxColumn4.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn5
+            // 
+            this.dataGridViewTextBoxColumn5.DataPropertyName = "LocalFilePath";
+            this.dataGridViewTextBoxColumn5.HeaderText = "LocalFilePath";
+            this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
+            this.dataGridViewTextBoxColumn5.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn6
+            // 
+            this.dataGridViewTextBoxColumn6.DataPropertyName = "ServicePath";
+            this.dataGridViewTextBoxColumn6.HeaderText = "ServicePath";
+            this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
+            this.dataGridViewTextBoxColumn6.ReadOnly = true;
+            // 
+            // dataGridViewCheckBoxColumn2
+            // 
+            this.dataGridViewCheckBoxColumn2.DataPropertyName = "IsDefault";
+            this.dataGridViewCheckBoxColumn2.HeaderText = "IsDefault";
+            this.dataGridViewCheckBoxColumn2.Name = "dataGridViewCheckBoxColumn2";
+            this.dataGridViewCheckBoxColumn2.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn7
+            // 
+            this.dataGridViewTextBoxColumn7.DataPropertyName = "OwnerProfile";
+            this.dataGridViewTextBoxColumn7.HeaderText = "OwnerProfile";
+            this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
+            this.dataGridViewTextBoxColumn7.ReadOnly = true;
+            this.dataGridViewTextBoxColumn7.Visible = false;
             // 
             // SafeFolderForm
             // 
@@ -346,7 +320,6 @@
             this.Load += new System.EventHandler(this.SafeFolder_Load);
             this.Resize += new System.EventHandler(this.SafeFolder_Resize);
             ((System.ComponentModel.ISupportInitialize)(this.configurationList)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.configurationBindingSource1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.configurationBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -379,7 +352,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn ownerIdDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewCheckBoxColumn isDefaultDataGridViewCheckBoxColumn;
-        private System.Windows.Forms.BindingSource configurationBindingSource;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
@@ -387,7 +359,12 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn servicePathDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewCheckBoxColumn dataGridViewCheckBoxColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn ownerProfileDataGridViewTextBoxColumn;
-        private System.Windows.Forms.BindingSource configurationBindingSource1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn dataGridViewCheckBoxColumn2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
+        private System.Windows.Forms.BindingSource configurationBindingSource;
     }
 }
 

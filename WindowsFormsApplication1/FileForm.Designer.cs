@@ -1,6 +1,6 @@
 ﻿namespace SafeFolder
 {
-    partial class EncryptForm
+    partial class FileForm
     {
         /// <summary>
         /// Required designer variable.
@@ -28,11 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EncryptForm));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FileForm));
             this.lstRecipients = new System.Windows.Forms.CheckedListBox();
             this.txtEmailAddress = new System.Windows.Forms.TextBox();
-            this.btnAdd = new System.Windows.Forms.Button();
-            this.btnEncrypt = new System.Windows.Forms.Button();
+            this.btnAddAddress = new System.Windows.Forms.Button();
+            this.btnSaveFile = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.FullFileName = new System.Windows.Forms.Label();
@@ -57,25 +57,25 @@
             this.txtEmailAddress.Size = new System.Drawing.Size(163, 20);
             this.txtEmailAddress.TabIndex = 1;
             // 
-            // btnAdd
+            // btnAddAddress
             // 
-            this.btnAdd.Location = new System.Drawing.Point(253, 13);
-            this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(28, 23);
-            this.btnAdd.TabIndex = 2;
-            this.btnAdd.Text = "+";
-            this.btnAdd.UseVisualStyleBackColor = true;
-            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
+            this.btnAddAddress.Location = new System.Drawing.Point(253, 13);
+            this.btnAddAddress.Name = "btnAddAddress";
+            this.btnAddAddress.Size = new System.Drawing.Size(28, 23);
+            this.btnAddAddress.TabIndex = 2;
+            this.btnAddAddress.Text = "+";
+            this.btnAddAddress.UseVisualStyleBackColor = true;
+            this.btnAddAddress.Click += new System.EventHandler(this.btnAddAddress_Click);
             // 
-            // btnEncrypt
+            // btnSaveFile
             // 
-            this.btnEncrypt.Location = new System.Drawing.Point(358, 161);
-            this.btnEncrypt.Name = "btnEncrypt";
-            this.btnEncrypt.Size = new System.Drawing.Size(75, 23);
-            this.btnEncrypt.TabIndex = 3;
-            this.btnEncrypt.Text = "Make Safe";
-            this.btnEncrypt.UseVisualStyleBackColor = true;
-            this.btnEncrypt.Click += new System.EventHandler(this.btnEncrypt_Click);
+            this.btnSaveFile.Location = new System.Drawing.Point(358, 161);
+            this.btnSaveFile.Name = "btnSaveFile";
+            this.btnSaveFile.Size = new System.Drawing.Size(75, 23);
+            this.btnSaveFile.TabIndex = 3;
+            this.btnSaveFile.Text = "Make Safe";
+            this.btnSaveFile.UseVisualStyleBackColor = true;
+            this.btnSaveFile.Click += new System.EventHandler(this.btnSaveFile_Click);
             // 
             // label1
             // 
@@ -147,7 +147,7 @@
             this.canCopyCheck.Text = "Can Copy";
             this.canCopyCheck.UseVisualStyleBackColor = true;
             // 
-            // EncryptForm
+            // FileForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -159,20 +159,20 @@
             this.Controls.Add(this.FullFileName);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.btnEncrypt);
-            this.Controls.Add(this.btnAdd);
+            this.Controls.Add(this.btnSaveFile);
+            this.Controls.Add(this.btnAddAddress);
             this.Controls.Add(this.txtEmailAddress);
             this.Controls.Add(this.lstRecipients);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "EncryptForm";
+            this.Name = "FileForm";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Encrypt File";
+            this.Text = "File Settings";
             this.TopMost = true;
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.EncryptForm_FormClosing);
-            this.Load += new System.EventHandler(this.EncryptForm_Load);
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FileForm_FormClosing);
+            this.Load += new System.EventHandler(this.FileForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -182,8 +182,8 @@
 
         private System.Windows.Forms.CheckedListBox lstRecipients;
         private System.Windows.Forms.TextBox txtEmailAddress;
-        private System.Windows.Forms.Button btnAdd;
-        private System.Windows.Forms.Button btnEncrypt;
+        private System.Windows.Forms.Button btnAddAddress;
+        private System.Windows.Forms.Button btnSaveFile;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label FullFileName;
