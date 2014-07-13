@@ -1,0 +1,306 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="SafeFolderModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AddressBook">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EmailAddress" Type="varchar" MaxLength="75" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Configurations">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OwnerId" Type="int" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="LocalFilePath" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ServicePath" Type="varchar" MaxLength="75" />
+          <Property Name="IsDefault" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FileRecipients">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FileId" Type="int" Nullable="false" />
+          <Property Name="AddressBookId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Files">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Path" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CanCopy" Type="bit" Nullable="false" />
+          <Property Name="CanDelete" Type="bit" Nullable="false" />
+          <Property Name="CanModify" Type="bit" Nullable="false" />
+          <Property Name="CanForward" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="OwnerProfile">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="LastName" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="EmailAddress" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="25" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Configurations_OwnerProfile">
+          <End Role="OwnerProfile" Type="Self.OwnerProfile" Multiplicity="1" />
+          <End Role="Configurations" Type="Self.Configurations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OwnerProfile">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Configurations">
+              <PropertyRef Name="OwnerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FileRecipients_AddressBook">
+          <End Role="AddressBook" Type="Self.AddressBook" Multiplicity="1" />
+          <End Role="FileRecipients" Type="Self.FileRecipients" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AddressBook">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FileRecipients">
+              <PropertyRef Name="AddressBookId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FileRecipients_Files">
+          <End Role="Files" Type="Self.Files" Multiplicity="1" />
+          <End Role="FileRecipients" Type="Self.FileRecipients" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Files">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FileRecipients">
+              <PropertyRef Name="FileId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="SafeFolderModelStoreContainer">
+          <EntitySet Name="AddressBook" EntityType="Self.AddressBook" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Configurations" EntityType="Self.Configurations" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FileRecipients" EntityType="Self.FileRecipients" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Files" EntityType="Self.Files" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OwnerProfile" EntityType="Self.OwnerProfile" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Configurations_OwnerProfile" Association="Self.FK_Configurations_OwnerProfile">
+            <End Role="OwnerProfile" EntitySet="OwnerProfile" />
+            <End Role="Configurations" EntitySet="Configurations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FileRecipients_AddressBook" Association="Self.FK_FileRecipients_AddressBook">
+            <End Role="AddressBook" EntitySet="AddressBook" />
+            <End Role="FileRecipients" EntitySet="FileRecipients" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FileRecipients_Files" Association="Self.FK_FileRecipients_Files">
+            <End Role="Files" EntitySet="Files" />
+            <End Role="FileRecipients" EntitySet="FileRecipients" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="SafeFolderModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="AddressBook">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EmailAddress" Type="String" MaxLength="75" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="FileRecipients" Relationship="Self.FK_FileRecipients_AddressBook" FromRole="AddressBook" ToRole="FileRecipients" />
+        </EntityType>
+        <EntityType Name="Configuration">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="OwnerId" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="LocalFilePath" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ServicePath" Type="String" MaxLength="75" FixedLength="false" Unicode="false" />
+          <Property Name="IsDefault" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="OwnerProfile" Relationship="Self.FK_Configurations_OwnerProfile" FromRole="Configurations" ToRole="OwnerProfile" />
+        </EntityType>
+        <EntityType Name="FileRecipient">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FileId" Type="Int32" Nullable="false" />
+          <Property Name="AddressBookId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="AddressBook" Relationship="Self.FK_FileRecipients_AddressBook" FromRole="FileRecipients" ToRole="AddressBook" />
+          <NavigationProperty Name="File" Relationship="Self.FK_FileRecipients_Files" FromRole="FileRecipients" ToRole="Files" />
+        </EntityType>
+        <EntityType Name="File">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Path" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CanCopy" Type="Boolean" Nullable="false" />
+          <Property Name="CanDelete" Type="Boolean" Nullable="false" />
+          <Property Name="CanModify" Type="Boolean" Nullable="false" />
+          <Property Name="CanForward" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="FileRecipients" Relationship="Self.FK_FileRecipients_Files" FromRole="Files" ToRole="FileRecipients" />
+        </EntityType>
+        <EntityType Name="OwnerProfile">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="LastName" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="EmailAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Configurations" Relationship="Self.FK_Configurations_OwnerProfile" FromRole="OwnerProfile" ToRole="Configurations" />
+        </EntityType>
+        <Association Name="FK_FileRecipients_AddressBook">
+          <End Role="AddressBook" Type="Self.AddressBook" Multiplicity="1" />
+          <End Role="FileRecipients" Type="Self.FileRecipient" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AddressBook">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FileRecipients">
+              <PropertyRef Name="AddressBookId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Configurations_OwnerProfile">
+          <End Role="OwnerProfile" Type="Self.OwnerProfile" Multiplicity="1" />
+          <End Role="Configurations" Type="Self.Configuration" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OwnerProfile">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Configurations">
+              <PropertyRef Name="OwnerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FileRecipients_Files">
+          <End Role="Files" Type="Self.File" Multiplicity="1" />
+          <End Role="FileRecipients" Type="Self.FileRecipient" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Files">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FileRecipients">
+              <PropertyRef Name="FileId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="SafeFolderEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AddressBooks" EntityType="Self.AddressBook" />
+          <EntitySet Name="Configurations" EntityType="Self.Configuration" />
+          <EntitySet Name="FileRecipients" EntityType="Self.FileRecipient" />
+          <EntitySet Name="Files" EntityType="Self.File" />
+          <EntitySet Name="OwnerProfiles" EntityType="Self.OwnerProfile" />
+          <AssociationSet Name="FK_FileRecipients_AddressBook" Association="Self.FK_FileRecipients_AddressBook">
+            <End Role="AddressBook" EntitySet="AddressBooks" />
+            <End Role="FileRecipients" EntitySet="FileRecipients" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Configurations_OwnerProfile" Association="Self.FK_Configurations_OwnerProfile">
+            <End Role="OwnerProfile" EntitySet="OwnerProfiles" />
+            <End Role="Configurations" EntitySet="Configurations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FileRecipients_Files" Association="Self.FK_FileRecipients_Files">
+            <End Role="Files" EntitySet="Files" />
+            <End Role="FileRecipients" EntitySet="FileRecipients" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="SafeFolderModelStoreContainer" CdmEntityContainer="SafeFolderEntities">
+          <EntitySetMapping Name="AddressBooks">
+            <EntityTypeMapping TypeName="SafeFolderModel.AddressBook">
+              <MappingFragment StoreEntitySet="AddressBook">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Configurations">
+            <EntityTypeMapping TypeName="SafeFolderModel.Configuration">
+              <MappingFragment StoreEntitySet="Configurations">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="OwnerId" ColumnName="OwnerId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="LocalFilePath" ColumnName="LocalFilePath" />
+                <ScalarProperty Name="ServicePath" ColumnName="ServicePath" />
+                <ScalarProperty Name="IsDefault" ColumnName="IsDefault" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FileRecipients">
+            <EntityTypeMapping TypeName="SafeFolderModel.FileRecipient">
+              <MappingFragment StoreEntitySet="FileRecipients">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="FileId" ColumnName="FileId" />
+                <ScalarProperty Name="AddressBookId" ColumnName="AddressBookId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Files">
+            <EntityTypeMapping TypeName="SafeFolderModel.File">
+              <MappingFragment StoreEntitySet="Files">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Path" ColumnName="Path" />
+                <ScalarProperty Name="CanCopy" ColumnName="CanCopy" />
+                <ScalarProperty Name="CanDelete" ColumnName="CanDelete" />
+                <ScalarProperty Name="CanModify" ColumnName="CanModify" />
+                <ScalarProperty Name="CanForward" ColumnName="CanForward" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OwnerProfiles">
+            <EntityTypeMapping TypeName="SafeFolderModel.OwnerProfile">
+              <MappingFragment StoreEntitySet="OwnerProfile">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,45 @@
+﻿Generated model file: Model.edmx.
+Loading metadata from the database took 00:00:02.9836861.
+Generating the model took 00:00:03.4893370.
+Generated model file: ContextModel.edmx.
+Loading metadata from the database took 00:00:02.2128513.
+Generating the model took 00:00:02.8477809.
+Added the connection string to the App.Config file.
+Writing the .edmx file took 00:00:00.0062760.
+Generated model file: ContextModel.edmx.
+Loading metadata from the database took 00:00:02.8473816.
+Generating the model took 00:00:02.5610018.
+Added the connection string to the App.Config file.
+Generated model file: Model.edmx.
+Loading metadata from the database took 00:00:01.3824817.
+Generating the model took 00:00:02.4569358.
+Generated model file: Model.edmx.
+Loading metadata from the database took 00:00:01.2557234.
+Generating the model took 00:00:02.3059622.
+Generated model file: Model.edmx.
+Loading metadata from the database took 00:00:01.2091787.
+Generating the model took 00:00:02.2830503.
+Generated model file: Model.edmx.
+Loading metadata from the database took 00:00:01.1275281.
+Generating the model took 00:00:02.3872745.
+Generated model file: Model.edmx.
+Loading metadata from the database took 00:00:01.3394226.
+Generating the model took 00:00:02.3137438.
+Generated model file: Model.edmx.
+Loading metadata from the database took 00:00:01.2200811.
+Generating the model took 00:00:02.3377449.
+Generated model file: Model.edmx.
+Loading metadata from the database took 00:00:01.5063263.
+Generating the model took 00:00:02.2792720.
+Generated model file: Model.edmx.
+Loading metadata from the database took 00:00:01.1337678.
+Generating the model took 00:00:02.3058526.
+Generated model file: Model.edmx.
+Loading metadata from the database took 00:00:01.1698438.
+Generating the model took 00:00:02.3031877.
+Generated model file: Model.edmx.
+Loading metadata from the database took 00:00:01.1779839.
+Generating the model took 00:00:02.3923673.
+Generated model file: Model.edmx.
+Loading metadata from the database took 00:00:01.1637126.
+Generating the model took 00:00:02.3511150.
