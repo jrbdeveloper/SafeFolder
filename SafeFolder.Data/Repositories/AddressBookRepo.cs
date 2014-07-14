@@ -25,21 +25,16 @@ namespace SafeFolder.Data.Repositories
             return result;
         }
 
+        public void Delete(Core.Entities.AddressBook addressBook)
+        {
+        }
+
         public List<Core.Entities.AddressBook> GetAll()
         {
             using (var data = new SafeFolderEntities())
             {
-                var list = new List<Core.Entities.AddressBook>();
-
-                foreach (var item in data.AddressBooks)
-                {
-                    list.Add(new Core.Entities.AddressBook
-                    {
-                        EmailAddress = item.EmailAddress
-                    });
-                }
-
-                return list;
+                return data.AddressBooks.Select(item => new Core.Entities.AddressBook
+                { EmailAddress = item.EmailAddress }).ToList();
             }
         }
     }

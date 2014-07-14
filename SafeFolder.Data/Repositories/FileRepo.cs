@@ -22,7 +22,7 @@ namespace SafeFolder.Data.Repositories
 
             return result;
         }
-
+        
         public void DeleteSettings(Core.Entities.File file)
         {
         }

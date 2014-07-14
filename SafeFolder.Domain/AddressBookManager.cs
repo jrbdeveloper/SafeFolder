@@ -14,6 +14,11 @@ namespace SafeFolder.Domain
             var result = _addressBookRepo.Save(addressBook);
         }
 
+        public void DeleteAddress(Core.Entities.AddressBook addressBook)
+        {
+            _addressBookRepo.Delete(addressBook);
+        }
+
         public List<Core.Entities.AddressBook> GetAllAddresses()
         {
             return _addressBookRepo.GetAll();

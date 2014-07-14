@@ -10,7 +10,6 @@ namespace SafeFolder
     public partial class SafeFolderForm : Form
     {
         #region Member Variables
-        private FileSystemWatcher _fileSysWatcher;
         private readonly ConfigurationManager _configurationManager = new ConfigurationManager();
         #endregion
 
@@ -19,6 +18,12 @@ namespace SafeFolder
         {
             get { return configurationList; }
         }
+
+        public string LocalFilePath
+        {
+            get { return _configurationManager.DefaultConfiguration.LocalFilePath; }
+        }
+
         #endregion
 
         #region Constructor
@@ -32,15 +37,15 @@ namespace SafeFolder
         private void SafeFolder_Load(object sender, EventArgs e)
         {
             ShowInTaskbar = false;
-            CreateIfNotExists(_configurationManager.DefaultConfiguration.LocalFilePath);
 
+            InitializeLocalPath();
             InitializeTrayMenu();
             InitializeFileSystemWatcher();
 
             Grid.DataSource = _configurationManager.GetAllConfigurations();
         }
 
-        private void addServiceLocation_Click(object sender, EventArgs e)
+        private void saveConfigurationBtn_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(configName.Text) || string.IsNullOrEmpty(localPath.Text) ||
                 string.IsNullOrEmpty(emailAddress.Text) || string.IsNullOrEmpty(servicePath.Text))
@@ -49,8 +54,10 @@ namespace SafeFolder
             }
             else
             {
-                CreateRecord();
+                SaveConfiguration();
                 ClearFields();
+
+                Grid.DataSource = _configurationManager.GetAllConfigurations();
             }
         }
         
@@ -75,21 +82,22 @@ namespace SafeFolder
                 }
                 else
                 {
-                    var encryptionForm = new FileForm {FileName = e.FullPath};
-                    encryptionForm.ShowDialog();
+                    var fileForm = new FileForm {FileName = e.FullPath};
+                    fileForm.ShowDialog();
                 }
             }
         }
 
         private void ShowSafeFolder(object sender, EventArgs e)
         {
-            CreateIfNotExists(_configurationManager.DefaultConfiguration.LocalFilePath);
+            InitializeLocalPath();
             System.Diagnostics.Process.Start("explorer.exe", _configurationManager.DefaultConfiguration.LocalFilePath);
         }
 
         private void ShowConfigurationForm(object sender, EventArgs e)
         {
             WindowState = FormWindowState.Normal;
+            
             Show();
         }
 
@@ -104,7 +112,7 @@ namespace SafeFolder
 
         private void closeButton_Click(object sender, EventArgs e)
         {
-            WindowState = FormWindowState.Minimized;
+            Hide();
         }
 
         private void configurationList_RowEnter(object sender, DataGridViewCellEventArgs e)
@@ -126,13 +134,14 @@ namespace SafeFolder
 
         private void SafeFolderForm_FormClosing(object sender, CancelEventArgs e)
         {
-            if (WindowState == FormWindowState.Minimized)
+            if (!Visible && WindowState == FormWindowState.Normal)
             {
                 Application.Exit();
             }
             else
             {
                 e.Cancel = true;
+                Hide();
             }
         }
         #endregion
@@ -147,7 +156,7 @@ namespace SafeFolder
             isDefaultCheck.Checked = false;
         }
 
-        private void CreateRecord()
+        private void SaveConfiguration()
         {
             try
             {
@@ -167,7 +176,6 @@ namespace SafeFolder
                 };
 
                 _configurationManager.SaveConfiguration(newConfig);
-                Grid.DataSource = _configurationManager.GetAllConfigurations();
             }
             catch (Exception ex)
             {
@@ -180,9 +188,9 @@ namespace SafeFolder
         /// </summary>
         private void InitializeFileSystemWatcher()
         {
-            _fileSysWatcher = new FileSystemWatcher
+            var fileSysWatcher = new FileSystemWatcher
             {
-                Path = _configurationManager.DefaultConfiguration.LocalFilePath,
+                Path = LocalFilePath,
                 Filter = "*.*",
                 NotifyFilter =
                     NotifyFilters.CreationTime |
@@ -193,9 +201,9 @@ namespace SafeFolder
             };
 
             //TODO: Adjust these filters if we're not getting the write notification/triggers
-            _fileSysWatcher.Changed += fileSysWatcher_Changed;
-            _fileSysWatcher.Created += fileSysWatcher_Created;
-            _fileSysWatcher.EnableRaisingEvents = true;
+            fileSysWatcher.Changed += fileSysWatcher_Changed;
+            fileSysWatcher.Created += fileSysWatcher_Created;
+            fileSysWatcher.EnableRaisingEvents = true;
         }
 
         /// <summary>
@@ -214,11 +222,11 @@ namespace SafeFolder
         /// Method to create the folder path if it does not exist
         /// </summary>
         /// <param name="path">string</param>
-        private void CreateIfNotExists(string path)
+        private void InitializeLocalPath()
         {
-            if (!Directory.Exists(path))
+            if (!Directory.Exists(LocalFilePath))
             {
-                Directory.CreateDirectory(path);
+                Directory.CreateDirectory(LocalFilePath);
             }
         }
 

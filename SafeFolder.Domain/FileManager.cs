@@ -15,11 +15,12 @@ namespace SafeFolder.Domain
 
         public void SaveFile(File file) 
         {
-            //SaveFileSettings(file);
-
             //TODO: Call the encryption service here
             var newFileName = file.Name + ".safe";
             System.IO.File.Move(file.Name, newFileName);
+
+            //TODO: Depending on what happens with the encryption service or if the application is online we'll set flags on the file before we save it
+            //SaveFileSettings(file);
         }
 
         private void SaveFileSettings(File file)

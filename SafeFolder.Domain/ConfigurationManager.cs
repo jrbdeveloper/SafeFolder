@@ -22,25 +22,7 @@ namespace SafeFolder.Domain
 
         public Configuration DefaultConfiguration
         {
-            get
-            {
-                if (_defaultConfiguration == null)
-                {
-                    if (string.IsNullOrEmpty(GetDefaultConfiguration().LocalFilePath))
-                    {
-                        _defaultConfiguration = new Configuration
-                        {
-                            LocalFilePath = @"c:\SafeFolder"
-                        };
-                    }
-                    else
-                    {
-                        _defaultConfiguration = GetDefaultConfiguration();
-                    }
-                }
-
-                return _defaultConfiguration;
-            }
+            get { return _defaultConfiguration ?? (_defaultConfiguration = GetDefaultConfiguration()); }
         }
         #endregion
 
@@ -51,6 +33,11 @@ namespace SafeFolder.Domain
         public void SaveConfiguration(Configuration config)
         {
             var result = _configurationRepo.Save(config);
+        }
+
+        public void DeleteConfiguration(Configuration config)
+        {
+            _configurationRepo.Delete(config);
         }
 
         public List<Configuration> GetAllConfigurations()

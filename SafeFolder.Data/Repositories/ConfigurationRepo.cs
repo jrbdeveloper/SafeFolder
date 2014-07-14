@@ -35,6 +35,11 @@ namespace SafeFolder.Data.Repositories
             return result;
         }
 
+        public void Delete(Core.Entities.Configuration config)
+        {
+            
+        }
+
         public List<Core.Entities.Configuration> GetAll()
         {
             var configList = new List<Core.Entities.Configuration>();
@@ -117,7 +122,10 @@ namespace SafeFolder.Data.Repositories
                     };
                 }
 
-                return new Core.Entities.Configuration();
+                return new Core.Entities.Configuration
+                {
+                    LocalFilePath = @"c:\SafeFolder"
+                };
             }
         }
     }
