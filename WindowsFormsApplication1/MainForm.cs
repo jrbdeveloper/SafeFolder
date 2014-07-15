@@ -10,9 +10,11 @@ namespace SafeFolder
     public partial class SafeFolderForm : Form
     {
         #region Member Variables
-
         private Configuration _defaultConfiguration;
-        private readonly IConfigurationManager _configurationManager;
+
+        private readonly IFileManager _fileManager;
+        private readonly IAddressBookManager _addressBookManager;
+        private readonly IConfigurationManager _configurationManager; 
         #endregion
 
         #region Properties
@@ -28,12 +30,15 @@ namespace SafeFolder
         #endregion
 
         #region Constructor
-        public SafeFolderForm(IConfigurationManager configurationManager)
+        public SafeFolderForm(IFileManager fileManager, IAddressBookManager addressBookManager, IConfigurationManager configurationManager)
         {
+            _fileManager = fileManager;
+            _addressBookManager = addressBookManager;
             _configurationManager = configurationManager;
 
             InitializeComponent();
             InitializeSafeFolder();
+            InitializeFileSystemWatcher();
             ShowInTaskbar = false;
         }
         #endregion
@@ -62,13 +67,11 @@ namespace SafeFolder
         
         private void fileSysWatcher_Created(object sender, FileSystemEventArgs e)
         {
-           // MessageBox.Show("Created");
             FileOrFolderChanged(e);        
         }
 
         private void fileSysWatcher_Changed(object sender, FileSystemEventArgs e)
         {
-            //MessageBox.Show("Changed");
             FileOrFolderChanged(e);        
         }
 
@@ -83,22 +86,23 @@ namespace SafeFolder
                 }
                 else
                 {
-                    var fileForm = new FileForm {FileName = e.FullPath};
-                    fileForm.ShowDialog();
+                    using (var fileForm = new FileForm(_fileManager, _addressBookManager, _configurationManager))
+                    {
+                        fileForm.FileName = e.FullPath;
+                        fileForm.ShowDialog(this);
+                    }
                 }
             }
         }
 
         private void ShowSafeFolder(object sender, EventArgs e)
         {
-            //InitializeLocalPath();
             System.Diagnostics.Process.Start("explorer.exe", DefaultConfiguration.LocalFilePath);
         }
 
         private void ShowConfigurationForm(object sender, EventArgs e)
         {
             WindowState = FormWindowState.Normal;
-            
             Show();
         }
 
@@ -198,12 +202,14 @@ namespace SafeFolder
                     NotifyFilters.LastAccess |
                     NotifyFilters.LastWrite |
                     NotifyFilters.FileName |
+                    NotifyFilters.Size |
                     NotifyFilters.DirectoryName,
             };
 
             //TODO: Adjust these filters if we're not getting the write notification/triggers
             fileSysWatcher.Changed += fileSysWatcher_Changed;
             fileSysWatcher.Created += fileSysWatcher_Created;
+            fileSysWatcher.SynchronizingObject = this;
             fileSysWatcher.EnableRaisingEvents = true;
         }
 
@@ -238,7 +244,6 @@ namespace SafeFolder
 
             InitializeLocalPath();
             InitializeTrayMenu();
-            InitializeFileSystemWatcher();
         }
         #endregion 
     }

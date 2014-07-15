@@ -11,20 +11,11 @@ namespace SafeFolder
         #region Member Variables
         private readonly IFileManager _fileManager;
         private readonly IAddressBookManager _addressBookManager;
-        private readonly IConfigurationManager _configurationManager;
-
-        private List<FileRecipient> _recipients; 
+        private readonly IConfigurationManager _configurationManager; 
         #endregion
 
         #region Properties
-
         public string FileName { get; set; }
-
-        public List<FileRecipient> Recipients
-        {
-            get { return _recipients ?? (_recipients = new List<FileRecipient>()); }
-            set { _recipients = value; }
-        }
         #endregion
 
         #region Constructors
@@ -35,10 +26,6 @@ namespace SafeFolder
             _configurationManager = configurationManager;
 
             InitializeComponent();
-        }
-
-        public FileForm()
-        {
         }
 
         #endregion
