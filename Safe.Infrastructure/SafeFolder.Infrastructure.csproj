@@ -7,8 +7,8 @@
     <ProjectGuid>{6D6EEC7D-7482-4D3B-90E6-A127A36EAB23}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Safe.Infrastructure</RootNamespace>
-    <AssemblyName>Safe.Infrastructure</AssemblyName>
+    <RootNamespace>SafeFolder.Infrastructure</RootNamespace>
+    <AssemblyName>SafeFolder.Infrastructure</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
