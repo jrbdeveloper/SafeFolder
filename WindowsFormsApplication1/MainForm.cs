@@ -2,8 +2,8 @@
 using System.ComponentModel;
 using System.IO;
 using System.Windows.Forms;
+using SafeFolder.Core.Contracts;
 using SafeFolder.Core.Entities;
-using SafeFolder.Domain;
 
 namespace SafeFolder
 {
@@ -12,7 +12,7 @@ namespace SafeFolder
         #region Member Variables
 
         private Configuration _defaultConfiguration;
-        private readonly ConfigurationManager _configurationManager = new ConfigurationManager();
+        private readonly IConfigurationManager _configurationManager;
         #endregion
 
         #region Properties
@@ -29,8 +29,10 @@ namespace SafeFolder
         #endregion
 
         #region Constructor
-        public SafeFolderForm()
+        public SafeFolderForm(IConfigurationManager configurationManager)
         {
+            _configurationManager = configurationManager;
+
             InitializeComponent();
             InitializeSafeFolder();
             ShowInTaskbar = false;

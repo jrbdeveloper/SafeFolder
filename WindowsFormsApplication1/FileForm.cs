@@ -1,17 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using SafeFolder.Core.Contracts;
 using SafeFolder.Core.Entities;
-using SafeFolder.Domain;
 
 namespace SafeFolder
 {
     public partial class FileForm : Form
     {
         #region Member Variables
-        private readonly FileManager _fileManager = new FileManager();
-        private readonly AddressBookManager _addressBookManager = new AddressBookManager();
-        private readonly ConfigurationManager _configurationManager = new ConfigurationManager();
+        private readonly IFileManager _fileManager;
+        private readonly IAddressBookManager _addressBookManager;
+        private readonly IConfigurationManager _configurationManager;
 
         private List<FileRecipient> _recipients; 
         #endregion
@@ -27,11 +27,20 @@ namespace SafeFolder
         }
         #endregion
 
-        #region Constructor
-        public FileForm()
+        #region Constructors
+        public FileForm(IFileManager fileManager, IAddressBookManager addressBookManager, IConfigurationManager configurationManager)
         {
+            _fileManager = fileManager;
+            _addressBookManager = addressBookManager;
+            _configurationManager = configurationManager;
+
             InitializeComponent();
         }
+
+        public FileForm()
+        {
+        }
+
         #endregion
 
         private void btnAddAddress_Click(object sender, EventArgs e)

@@ -1,17 +1,26 @@
 ﻿using System.Collections.Generic;
+using SafeFolder.Core.Contracts;
 using SafeFolder.Core.Entities;
-using SafeFolder.Data.Repositories;
 
 namespace SafeFolder.Domain
 {
-    public class FileManager
+    public class FileManager : IFileManager
     {
         #region Member Variables
-        private readonly FileRepo _fileRepo = new FileRepo();
+        private readonly IFileRepo _fileRepo;
         #endregion
 
         #region Properties
         public string FileLocation { get; set; }
+        #endregion
+
+        #region Constructors
+
+        public FileManager(IFileRepo fileRepo)
+        {
+            _fileRepo = fileRepo;
+        }
+
         #endregion
 
         public void SaveFileSettings(List<FileRecipient> filesettings) 
@@ -24,9 +33,9 @@ namespace SafeFolder.Domain
             var result = _fileRepo.SaveSettings(filesettings);
         }
 
-        private void DeleteFileSettings(File file)
+        public void DeleteFileSettings(FileRecipient filesettings)
         {
-            _fileRepo.DeleteSettings(file);
+            _fileRepo.DeleteSettings(filesettings);
         }
     }
 }

@@ -1,12 +1,21 @@
 ﻿using System.Collections.Generic;
-using SafeFolder.Data.Repositories;
+using SafeFolder.Core.Contracts;
 
 namespace SafeFolder.Domain
 {
-    public class AddressBookManager
+    public class AddressBookManager : IAddressBookManager
     {
         #region Member Variables
-        private readonly AddressBookRepo _addressBookRepo = new AddressBookRepo();
+        private readonly IAddressBookRepo _addressBookRepo;
+        #endregion
+
+        #region Constructors
+
+        public AddressBookManager(IAddressBookRepo addressBookRepo)
+        {
+            _addressBookRepo = addressBookRepo;
+        }
+
         #endregion
 
         public void SaveAddress(Core.Entities.AddressBook addressBook)

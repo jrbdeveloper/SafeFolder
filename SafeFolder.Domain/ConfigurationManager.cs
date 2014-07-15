@@ -1,14 +1,14 @@
 ﻿using System.Collections.Generic;
+using SafeFolder.Core.Contracts;
 using SafeFolder.Core.Entities;
-using SafeFolder.Data.Repositories;
 
 namespace SafeFolder.Domain
 {
-    public class ConfigurationManager
+    public class ConfigurationManager : IConfigurationManager
     {
         #region Member Variables
         private Configuration _defaultConfiguration;
-        private readonly ConfigurationRepo _configurationRepo = new ConfigurationRepo();
+        private readonly IConfigurationRepo _configurationRepo;
         #endregion
 
         #region Properties
@@ -20,6 +20,12 @@ namespace SafeFolder.Domain
         #endregion
 
         #region Constructor
+
+        public ConfigurationManager(IConfigurationRepo configurationRepo)
+        {
+            _configurationRepo = configurationRepo;
+        }
+
         #endregion
 
         #region Public Methods

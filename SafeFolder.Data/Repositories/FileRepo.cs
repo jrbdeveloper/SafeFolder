@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
+using SafeFolder.Core.Contracts;
 
 namespace SafeFolder.Data.Repositories
 {
-    public class FileRepo
+    public class FileRepo : IFileRepo
     {
         public int SaveSettings(List<Core.Entities.FileRecipient> filesettings)
         {
@@ -39,8 +40,8 @@ namespace SafeFolder.Data.Repositories
 
             return result;
         }
-        
-        public void DeleteSettings(Core.Entities.File file)
+
+        public void DeleteSettings(Core.Entities.FileRecipient file)
         {
         }
     }

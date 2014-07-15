@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using SafeFolder.Core.Contracts;
 
 namespace SafeFolder.Data.Repositories
 {
-    public class AddressBookRepo
+    public class AddressBookRepo : IAddressBookRepo
     {
         public int Save(Core.Entities.AddressBook addressBook)
         {

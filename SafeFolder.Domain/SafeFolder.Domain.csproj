@@ -30,6 +30,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Ninject">
+      <HintPath>..\packages\Ninject.3.2.2.0\lib\net45-full\Ninject.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -49,10 +52,9 @@
       <Project>{dc10f637-ed55-4951-8efb-d3deb823a46d}</Project>
       <Name>SafeFolder.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\SafeFolder.Data\SafeFolder.Data.csproj">
-      <Project>{3f48d8cf-370b-4c68-acb7-4d1f9bf4d64a}</Project>
-      <Name>SafeFolder.Data</Name>
-    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

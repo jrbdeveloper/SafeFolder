@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using SafeFolder.Core;
 
 namespace SafeFolder
 {
@@ -14,9 +12,11 @@ namespace SafeFolder
         [STAThread]
         static void Main()
         {
+            CompositionRoot.Wire();
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new SafeFolderForm());
+            Application.Run(CompositionRoot.Resolve<SafeFolderForm>());
         }
     }
 }

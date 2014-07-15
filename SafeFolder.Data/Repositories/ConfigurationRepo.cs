@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using SafeFolder.Core.Contracts;
 
 namespace SafeFolder.Data.Repositories
 {
-    public class ConfigurationRepo
+    public class ConfigurationRepo : IConfigurationRepo
     {
         public int Save(Core.Entities.Configuration config)
         {

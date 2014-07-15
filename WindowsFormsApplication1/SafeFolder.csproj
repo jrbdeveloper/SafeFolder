@@ -55,6 +55,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="Ninject">
+      <HintPath>..\packages\Ninject.3.2.2.0\lib\net45-full\Ninject.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
@@ -136,13 +139,13 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Safe.Infrastructure\Safe.Infrastructure.csproj">
+      <Project>{6D6EEC7D-7482-4D3B-90E6-A127A36EAB23}</Project>
+      <Name>Safe.Infrastructure</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SafeFolder.Core\SafeFolder.Core.csproj">
       <Project>{dc10f637-ed55-4951-8efb-d3deb823a46d}</Project>
       <Name>SafeFolder.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\SafeFolder.Domain\SafeFolder.Domain.csproj">
-      <Project>{a0c421a1-b1ea-4298-8fd5-290c3e7906d7}</Project>
-      <Name>SafeFolder.Domain</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
