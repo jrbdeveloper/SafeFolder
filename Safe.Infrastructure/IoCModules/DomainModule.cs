@@ -2,7 +2,7 @@
 using SafeFolder.Core.Contracts;
 using SafeFolder.Domain;
 
-namespace SafeFolder.Infrastructure
+namespace SafeFolder.Infrastructure.IoCModules
 {
     public class DomainModule : NinjectModule
     {

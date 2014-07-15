@@ -49,20 +49,7 @@ namespace SafeFolder.Data.Repositories
             {
                 foreach (var config in data.Configurations)
                 {
-                    configList.Add(new Core.Entities.Configuration
-                    {
-                        Name = config.Name,
-                        LocalFilePath = config.LocalFilePath,
-                        ServicePath = config.ServicePath,
-                        IsDefault = config.IsDefault,
-                        OwnerProfile = new Core.Entities.OwnerProfile
-                        {
-                            FirstName = config.OwnerProfile.FirstName,
-                            LastName = config.OwnerProfile.LastName,
-                            EmailAddress = config.OwnerProfile.EmailAddress,
-                            Password = config.OwnerProfile.Password
-                        }
-                    });
+                    configList.Add(GetConfiguration(config));
                 }
 
                 return configList;
@@ -78,20 +65,7 @@ namespace SafeFolder.Data.Repositories
 
                 if (configuration != null)
                 {
-                    return new Core.Entities.Configuration
-                    {
-                        Name = configuration.Name,
-                        LocalFilePath = configuration.LocalFilePath,
-                        ServicePath = configuration.ServicePath,
-                        IsDefault = configuration.IsDefault,
-                        OwnerProfile = new Core.Entities.OwnerProfile
-                        {
-                            FirstName = configuration.OwnerProfile.FirstName,
-                            LastName = configuration.OwnerProfile.LastName,
-                            EmailAddress = configuration.OwnerProfile.EmailAddress,
-                            Password = configuration.OwnerProfile.Password
-                        }
-                    };
+                    return GetConfiguration(configuration);
                 }
                 
                 return new Core.Entities.Configuration();
@@ -107,20 +81,7 @@ namespace SafeFolder.Data.Repositories
 
                 if (configuration != null)
                 {
-                    return new Core.Entities.Configuration
-                    {
-                        Name = configuration.Name,
-                        LocalFilePath = configuration.LocalFilePath,
-                        ServicePath = configuration.ServicePath,
-                        IsDefault = configuration.IsDefault,
-                        OwnerProfile = new Core.Entities.OwnerProfile
-                        {
-                            FirstName = configuration.OwnerProfile.FirstName,
-                            LastName = configuration.OwnerProfile.LastName,
-                            EmailAddress = configuration.OwnerProfile.EmailAddress,
-                            Password = configuration.OwnerProfile.Password
-                        }
-                    };
+                    return GetConfiguration(configuration);
                 }
 
                 return new Core.Entities.Configuration
@@ -128,6 +89,24 @@ namespace SafeFolder.Data.Repositories
                     LocalFilePath = @"c:\SafeFolder"
                 };
             }
+        }
+
+        private Core.Entities.Configuration GetConfiguration(Configuration configuration)
+        {
+            return new Core.Entities.Configuration
+            {
+                Name = configuration.Name,
+                LocalFilePath = configuration.LocalFilePath,
+                ServicePath = configuration.ServicePath,
+                IsDefault = configuration.IsDefault,
+                OwnerProfile = new Core.Entities.OwnerProfile
+                {
+                    FirstName = configuration.OwnerProfile.FirstName,
+                    LastName = configuration.OwnerProfile.LastName,
+                    EmailAddress = configuration.OwnerProfile.EmailAddress,
+                    Password = configuration.OwnerProfile.Password
+                }
+            };
         }
     }
 }

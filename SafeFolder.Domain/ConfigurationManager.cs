@@ -56,8 +56,5 @@ namespace SafeFolder.Domain
             return _configurationRepo.GetDefault();
         }
         #endregion
-
-        #region Private Methods
-        #endregion
     }
 }

@@ -1,8 +1,8 @@
 ﻿using Ninject;
 using Ninject.Modules;
-using SafeFolder.Infrastructure;
+using SafeFolder.Infrastructure.IoCModules;
 
-namespace SafeFolder.Core
+namespace SafeFolder.Infrastructure
 {
     public class CompositionRoot
     {
@@ -19,7 +19,7 @@ namespace SafeFolder.Core
             return modules;
         }
 
-        public static void Wire()
+        public static void InitializeKernel()
         {
             _ninjectKernel = new StandardKernel(GetRegisteredModules());
         }

@@ -4,8 +4,8 @@ namespace SafeFolder.Core.Contracts
 {
     public interface IAddressBookManager
     {
-        void SaveAddress(Core.Entities.AddressBook addressBook);
-        void DeleteAddress(Core.Entities.AddressBook addressBook);
+        void SaveAddress(Entities.AddressBook addressBook);
+        void DeleteAddress(Entities.AddressBook addressBook);
         List<Entities.AddressBook> GetAllAddresses();
     }
 }

@@ -25,7 +25,6 @@ namespace SafeFolder
             get { return _defaultConfiguration ?? (_defaultConfiguration = _configurationManager.GetDefaultConfiguration()); }
             set { _defaultConfiguration = value; }
         }
-
         #endregion
 
         #region Constructor

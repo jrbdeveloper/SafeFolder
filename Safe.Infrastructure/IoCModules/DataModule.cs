@@ -2,7 +2,7 @@
 using SafeFolder.Core.Contracts;
 using SafeFolder.Data.Repositories;
 
-namespace SafeFolder.Core
+namespace SafeFolder.Infrastructure.IoCModules
 {
     public class DataModule : NinjectModule
     {
