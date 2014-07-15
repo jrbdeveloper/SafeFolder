@@ -11,7 +11,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SafeFolder.Data", "SafeFold
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SafeFolder.Core", "SafeFolder.Core\SafeFolder.Core.csproj", "{DC10F637-ED55-4951-8EFB-D3DEB823A46D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SafeFolder.Infrastructure", "Safe.Infrastructure\SafeFolder.Infrastructure.csproj", "{6D6EEC7D-7482-4D3B-90E6-A127A36EAB23}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SafeFolder.Infrastructure", "SafeFolder.Infrastructure\SafeFolder.Infrastructure.csproj", "{6D6EEC7D-7482-4D3B-90E6-A127A36EAB23}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
