@@ -42,7 +42,6 @@ namespace SafeFolder
             };
 
             _addressBookManager.SaveAddress(address);
-            AddRecipientToList(address);
             LoadAddressList();
 
             txtEmailAddress.Text = "";
@@ -50,18 +49,29 @@ namespace SafeFolder
 
         private void btnSaveFile_Click(object sender, EventArgs e)
         {
-            var file = new File
+            var list = new List<FileRecipient>();
+            foreach (var fileRecipient in GetRecipients())
             {
-                Name = FileName,
-                Path = _configurationManager.DefaultConfiguration.LocalFilePath,
-                CanCopy = canCopyCheck.Checked,
-                CanForward = canForwardCheck.Checked,
-                FileRecipients = Recipients
-            };
+                list.Add(new FileRecipient
+                {
+                    File = new File
+                    {
+                        Name = FileName,
+                        Path = _configurationManager.DefaultConfiguration.LocalFilePath,
+                        CanCopy = canCopyCheck.Checked,
+                        CanForward = canForwardCheck.Checked,
+                        CanDelete = canDeleteCheck.Checked,
+                        CanModify = canModifyCheck.Checked,
+                    },
+                    AddressBook = new AddressBook
+                    {
+                        EmailAddress = fileRecipient.AddressBook.EmailAddress
+                    }
+                });
+            }
 
-            _fileManager.SaveFile(file);
+            _fileManager.SaveFileSettings(list);
             Close();
-            //Hide();
         }
 
         private void FileForm_Load(object sender, EventArgs e)
@@ -87,20 +97,27 @@ namespace SafeFolder
             }
         }
 
-        private void AddRecipientToList(AddressBook addressBookItem)
+        private List<FileRecipient> GetRecipients()
         {
-            var recipient = new FileRecipient
+            var list = new List<FileRecipient>();
+            for (int i = 0; i < lstRecipients.Items.Count; i++)
             {
-                AddressBook = addressBookItem,
-                File = new File
+                if (lstRecipients.GetItemChecked(i))
                 {
-                    Name = FileName,
-                    Path = ""
+                    var str = (string)lstRecipients.Items[i];
+                    list.Add(new FileRecipient
+                    {
+                        AddressBook = new AddressBook
+                        {
+                            EmailAddress = str
+                        }
+                    });
                 }
-            };
+            }
 
-            Recipients.Add(recipient);
+            return list;
         }
+
         #endregion
     }
 }

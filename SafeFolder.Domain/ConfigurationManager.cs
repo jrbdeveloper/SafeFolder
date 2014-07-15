@@ -7,18 +7,11 @@ namespace SafeFolder.Domain
     public class ConfigurationManager
     {
         #region Member Variables
-        private OwnerProfile _owner;
         private Configuration _defaultConfiguration;
         private readonly ConfigurationRepo _configurationRepo = new ConfigurationRepo();
         #endregion
 
         #region Properties
-
-        public OwnerProfile Owner 
-        { 
-            get { return _owner ?? (_owner = new OwnerProfile()); }
-            set { _owner = value; } 
-        }
 
         public Configuration DefaultConfiguration
         {
@@ -33,6 +26,8 @@ namespace SafeFolder.Domain
         public void SaveConfiguration(Configuration config)
         {
             var result = _configurationRepo.Save(config);
+
+            _defaultConfiguration = GetDefaultConfiguration();
         }
 
         public void DeleteConfiguration(Configuration config)

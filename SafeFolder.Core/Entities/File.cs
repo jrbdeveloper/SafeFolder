@@ -1,5 +1,4 @@
-﻿
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace SafeFolder.Core.Entities
 {
@@ -10,9 +9,11 @@ namespace SafeFolder.Core.Entities
         public string Path { get; set; }
 
         public bool CanCopy { get; set; }
+        
+        public bool CanDelete { get; set; }
 
+        public bool CanModify { get; set; }
+        
         public bool CanForward { get; set; }
-
-        public List<FileRecipient> FileRecipients { get; set; }
     }
 }

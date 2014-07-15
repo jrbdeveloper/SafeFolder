@@ -14,11 +14,6 @@ namespace SafeFolder.Data
     
     public partial class File
     {
-        public File()
-        {
-            this.FileRecipients = new HashSet<FileRecipient>();
-        }
-    
         public int Id { get; set; }
         public string Name { get; set; }
         public string Path { get; set; }
@@ -26,7 +21,5 @@ namespace SafeFolder.Data
         public bool CanDelete { get; set; }
         public bool CanModify { get; set; }
         public bool CanForward { get; set; }
-    
-        public virtual ICollection<FileRecipient> FileRecipients { get; set; }
     }
 }

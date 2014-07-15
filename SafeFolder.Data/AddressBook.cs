@@ -14,14 +14,7 @@ namespace SafeFolder.Data
     
     public partial class AddressBook
     {
-        public AddressBook()
-        {
-            this.FileRecipients = new HashSet<FileRecipient>();
-        }
-    
         public int Id { get; set; }
         public string EmailAddress { get; set; }
-    
-        public virtual ICollection<FileRecipient> FileRecipients { get; set; }
     }
 }

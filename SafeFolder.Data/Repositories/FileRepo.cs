@@ -1,22 +1,39 @@
-﻿
+﻿using System.Collections.Generic;
+
 namespace SafeFolder.Data.Repositories
 {
     public class FileRepo
     {
-        public int SaveSettings(Core.Entities.File file)
+        public int SaveSettings(List<Core.Entities.FileRecipient> filesettings)
         {
             int result = 0;
 
             using (var data = new SafeFolderEntities())
             {
-                data.Files.Add(new File
+                foreach (var fileRecipient in filesettings)
                 {
-                    Name = file.Name
-                });
+                    data.FileRecipients.Add(new FileRecipient
+                    {
+                        File = new File
+                        {
+                            Name = fileRecipient.File.Name,
+                            Path = fileRecipient.File.Path,
+                            CanCopy = fileRecipient.File.CanCopy,
+                            CanDelete = fileRecipient.File.CanDelete,
+                            CanForward = fileRecipient.File.CanForward,
+                            CanModify = fileRecipient.File.CanModify
+                        },
 
-                if (data.ChangeTracker.HasChanges())
-                {
-                    result = data.SaveChanges();
+                        AddressBook = new AddressBook
+                        {
+                            EmailAddress = fileRecipient.AddressBook.EmailAddress
+                        }
+                    });
+
+                    if (data.ChangeTracker.HasChanges())
+                    {
+                        result = data.SaveChanges();
+                    }
                 }
             }
 

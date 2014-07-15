@@ -118,7 +118,6 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="EmailAddress" Type="String" MaxLength="75" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="FileRecipients" Relationship="Self.FK_FileRecipients_AddressBook" FromRole="AddressBook" ToRole="FileRecipients" />
         </EntityType>
         <EntityType Name="Configuration">
           <Key>
@@ -153,7 +152,6 @@
           <Property Name="CanDelete" Type="Boolean" Nullable="false" />
           <Property Name="CanModify" Type="Boolean" Nullable="false" />
           <Property Name="CanForward" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="FileRecipients" Relationship="Self.FK_FileRecipients_Files" FromRole="Files" ToRole="FileRecipients" />
         </EntityType>
         <EntityType Name="OwnerProfile">
           <Key>

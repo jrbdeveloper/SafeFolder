@@ -36,9 +36,9 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.FullFileName = new System.Windows.Forms.Label();
-            this.canSaveCheck = new System.Windows.Forms.CheckBox();
+            this.canDeleteCheck = new System.Windows.Forms.CheckBox();
             this.canForwardCheck = new System.Windows.Forms.CheckBox();
-            this.canPrintCheck = new System.Windows.Forms.CheckBox();
+            this.canModifyCheck = new System.Windows.Forms.CheckBox();
             this.canCopyCheck = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
@@ -107,40 +107,40 @@
             this.FullFileName.TabIndex = 6;
             this.FullFileName.Text = "label3";
             // 
-            // canSaveCheck
+            // canDeleteCheck
             // 
-            this.canSaveCheck.AutoSize = true;
-            this.canSaveCheck.Location = new System.Drawing.Point(358, 53);
-            this.canSaveCheck.Name = "canSaveCheck";
-            this.canSaveCheck.Size = new System.Drawing.Size(73, 17);
-            this.canSaveCheck.TabIndex = 7;
-            this.canSaveCheck.Text = "Can Save";
-            this.canSaveCheck.UseVisualStyleBackColor = true;
+            this.canDeleteCheck.AutoSize = true;
+            this.canDeleteCheck.Location = new System.Drawing.Point(358, 65);
+            this.canDeleteCheck.Name = "canDeleteCheck";
+            this.canDeleteCheck.Size = new System.Drawing.Size(79, 17);
+            this.canDeleteCheck.TabIndex = 7;
+            this.canDeleteCheck.Text = "Can Delete";
+            this.canDeleteCheck.UseVisualStyleBackColor = true;
             // 
             // canForwardCheck
             // 
             this.canForwardCheck.AutoSize = true;
-            this.canForwardCheck.Location = new System.Drawing.Point(358, 77);
+            this.canForwardCheck.Location = new System.Drawing.Point(358, 99);
             this.canForwardCheck.Name = "canForwardCheck";
             this.canForwardCheck.Size = new System.Drawing.Size(86, 17);
             this.canForwardCheck.TabIndex = 8;
             this.canForwardCheck.Text = "Can Forward";
             this.canForwardCheck.UseVisualStyleBackColor = true;
             // 
-            // canPrintCheck
+            // canModifyCheck
             // 
-            this.canPrintCheck.AutoSize = true;
-            this.canPrintCheck.Location = new System.Drawing.Point(358, 101);
-            this.canPrintCheck.Name = "canPrintCheck";
-            this.canPrintCheck.Size = new System.Drawing.Size(69, 17);
-            this.canPrintCheck.TabIndex = 9;
-            this.canPrintCheck.Text = "Can Print";
-            this.canPrintCheck.UseVisualStyleBackColor = true;
+            this.canModifyCheck.AutoSize = true;
+            this.canModifyCheck.Location = new System.Drawing.Point(358, 82);
+            this.canModifyCheck.Name = "canModifyCheck";
+            this.canModifyCheck.Size = new System.Drawing.Size(79, 17);
+            this.canModifyCheck.TabIndex = 9;
+            this.canModifyCheck.Text = "Can Modify";
+            this.canModifyCheck.UseVisualStyleBackColor = true;
             // 
             // canCopyCheck
             // 
             this.canCopyCheck.AutoSize = true;
-            this.canCopyCheck.Location = new System.Drawing.Point(358, 125);
+            this.canCopyCheck.Location = new System.Drawing.Point(358, 48);
             this.canCopyCheck.Name = "canCopyCheck";
             this.canCopyCheck.Size = new System.Drawing.Size(72, 17);
             this.canCopyCheck.TabIndex = 10;
@@ -153,9 +153,9 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(509, 197);
             this.Controls.Add(this.canCopyCheck);
-            this.Controls.Add(this.canPrintCheck);
+            this.Controls.Add(this.canModifyCheck);
             this.Controls.Add(this.canForwardCheck);
-            this.Controls.Add(this.canSaveCheck);
+            this.Controls.Add(this.canDeleteCheck);
             this.Controls.Add(this.FullFileName);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -187,9 +187,9 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label FullFileName;
-        private System.Windows.Forms.CheckBox canSaveCheck;
+        private System.Windows.Forms.CheckBox canDeleteCheck;
         private System.Windows.Forms.CheckBox canForwardCheck;
-        private System.Windows.Forms.CheckBox canPrintCheck;
+        private System.Windows.Forms.CheckBox canModifyCheck;
         private System.Windows.Forms.CheckBox canCopyCheck;
     }
 }
