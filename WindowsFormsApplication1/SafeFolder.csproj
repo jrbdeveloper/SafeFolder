@@ -139,9 +139,9 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Safe.Infrastructure\Safe.Infrastructure.csproj">
+    <ProjectReference Include="..\Safe.Infrastructure\SafeFolder.Infrastructure.csproj">
       <Project>{6D6EEC7D-7482-4D3B-90E6-A127A36EAB23}</Project>
-      <Name>Safe.Infrastructure</Name>
+      <Name>SafeFolder.Infrastructure</Name>
     </ProjectReference>
     <ProjectReference Include="..\SafeFolder.Core\SafeFolder.Core.csproj">
       <Project>{dc10f637-ed55-4951-8efb-d3deb823a46d}</Project>
