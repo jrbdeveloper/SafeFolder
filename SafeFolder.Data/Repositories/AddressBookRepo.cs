@@ -35,7 +35,10 @@ namespace SafeFolder.Data.Repositories
             using (var data = new SafeFolderEntities())
             {
                 return data.AddressBooks.Select(item => new Core.Entities.AddressBook
-                { EmailAddress = item.EmailAddress }).ToList();
+                {
+                    Id = item.Id,
+                    EmailAddress = item.EmailAddress
+                }).ToList();
             }
         }
     }

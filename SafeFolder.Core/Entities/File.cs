@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace SafeFolder.Core.Entities
+﻿namespace SafeFolder.Core.Entities
 {
     public class File
     {

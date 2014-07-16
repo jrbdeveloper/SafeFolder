@@ -5,7 +5,7 @@ namespace SafeFolder.Core.Contracts
 {
     public interface IFileManager
     {
-        void SaveFileSettings(List<FileRecipient> filesettings);
+        void SaveFileSettings(File file, List<AddressBook> addresses);
 
         void DeleteFileSettings(FileRecipient filesettings);
     }

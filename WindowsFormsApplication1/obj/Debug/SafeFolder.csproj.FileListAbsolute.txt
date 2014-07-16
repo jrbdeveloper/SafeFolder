@@ -7,11 +7,6 @@ D:\_Core Tech\SafeFolder\WindowsFormsApplication1\obj\Debug\SafeFolder.SafeFolde
 D:\_Core Tech\SafeFolder\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.Properties.Resources.resources
 D:\_Core Tech\SafeFolder\WindowsFormsApplication1\obj\Debug\SafeFolder.csproj.GenerateResource.Cache
 D:\_Core Tech\SafeFolder\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.EncryptForm.resources
-C:\Users\jabe\Documents\Visual Studio 2013\Projects\WindowsFormsApplication1\WindowsFormsApplication1\obj\Debug\SafeFolder.csprojResolveAssemblyReference.cache
-C:\Users\jabe\Documents\Visual Studio 2013\Projects\WindowsFormsApplication1\WindowsFormsApplication1\obj\Debug\SafeFolder.FileForm.resources
-C:\Users\jabe\Documents\Visual Studio 2013\Projects\WindowsFormsApplication1\WindowsFormsApplication1\obj\Debug\SafeFolder.SafeFolderForm.resources
-C:\Users\jabe\Documents\Visual Studio 2013\Projects\WindowsFormsApplication1\WindowsFormsApplication1\obj\Debug\SafeFolder.Properties.Resources.resources
-C:\Users\jabe\Documents\Visual Studio 2013\Projects\WindowsFormsApplication1\WindowsFormsApplication1\obj\Debug\SafeFolder.csproj.GenerateResource.Cache
 C:\Users\jabe\Documents\Visual Studio 2013\Projects\WindowsFormsApplication1\WindowsFormsApplication1\bin\Debug\Model.Designer.cs
 C:\Users\jabe\Documents\Visual Studio 2013\Projects\WindowsFormsApplication1\WindowsFormsApplication1\bin\Debug\Model.edmx.diagram
 C:\Users\jabe\Documents\Visual Studio 2013\Projects\WindowsFormsApplication1\WindowsFormsApplication1\bin\Debug\SafeFolder.mdf
@@ -33,5 +28,10 @@ C:\Users\jabe\Documents\Visual Studio 2013\Projects\WindowsFormsApplication1\Win
 C:\Users\jabe\Documents\Visual Studio 2013\Projects\WindowsFormsApplication1\WindowsFormsApplication1\bin\Debug\Ninject.xml
 C:\Users\jabe\Documents\Visual Studio 2013\Projects\WindowsFormsApplication1\WindowsFormsApplication1\bin\Debug\SafeFolder.Data.pdb
 C:\Users\jabe\Documents\Visual Studio 2013\Projects\WindowsFormsApplication1\WindowsFormsApplication1\bin\Debug\SafeFolder.Domain.pdb
+C:\Users\jabe\Documents\Visual Studio 2013\Projects\WindowsFormsApplication1\WindowsFormsApplication1\obj\Debug\SafeFolder.csprojResolveAssemblyReference.cache
+C:\Users\jabe\Documents\Visual Studio 2013\Projects\WindowsFormsApplication1\WindowsFormsApplication1\obj\Debug\SafeFolder.FileForm.resources
+C:\Users\jabe\Documents\Visual Studio 2013\Projects\WindowsFormsApplication1\WindowsFormsApplication1\obj\Debug\SafeFolder.SafeFolderForm.resources
+C:\Users\jabe\Documents\Visual Studio 2013\Projects\WindowsFormsApplication1\WindowsFormsApplication1\obj\Debug\SafeFolder.Properties.Resources.resources
+C:\Users\jabe\Documents\Visual Studio 2013\Projects\WindowsFormsApplication1\WindowsFormsApplication1\obj\Debug\SafeFolder.csproj.GenerateResource.Cache
 C:\Users\jabe\Documents\Visual Studio 2013\Projects\WindowsFormsApplication1\WindowsFormsApplication1\obj\Debug\SafeFolder.exe
 C:\Users\jabe\Documents\Visual Studio 2013\Projects\WindowsFormsApplication1\WindowsFormsApplication1\obj\Debug\SafeFolder.pdb

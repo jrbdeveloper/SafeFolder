@@ -45,28 +45,23 @@ namespace SafeFolder
 
         private void btnSaveFile_Click(object sender, EventArgs e)
         {
-            var list = new List<FileRecipient>();
+            var addresses = new List<AddressBook>();
+            var file = new File
+            {
+                Name = FileName,
+                Path = _configurationManager.DefaultConfiguration.LocalFilePath,
+                CanCopy = canCopyCheck.Checked,
+                CanForward = canForwardCheck.Checked,
+                CanDelete = canDeleteCheck.Checked,
+                CanModify = canModifyCheck.Checked,
+            };
+
             foreach (var fileRecipient in GetRecipients())
             {
-                list.Add(new FileRecipient
-                {
-                    File = new File
-                    {
-                        Name = FileName,
-                        Path = _configurationManager.DefaultConfiguration.LocalFilePath,
-                        CanCopy = canCopyCheck.Checked,
-                        CanForward = canForwardCheck.Checked,
-                        CanDelete = canDeleteCheck.Checked,
-                        CanModify = canModifyCheck.Checked,
-                    },
-                    AddressBook = new AddressBook
-                    {
-                        EmailAddress = fileRecipient.AddressBook.EmailAddress
-                    }
-                });
+                addresses.Add(fileRecipient.AddressBook);
             }
 
-            _fileManager.SaveFileSettings(list);
+            _fileManager.SaveFileSettings(file, addresses);
             Close();
         }
 

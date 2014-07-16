@@ -1,10 +1,11 @@
 ﻿using System.Collections.Generic;
+using SafeFolder.Core.Entities;
 
 namespace SafeFolder.Core.Contracts
 {
     public interface IFileRepo
     {
-        int SaveSettings(List<Entities.FileRecipient> filesettings);
-        void DeleteSettings(Entities.FileRecipient file);
+        int SaveSettings(File file, List<AddressBook> addresses);
+        void DeleteSettings(FileRecipient file);
     }
 }

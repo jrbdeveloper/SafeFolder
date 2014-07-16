@@ -23,14 +23,14 @@ namespace SafeFolder.Domain
 
         #endregion
 
-        public void SaveFileSettings(List<FileRecipient> filesettings) 
+        public void SaveFileSettings(File file, List<AddressBook> addresses) 
         {
             //TODO: Call the encryption service here
-            var newFileName = filesettings[0].File.Name + ".safe";
-            System.IO.File.Move(filesettings[0].File.Name, newFileName);
+            var newFileName = file.Name + ".safe";
+            System.IO.File.Move(file.Name, newFileName);
 
             //TODO: Depending on what happens with the encryption service or if the application is online we'll set flags on the file before we save it
-            var result = _fileRepo.SaveSettings(filesettings);
+            var result = _fileRepo.SaveSettings(file, addresses);
         }
 
         public void DeleteFileSettings(FileRecipient filesettings)

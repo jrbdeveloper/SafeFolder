@@ -1,40 +1,35 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using SafeFolder.Core.Contracts;
 
 namespace SafeFolder.Data.Repositories
 {
     public class FileRepo : IFileRepo
     {
-        public int SaveSettings(List<Core.Entities.FileRecipient> filesettings)
+        public int SaveSettings(Core.Entities.File file, List<Core.Entities.AddressBook> addresses)
         {
             int result = 0;
 
             using (var data = new SafeFolderEntities())
             {
-                foreach (var fileRecipient in filesettings)
+                // Save file so it can be used in the next block of code
+                var savedFile = SaveFile(file);
+
+                // Construct a FileRecipient object to persist
+                foreach (var address in addresses)
                 {
+                    var savedAddress = data.AddressBooks.FirstOrDefault(x => x.EmailAddress == address.EmailAddress);
+
                     data.FileRecipients.Add(new FileRecipient
                     {
-                        File = new File
-                        {
-                            Name = fileRecipient.File.Name,
-                            Path = fileRecipient.File.Path,
-                            CanCopy = fileRecipient.File.CanCopy,
-                            CanDelete = fileRecipient.File.CanDelete,
-                            CanForward = fileRecipient.File.CanForward,
-                            CanModify = fileRecipient.File.CanModify
-                        },
-
-                        AddressBook = new AddressBook
-                        {
-                            EmailAddress = fileRecipient.AddressBook.EmailAddress
-                        }
+                        AddressBookId = savedAddress.Id,
+                        FileId = savedFile.Id
                     });
+                }
 
-                    if (data.ChangeTracker.HasChanges())
-                    {
-                        result = data.SaveChanges();
-                    }
+                if (data.ChangeTracker.HasChanges())
+                {
+                    result = data.SaveChanges();
                 }
             }
 
@@ -44,5 +39,28 @@ namespace SafeFolder.Data.Repositories
         public void DeleteSettings(Core.Entities.FileRecipient file)
         {
         }
+
+        #region Private Methods
+        private File SaveFile(Core.Entities.File file)
+        {
+            using (var data = new SafeFolderEntities())
+            {
+                var f = new File
+                {
+                    Name = file.Name,
+                    Path = file.Path,
+                    CanCopy = file.CanCopy,
+                    CanDelete = file.CanDelete,
+                    CanForward = file.CanForward,
+                    CanModify = file.CanModify
+                };
+
+                data.Files.Add(f);
+                data.SaveChanges();
+
+                return f;
+            }
+        }
+        #endregion
     }
 }
