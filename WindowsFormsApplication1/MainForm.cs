@@ -59,7 +59,7 @@ namespace SafeFolder
             else
             {
                 SaveConfiguration();
-                ClearFields();
+                //ClearFields();
 
                 InitializeSafeFolder();
             }
@@ -120,16 +120,26 @@ namespace SafeFolder
             Hide();
         }
 
+        private void configurationList_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
+        {
+            ResetSelection((DataGridView)sender);
+            ClearFields();
+        }
+
         private void configurationList_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
-            //var grid = (DataGridView)sender;
-            //configName.Text = grid.Rows[e.RowIndex].Cells[0].Value.ToString();
-            //localPath.Text = grid.Rows[e.RowIndex].Cells[1].Value.ToString();
-            //emailAddress.Text = grid.Rows[e.RowIndex].Cells[2].Value.ToString();
-            //servicePath.Text = grid.Rows[e.RowIndex].Cells[3].Value.ToString();
-            //isDefaultCheck.Checked = bool.Parse(grid.Rows[e.RowIndex].Cells[4].Value.ToString());
+            ResetSelection((DataGridView)sender);
+            ClearFields();
+        }
 
-            //_activeRowIndex = e.RowIndex;
+        private void configurationList_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
+        {
+            ResetSelection((DataGridView)sender);
+        }
+
+        private void configurationList_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            GetRowValues((DataGridView)sender, e.RowIndex);
         }
 
         private void Exit(object sender, EventArgs e)
@@ -156,7 +166,6 @@ namespace SafeFolder
         {
             configName.Text = string.Empty;
             localPath.Text = string.Empty;
-            emailAddress.Text = string.Empty;
             servicePath.Text = string.Empty;
             isDefaultCheck.Checked = false;
         }
@@ -246,5 +255,33 @@ namespace SafeFolder
             InitializeTrayMenu();
         }
         #endregion 
+
+        private void GetRowValues(DataGridView grid, int rowIndex)
+        {
+            configName.Text = grid.Rows[rowIndex].Cells[0].Value.ToString();
+            localPath.Text = grid.Rows[rowIndex].Cells[1].Value.ToString();
+            servicePath.Text = grid.Rows[rowIndex].Cells[3].Value.ToString();
+            isDefaultCheck.Checked = bool.Parse(grid.Rows[rowIndex].Cells[4].Value.ToString());
+        }
+
+        private void ResetSelection(DataGridView grid)
+        {
+            foreach (DataGridViewRow row in grid.SelectedRows)
+            {
+                row.Selected = false;
+            }
+
+            foreach (DataGridViewCell cell in grid.SelectedCells)
+            {
+                cell.Selected = false;
+            }
+
+            foreach (DataGridViewColumn col in grid.SelectedColumns)
+            {
+                col.Selected = false;
+            }
+        }
+
+        
     }
 }

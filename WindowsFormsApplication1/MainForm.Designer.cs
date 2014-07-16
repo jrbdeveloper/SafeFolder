@@ -170,8 +170,11 @@
             this.configurationList.Name = "configurationList";
             this.configurationList.ReadOnly = true;
             this.configurationList.Size = new System.Drawing.Size(759, 150);
-            this.configurationList.TabIndex = 5;
+            this.configurationList.TabIndex = 10;
+            this.configurationList.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.configurationList_CellClick);
             this.configurationList.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.configurationList_RowEnter);
+            this.configurationList.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.configurationList_RowPostPaint);
+            this.configurationList.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.configurationList_RowsAdded);
             // 
             // dataGridViewTextBoxColumn4
             // 
