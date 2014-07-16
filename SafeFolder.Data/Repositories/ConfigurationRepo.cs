@@ -49,7 +49,7 @@ namespace SafeFolder.Data.Repositories
             {
                 foreach (var config in data.Configurations)
                 {
-                    configList.Add(GetConfiguration(config));
+                    configList.Add(HydrateEntity(config));
                 }
 
                 return configList;
@@ -65,7 +65,7 @@ namespace SafeFolder.Data.Repositories
 
                 if (configuration != null)
                 {
-                    return GetConfiguration(configuration);
+                    return HydrateEntity(configuration);
                 }
                 
                 return new Core.Entities.Configuration();
@@ -81,7 +81,7 @@ namespace SafeFolder.Data.Repositories
 
                 if (configuration != null)
                 {
-                    return GetConfiguration(configuration);
+                    return HydrateEntity(configuration);
                 }
 
                 return new Core.Entities.Configuration
@@ -91,7 +91,7 @@ namespace SafeFolder.Data.Repositories
             }
         }
 
-        private Core.Entities.Configuration GetConfiguration(Configuration configuration)
+        private Core.Entities.Configuration HydrateEntity(Configuration configuration)
         {
             return new Core.Entities.Configuration
             {
