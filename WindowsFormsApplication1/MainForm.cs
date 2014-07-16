@@ -254,14 +254,13 @@ namespace SafeFolder
             InitializeLocalPath();
             InitializeTrayMenu();
         }
-        #endregion 
 
         private void GetRowValues(DataGridView grid, int rowIndex)
         {
             configName.Text = grid.Rows[rowIndex].Cells[0].Value.ToString();
             localPath.Text = grid.Rows[rowIndex].Cells[1].Value.ToString();
-            servicePath.Text = grid.Rows[rowIndex].Cells[3].Value.ToString();
-            isDefaultCheck.Checked = bool.Parse(grid.Rows[rowIndex].Cells[4].Value.ToString());
+            servicePath.Text = grid.Rows[rowIndex].Cells[2].Value.ToString();
+            isDefaultCheck.Checked = bool.Parse(grid.Rows[rowIndex].Cells[3].Value.ToString());
         }
 
         private void ResetSelection(DataGridView grid)
@@ -282,6 +281,6 @@ namespace SafeFolder
             }
         }
 
-        
+        #endregion 
     }
 }
