@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.IO;
 using SafeFolder.Core.Contracts;
 using SafeFolder.Core.Entities;
 
@@ -51,9 +52,26 @@ namespace SafeFolder.Domain
             return _configurationRepo.GetById(id);
         }
 
+        public Configuration GetByName(string name)
+        {
+            return _configurationRepo.GetByName(name);
+        }
+
         public Configuration GetDefaultConfiguration()
         {
             return _configurationRepo.GetDefault();
+        }
+
+        /// <summary>
+        /// Method to create the folder path if it does not exist
+        /// </summary>
+        /// <param name="path">string</param>
+        public void InitializeLocalPath()
+        {
+            if (!Directory.Exists(DefaultConfiguration.LocalFilePath))
+            {
+                Directory.CreateDirectory(DefaultConfiguration.LocalFilePath);
+            }
         }
         #endregion
     }

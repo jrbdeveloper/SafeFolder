@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Data;
+using System.Data.Entity;
 using System.Linq;
-using System.Security.Cryptography.X509Certificates;
 using SafeFolder.Core.Contracts;
 
 namespace SafeFolder.Data.Repositories
@@ -18,12 +18,14 @@ namespace SafeFolder.Data.Repositories
 
                 if (model != null)
                 {
-                    model = HydrateModel(config);
-                    data.Configurations.Add(model);
+                    model = HydrateModel(model, config, false);
+                    data.Configurations.Attach(model);
+                    data.Entry(model).State = EntityState.Modified;
+                    //data.Configurations.Add(model);
                 }
                 else
                 {
-                    var newModel = HydrateModel(config);
+                    var newModel = HydrateModel(model, config, true);
                     data.Configurations.Add(newModel);
                 }
 
@@ -60,14 +62,28 @@ namespace SafeFolder.Data.Repositories
         {
             using (var data = new SafeFolderEntities())
             {
-                var result = from config in data.Configurations.Where(x => x.Id == id) select config;
-                var configuration = result.FirstOrDefault();
+                var model = data.Configurations.FirstOrDefault(x => x.Id == id);
 
-                if (configuration != null)
+                if (model != null)
                 {
-                    return HydrateEntity(configuration);
+                    return HydrateEntity(model);
                 }
                 
+                return new Core.Entities.Configuration();
+            }
+        }
+
+        public Core.Entities.Configuration GetByName(string name)
+        {
+            using (var data = new SafeFolderEntities())
+            {
+                var model = data.Configurations.FirstOrDefault(x => x.Name == name);
+
+                if (model != null)
+                {
+                    return HydrateEntity(model);
+                }
+
                 return new Core.Entities.Configuration();
             }
         }
@@ -119,22 +135,41 @@ namespace SafeFolder.Data.Repositories
             };
         }
 
-        private Configuration HydrateModel(Core.Entities.Configuration config)
+        private Configuration HydrateModel(Configuration existingModel, Core.Entities.Configuration config, bool includeOwner)
         {
-            var model = new Configuration
+            Configuration model = null;
+
+            if (existingModel != null)
             {
-                Name = config.Name,
-                LocalFilePath = config.LocalFilePath,
-                ServicePath = config.ServicePath,
-                IsDefault = config.IsDefault,
-                OwnerProfile = new OwnerProfile
+                model = existingModel;
+                model.Name = config.Name;
+                model.IsDefault = config.IsDefault;
+                model.LocalFilePath = config.LocalFilePath;
+                model.ServicePath = config.ServicePath;
+                model.OwnerProfile.FirstName = config.OwnerProfile.FirstName;
+                model.OwnerProfile.LastName = config.OwnerProfile.LastName;
+                model.OwnerProfile.EmailAddress = config.OwnerProfile.EmailAddress;
+                model.OwnerProfile.Password = config.OwnerProfile.Password;
+            }
+            else
+            {
+                model = new Configuration
                 {
-                    FirstName = config.OwnerProfile.FirstName,
-                    LastName = config.OwnerProfile.LastName,
-                    EmailAddress = config.OwnerProfile.EmailAddress,
-                    Password = config.OwnerProfile.Password
-                }
-            };
+                    Name = config.Name,
+                    LocalFilePath = config.LocalFilePath,
+                    ServicePath = config.ServicePath,
+                    IsDefault = config.IsDefault,
+                    OwnerProfile = (includeOwner)
+                        ? new OwnerProfile
+                        {
+                            FirstName = config.OwnerProfile.FirstName,
+                            LastName = config.OwnerProfile.LastName,
+                            EmailAddress = config.OwnerProfile.EmailAddress,
+                            Password = config.OwnerProfile.Password
+                        }
+                        : null
+                };
+            }
 
             return model;
         }

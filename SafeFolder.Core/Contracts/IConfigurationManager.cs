@@ -11,6 +11,8 @@ namespace SafeFolder.Core.Contracts
         void DeleteConfiguration(Configuration config);
         List<Configuration> GetAllConfigurations();
         Configuration GetById(int id);
+        Configuration GetByName(string name);
         Configuration GetDefaultConfiguration();
+        void InitializeLocalPath();
     }
 }

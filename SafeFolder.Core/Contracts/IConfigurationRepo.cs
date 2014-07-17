@@ -9,6 +9,7 @@ namespace SafeFolder.Core.Contracts
         void Delete(Configuration config);
         List<Configuration> GetAll();
         Configuration GetById(int id);
+        Configuration GetByName(string name);
         Configuration GetDefault();
     }
 }

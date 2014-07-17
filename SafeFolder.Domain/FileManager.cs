@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using SafeFolder.Core.Contracts;
 using SafeFolder.Core.Entities;
+using File = SafeFolder.Core.Entities.File;
 
 namespace SafeFolder.Domain
 {

@@ -23,10 +23,10 @@ namespace SafeFolder
             get { return configurationList; }
         }
 
-        public Configuration DefaultConfiguration {
-            get { return _defaultConfiguration ?? (_defaultConfiguration = _configurationManager.GetDefaultConfiguration()); }
-            set { _defaultConfiguration = value; }
-        }
+        //public Configuration DefaultConfiguration {
+        //    get { return _defaultConfiguration ?? (_defaultConfiguration = _configurationManager.GetDefaultConfiguration()); }
+        //    set { _defaultConfiguration = value; }
+        //}
         #endregion
 
         #region Constructor
@@ -49,6 +49,15 @@ namespace SafeFolder
             InitializeSafeFolder();
         }
 
+        private void SafeFolder_Resize(object sender, EventArgs e)
+        {
+            if (WindowState == FormWindowState.Minimized)
+            {
+                notifyIcon1.Visible = true;
+                Hide();
+            }
+        }
+
         private void saveConfigurationBtn_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(configName.Text) || string.IsNullOrEmpty(localPath.Text) ||
@@ -64,7 +73,12 @@ namespace SafeFolder
                 InitializeSafeFolder();
             }
         }
-        
+
+        private void closeButton_Click(object sender, EventArgs e)
+        {
+            Hide();
+        }
+
         private void fileSysWatcher_Created(object sender, FileSystemEventArgs e)
         {
             FileOrFolderChanged(e);        
@@ -97,7 +111,7 @@ namespace SafeFolder
 
         private void ShowSafeFolder(object sender, EventArgs e)
         {
-            System.Diagnostics.Process.Start("explorer.exe", DefaultConfiguration.LocalFilePath);
+            System.Diagnostics.Process.Start("explorer.exe", _configurationManager.DefaultConfiguration.LocalFilePath);
         }
 
         private void ShowConfigurationForm(object sender, EventArgs e)
@@ -106,40 +120,26 @@ namespace SafeFolder
             Show();
         }
 
-        private void SafeFolder_Resize(object sender, EventArgs e)
-        {
-            if (WindowState == FormWindowState.Minimized)
-            {
-                notifyIcon1.Visible = true;
-                Hide();
-            }
-        }
-
-        private void closeButton_Click(object sender, EventArgs e)
-        {
-            Hide();
-        }
-
         private void configurationList_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
         {
-            ResetSelection((DataGridView)sender);
+            ResetGridSelection((DataGridView)sender);
             ClearFields();
         }
 
         private void configurationList_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
-            ResetSelection((DataGridView)sender);
+            ResetGridSelection((DataGridView)sender);
             ClearFields();
         }
 
         private void configurationList_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
         {
-            ResetSelection((DataGridView)sender);
+            ResetGridSelection((DataGridView)sender);
         }
 
         private void configurationList_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            GetRowValues((DataGridView)sender, e.RowIndex);
+            GetGridRowValues((DataGridView)sender, e.RowIndex);
         }
 
         private void Exit(object sender, EventArgs e)
@@ -204,7 +204,7 @@ namespace SafeFolder
         {
             var fileSysWatcher = new FileSystemWatcher
             {
-                Path = DefaultConfiguration.LocalFilePath,
+                Path = _configurationManager.DefaultConfiguration.LocalFilePath,
                 Filter = "*.*",
                 NotifyFilter =
                     NotifyFilters.CreationTime |
@@ -234,36 +234,30 @@ namespace SafeFolder
             notifyIcon1.ContextMenu.MenuItems.Add(new MenuItem("Quit Safe Folder", Exit));
         }
 
-        /// <summary>
-        /// Method to create the folder path if it does not exist
-        /// </summary>
-        /// <param name="path">string</param>
-        private void InitializeLocalPath()
-        {
-            if (!Directory.Exists(DefaultConfiguration.LocalFilePath))
-            {
-                Directory.CreateDirectory(DefaultConfiguration.LocalFilePath);
-            }
-        }
-
         private void InitializeSafeFolder()
         {
-            DefaultConfiguration = _configurationManager.GetDefaultConfiguration();
             Grid.DataSource = _configurationManager.GetAllConfigurations();
 
-            InitializeLocalPath();
+            _configurationManager.InitializeLocalPath();
             InitializeTrayMenu();
         }
 
-        private void GetRowValues(DataGridView grid, int rowIndex)
+        private void GetGridRowValues(DataGridView grid, int rowIndex)
         {
-            configName.Text = grid.Rows[rowIndex].Cells[0].Value.ToString();
-            localPath.Text = grid.Rows[rowIndex].Cells[1].Value.ToString();
-            servicePath.Text = grid.Rows[rowIndex].Cells[2].Value.ToString();
-            isDefaultCheck.Checked = bool.Parse(grid.Rows[rowIndex].Cells[3].Value.ToString());
+            var model = _configurationManager.GetByName(grid.Rows[rowIndex].Cells[0].Value.ToString());
+
+            firstName.Text = model.OwnerProfile.FirstName;
+            lastName.Text = model.OwnerProfile.LastName;
+            emailAddress.Text = model.OwnerProfile.EmailAddress;
+            password.Text = model.OwnerProfile.Password;
+
+            configName.Text = model.Name;
+            localPath.Text = model.LocalFilePath;
+            servicePath.Text = model.ServicePath;
+            isDefaultCheck.Checked = model.IsDefault;
         }
 
-        private void ResetSelection(DataGridView grid)
+        private void ResetGridSelection(DataGridView grid)
         {
             foreach (DataGridViewRow row in grid.SelectedRows)
             {
