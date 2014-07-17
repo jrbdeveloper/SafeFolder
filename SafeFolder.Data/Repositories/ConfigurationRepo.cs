@@ -21,7 +21,6 @@ namespace SafeFolder.Data.Repositories
                     model = HydrateModel(model, config, false);
                     data.Configurations.Attach(model);
                     data.Entry(model).State = EntityState.Modified;
-                    //data.Configurations.Add(model);
                 }
                 else
                 {
