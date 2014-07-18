@@ -13,6 +13,8 @@ namespace SafeFolder.Core.Contracts
         Configuration GetById(int id);
         Configuration GetByName(string name);
         Configuration GetDefaultConfiguration();
+        OwnerProfile GetDefaultOwnerProfile();
+
         void InitializeLocalPath();
     }
 }

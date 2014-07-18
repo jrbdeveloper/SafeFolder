@@ -18,13 +18,13 @@ namespace SafeFolder.Data.Repositories
 
                 if (model != null)
                 {
-                    model = HydrateModel(model, config, false);
+                    model = HydrateModel(model, config, data, false);
                     data.Configurations.Attach(model);
                     data.Entry(model).State = EntityState.Modified;
                 }
                 else
                 {
-                    var newModel = HydrateModel(model, config, true);
+                    var newModel = HydrateModel(model, config, data, true);
                     data.Configurations.Add(newModel);
                 }
 
@@ -48,9 +48,12 @@ namespace SafeFolder.Data.Repositories
 
             using (var data = new SafeFolderEntities())
             {
-                foreach (var config in data.Configurations)
+                if (data.Configurations.Any())
                 {
-                    configList.Add(HydrateEntity(config));
+                    foreach (var config in data.Configurations)
+                    {
+                        configList.Add(HydrateEntity(config));
+                    }
                 }
 
                 return configList;
@@ -116,6 +119,29 @@ namespace SafeFolder.Data.Repositories
             }
         }
 
+        public Core.Entities.OwnerProfile GetDefaultOwnerProfile()
+        {
+            using (var data = new SafeFolderEntities())
+            {
+                Core.Entities.OwnerProfile owner = null;
+                var model = data.Configurations.FirstOrDefault(x=>x.IsDefault);
+
+                if (model != null)
+                {
+                    owner = new Core.Entities.OwnerProfile
+                    {
+                        FirstName = model.OwnerProfile.FirstName,
+                        LastName = model.OwnerProfile.LastName,
+                        EmailAddress = model.OwnerProfile.EmailAddress,
+                        Password = model.OwnerProfile.Password
+                    };
+                }
+                
+
+                return owner;
+            }
+        }
+
         private Core.Entities.Configuration HydrateEntity(Configuration configuration)
         {
             return new Core.Entities.Configuration
@@ -134,7 +160,7 @@ namespace SafeFolder.Data.Repositories
             };
         }
 
-        private Configuration HydrateModel(Configuration existingModel, Core.Entities.Configuration config, bool includeOwner)
+        private Configuration HydrateModel(Configuration existingModel, Core.Entities.Configuration config, SafeFolderEntities data, bool includeOwner)
         {
             Configuration model = null;
 
@@ -145,13 +171,20 @@ namespace SafeFolder.Data.Repositories
                 model.IsDefault = config.IsDefault;
                 model.LocalFilePath = config.LocalFilePath;
                 model.ServicePath = config.ServicePath;
-                model.OwnerProfile.FirstName = config.OwnerProfile.FirstName;
-                model.OwnerProfile.LastName = config.OwnerProfile.LastName;
-                model.OwnerProfile.EmailAddress = config.OwnerProfile.EmailAddress;
-                model.OwnerProfile.Password = config.OwnerProfile.Password;
+
+                if (data.Entry(model.OwnerProfile).State == EntityState.Modified)
+                {
+                    model.OwnerProfile.FirstName = config.OwnerProfile.FirstName;
+                    model.OwnerProfile.LastName = config.OwnerProfile.LastName;
+                    model.OwnerProfile.EmailAddress = config.OwnerProfile.EmailAddress;
+                    model.OwnerProfile.Password = config.OwnerProfile.Password;
+                }
+
             }
             else
             {
+                var owner = data.OwnerProfiles.FirstOrDefault(x => x.EmailAddress == config.OwnerProfile.EmailAddress);
+
                 model = new Configuration
                 {
                     Name = config.Name,
@@ -168,6 +201,12 @@ namespace SafeFolder.Data.Repositories
                         }
                         : null
                 };
+
+                if (owner != null)
+                {
+                    model.OwnerId = owner.Id;
+                    model.OwnerProfile = null;
+                }
             }
 
             return model;

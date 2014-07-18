@@ -234,6 +234,7 @@ namespace SafeFolder
             Grid.DataSource = _configurationManager.GetAllConfigurations();
 
             _configurationManager.InitializeLocalPath();
+            SetDefaultOwner();
             InitializeTrayMenu();
         }
 
@@ -267,6 +268,19 @@ namespace SafeFolder
             foreach (DataGridViewColumn col in grid.SelectedColumns)
             {
                 col.Selected = false;
+            }
+        }
+
+        private void SetDefaultOwner()
+        {
+            var owner = _configurationManager.GetDefaultOwnerProfile();
+
+            if (owner != null)
+            {
+                firstName.Text = owner.FirstName;
+                lastName.Text = owner.LastName;
+                emailAddress.Text = owner.EmailAddress;
+                password.Text = owner.Password;
             }
         }
 

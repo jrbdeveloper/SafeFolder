@@ -62,6 +62,11 @@ namespace SafeFolder.Domain
             return _configurationRepo.GetDefault();
         }
 
+        public OwnerProfile GetDefaultOwnerProfile()
+        {
+            return _configurationRepo.GetDefaultOwnerProfile();
+        }
+
         /// <summary>
         /// Method to create the folder path if it does not exist
         /// </summary>
