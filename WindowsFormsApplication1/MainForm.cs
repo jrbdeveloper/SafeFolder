@@ -85,11 +85,6 @@ namespace SafeFolder
             }
         }
 
-        private void closeButton_Click(object sender, EventArgs e)
-        {
-            Hide();
-        }
-
         private void fileSysWatcher_Created(object sender, FileSystemEventArgs e)
         {
             FileOrFolderChanged(e);        
