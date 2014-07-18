@@ -18,13 +18,13 @@ namespace SafeFolder.Data.Repositories
 
                 if (model != null)
                 {
-                    model = HydrateModel(model, config, data, false);
+                    model = HydrateModel(model, config, data);
                     data.Configurations.Attach(model);
                     data.Entry(model).State = EntityState.Modified;
                 }
                 else
                 {
-                    var newModel = HydrateModel(model, config, data, true);
+                    var newModel = HydrateModel(model, config, data);
                     data.Configurations.Add(newModel);
                 }
 
@@ -39,7 +39,13 @@ namespace SafeFolder.Data.Repositories
 
         public void Delete(Core.Entities.Configuration config)
         {
-            
+            using (var data = new SafeFolderEntities())
+            {
+                var model = data.Configurations.FirstOrDefault(x => x.Name == config.Name);
+                data.Configurations.Remove(model);
+
+                data.SaveChanges();
+            }
         }
 
         public List<Core.Entities.Configuration> GetAll()
@@ -160,7 +166,7 @@ namespace SafeFolder.Data.Repositories
             };
         }
 
-        private Configuration HydrateModel(Configuration existingModel, Core.Entities.Configuration config, SafeFolderEntities data, bool includeOwner)
+        private Configuration HydrateModel(Configuration existingModel, Core.Entities.Configuration config, SafeFolderEntities data)
         {
             Configuration model = null;
 
@@ -191,7 +197,7 @@ namespace SafeFolder.Data.Repositories
                     LocalFilePath = config.LocalFilePath,
                     ServicePath = config.ServicePath,
                     IsDefault = config.IsDefault,
-                    OwnerProfile = (includeOwner)
+                    OwnerProfile = (owner == null)
                         ? new OwnerProfile
                         {
                             FirstName = config.OwnerProfile.FirstName,

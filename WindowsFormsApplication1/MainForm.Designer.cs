@@ -48,7 +48,6 @@
             this.dataGridViewCheckBoxColumn2 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.configurationBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.closeButton = new System.Windows.Forms.Button();
             this.isDefaultCheck = new System.Windows.Forms.CheckBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
@@ -56,6 +55,7 @@
             this.firstName = new System.Windows.Forms.TextBox();
             this.lastName = new System.Windows.Forms.TextBox();
             this.password = new System.Windows.Forms.TextBox();
+            this.deleteConfigurationBtn = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.configurationList)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.configurationBindingSource)).BeginInit();
             this.SuspendLayout();
@@ -94,11 +94,11 @@
             // 
             // saveConfigurationBtn
             // 
-            this.saveConfigurationBtn.Location = new System.Drawing.Point(641, 115);
+            this.saveConfigurationBtn.Location = new System.Drawing.Point(684, 115);
             this.saveConfigurationBtn.Name = "saveConfigurationBtn";
-            this.saveConfigurationBtn.Size = new System.Drawing.Size(106, 23);
+            this.saveConfigurationBtn.Size = new System.Drawing.Size(63, 23);
             this.saveConfigurationBtn.TabIndex = 9;
-            this.saveConfigurationBtn.Text = "Save Configuration";
+            this.saveConfigurationBtn.Text = "Save";
             this.saveConfigurationBtn.UseVisualStyleBackColor = true;
             this.saveConfigurationBtn.Click += new System.EventHandler(this.saveConfigurationBtn_Click);
             // 
@@ -216,20 +216,10 @@
             // 
             this.configurationBindingSource.DataSource = typeof(SafeFolder.Core.Entities.Configuration);
             // 
-            // closeButton
-            // 
-            this.closeButton.Location = new System.Drawing.Point(560, 115);
-            this.closeButton.Name = "closeButton";
-            this.closeButton.Size = new System.Drawing.Size(75, 23);
-            this.closeButton.TabIndex = 8;
-            this.closeButton.Text = "Close";
-            this.closeButton.UseVisualStyleBackColor = true;
-            this.closeButton.Click += new System.EventHandler(this.closeButton_Click);
-            // 
             // isDefaultCheck
             // 
             this.isDefaultCheck.AutoSize = true;
-            this.isDefaultCheck.Location = new System.Drawing.Point(476, 119);
+            this.isDefaultCheck.Location = new System.Drawing.Point(518, 119);
             this.isDefaultCheck.Name = "isDefaultCheck";
             this.isDefaultCheck.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.isDefaultCheck.Size = new System.Drawing.Size(71, 17);
@@ -285,11 +275,22 @@
             this.password.Size = new System.Drawing.Size(229, 20);
             this.password.TabIndex = 3;
             // 
+            // deleteConfigurationBtn
+            // 
+            this.deleteConfigurationBtn.Location = new System.Drawing.Point(603, 115);
+            this.deleteConfigurationBtn.Name = "deleteConfigurationBtn";
+            this.deleteConfigurationBtn.Size = new System.Drawing.Size(75, 23);
+            this.deleteConfigurationBtn.TabIndex = 19;
+            this.deleteConfigurationBtn.Text = "Delete";
+            this.deleteConfigurationBtn.UseVisualStyleBackColor = true;
+            this.deleteConfigurationBtn.Click += new System.EventHandler(this.deleteConfigurationBtn_Click);
+            // 
             // SafeFolderForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(759, 304);
+            this.Controls.Add(this.deleteConfigurationBtn);
             this.Controls.Add(this.password);
             this.Controls.Add(this.lastName);
             this.Controls.Add(this.firstName);
@@ -297,7 +298,6 @@
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.isDefaultCheck);
-            this.Controls.Add(this.closeButton);
             this.Controls.Add(this.configurationList);
             this.Controls.Add(this.configName);
             this.Controls.Add(this.label4);
@@ -343,7 +343,6 @@
         private System.Windows.Forms.NotifyIcon notifyIcon1;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.DataGridView configurationList;
-        private System.Windows.Forms.Button closeButton;
         private System.Windows.Forms.CheckBox isDefaultCheck;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
@@ -368,6 +367,7 @@
         private System.Windows.Forms.DataGridViewCheckBoxColumn dataGridViewCheckBoxColumn2;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
         private System.Windows.Forms.BindingSource configurationBindingSource;
+        private System.Windows.Forms.Button deleteConfigurationBtn;
     }
 }
 

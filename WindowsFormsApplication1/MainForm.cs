@@ -69,6 +69,22 @@ namespace SafeFolder
             }
         }
 
+        private void deleteConfigurationBtn_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("Are you sure you want to delete this configuration?", "Confirm Delete",
+                    MessageBoxButtons.YesNo) == DialogResult.Yes)
+            {
+                var config = _configurationManager.GetByName(configName.Text);
+
+                if (config != null)
+                {
+                    _configurationManager.DeleteConfiguration(config);
+                    ClearFields();
+                    Grid.DataSource = _configurationManager.GetAllConfigurations();
+                }
+            }
+        }
+
         private void closeButton_Click(object sender, EventArgs e)
         {
             Hide();
