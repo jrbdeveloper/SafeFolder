@@ -38,5 +38,10 @@ namespace SafeFolder.Domain
         {
             _fileRepo.DeleteSettings(filesettings);
         }
+
+        public List<FileRecipient> GetAllSavedFiles()
+        {
+            return _fileRepo.GetAllSavedFiles();
+        }
     }
 }

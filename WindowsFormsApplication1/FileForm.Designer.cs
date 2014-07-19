@@ -91,7 +91,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(320, 18);
+            this.label2.Location = new System.Drawing.Point(292, 19);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(31, 13);
             this.label2.TabIndex = 5;
@@ -100,7 +100,7 @@
             // FullFileName
             // 
             this.FullFileName.AutoSize = true;
-            this.FullFileName.Location = new System.Drawing.Point(351, 19);
+            this.FullFileName.Location = new System.Drawing.Point(323, 19);
             this.FullFileName.MaximumSize = new System.Drawing.Size(120, 0);
             this.FullFileName.Name = "FullFileName";
             this.FullFileName.Size = new System.Drawing.Size(35, 13);
@@ -110,6 +110,9 @@
             // canDeleteCheck
             // 
             this.canDeleteCheck.AutoSize = true;
+            this.canDeleteCheck.Checked = true;
+            this.canDeleteCheck.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.canDeleteCheck.Enabled = false;
             this.canDeleteCheck.Location = new System.Drawing.Point(358, 65);
             this.canDeleteCheck.Name = "canDeleteCheck";
             this.canDeleteCheck.Size = new System.Drawing.Size(79, 17);
@@ -120,6 +123,9 @@
             // canForwardCheck
             // 
             this.canForwardCheck.AutoSize = true;
+            this.canForwardCheck.Checked = true;
+            this.canForwardCheck.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.canForwardCheck.Enabled = false;
             this.canForwardCheck.Location = new System.Drawing.Point(358, 99);
             this.canForwardCheck.Name = "canForwardCheck";
             this.canForwardCheck.Size = new System.Drawing.Size(86, 17);
@@ -130,6 +136,9 @@
             // canModifyCheck
             // 
             this.canModifyCheck.AutoSize = true;
+            this.canModifyCheck.Checked = true;
+            this.canModifyCheck.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.canModifyCheck.Enabled = false;
             this.canModifyCheck.Location = new System.Drawing.Point(358, 82);
             this.canModifyCheck.Name = "canModifyCheck";
             this.canModifyCheck.Size = new System.Drawing.Size(79, 17);
@@ -140,6 +149,9 @@
             // canCopyCheck
             // 
             this.canCopyCheck.AutoSize = true;
+            this.canCopyCheck.Checked = true;
+            this.canCopyCheck.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.canCopyCheck.Enabled = false;
             this.canCopyCheck.Location = new System.Drawing.Point(358, 48);
             this.canCopyCheck.Name = "canCopyCheck";
             this.canCopyCheck.Size = new System.Drawing.Size(72, 17);

@@ -28,34 +28,52 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.components = new System.ComponentModel.Container();
+            this.savedFilesGrid = new System.Windows.Forms.DataGridView();
+            this.fileRecipientBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.fileBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            ((System.ComponentModel.ISupportInitialize)(this.savedFilesGrid)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fileRecipientBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fileBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
-            // dataGridView1
+            // savedFilesGrid
             // 
-            this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.MenuBar;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(1, 169);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(846, 166);
-            this.dataGridView1.TabIndex = 0;
+            this.savedFilesGrid.BackgroundColor = System.Drawing.SystemColors.MenuBar;
+            this.savedFilesGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.savedFilesGrid.Location = new System.Drawing.Point(1, 169);
+            this.savedFilesGrid.Name = "savedFilesGrid";
+            this.savedFilesGrid.Size = new System.Drawing.Size(846, 166);
+            this.savedFilesGrid.TabIndex = 0;
+            // 
+            // fileRecipientBindingSource
+            // 
+            this.fileRecipientBindingSource.DataSource = typeof(SafeFolder.Core.Entities.FileRecipient);
+            // 
+            // fileBindingSource
+            // 
+            this.fileBindingSource.DataSource = typeof(SafeFolder.Core.Entities.File);
             // 
             // FileReport
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(847, 335);
-            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.savedFilesGrid);
             this.Name = "FileReport";
             this.Text = "File Report";
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            this.Load += new System.EventHandler(this.FileReport_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.savedFilesGrid)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fileRecipientBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fileBindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView savedFilesGrid;
+        private System.Windows.Forms.BindingSource fileBindingSource;
+        private System.Windows.Forms.BindingSource fileRecipientBindingSource;
     }
 }

@@ -6,6 +6,7 @@ namespace SafeFolder.Data.Repositories
 {
     public class FileRepo : IFileRepo
     {
+        #region Public Methods
         public int SaveSettings(Core.Entities.File file, List<Core.Entities.AddressBook> addresses)
         {
             int result = 0;
@@ -39,6 +40,35 @@ namespace SafeFolder.Data.Repositories
         public void DeleteSettings(Core.Entities.FileRecipient file)
         {
         }
+
+        public List<Core.Entities.FileRecipient> GetAllSavedFiles()
+        {
+            using (var data = new SafeFolderEntities())
+            {
+                var files = from fileRecipient in data.FileRecipients
+                    join file in data.Files on fileRecipient.FileId equals file.Id
+                    join address in data.AddressBooks on fileRecipient.AddressBookId equals address.Id
+                    select new Core.Entities.FileRecipient
+                    {
+                        AddressBook = new Core.Entities.AddressBook
+                        {
+                            EmailAddress = address.EmailAddress
+                        },
+                        File = new Core.Entities.File
+                        {
+                            Name = file.Name,
+                            Path = file.Path,
+                            CanCopy = file.CanCopy,
+                            CanDelete = file.CanDelete,
+                            CanModify = file.CanModify,
+                            CanForward = file.CanForward,
+                        }
+                    };
+
+                return files.ToList();
+            }
+        }
+        #endregion
 
         #region Private Methods
         private File SaveFile(Core.Entities.File file)

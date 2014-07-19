@@ -126,6 +126,12 @@ namespace SafeFolder
             Show();
         }
 
+        private void ShowFileReportForm(object sender, EventArgs e)
+        {
+            var fileReport = new FileReport(_configurationManager, _fileManager);
+            fileReport.Show();
+        }
+
         private void configurationList_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
         {
             ResetGridSelection((DataGridView)sender);
@@ -155,15 +161,15 @@ namespace SafeFolder
 
         private void SafeFolderForm_FormClosing(object sender, CancelEventArgs e)
         {
-            if (!Visible && WindowState == FormWindowState.Normal)
-            {
-                Application.Exit();
-            }
-            else
-            {
-                e.Cancel = true;
-                Hide();
-            }
+            //if (!Visible && WindowState == FormWindowState.Normal)
+            //{
+            //    Application.Exit();
+            //}
+            //else
+            //{
+            //    e.Cancel = true;
+            //    Hide();
+            //}
         }
         #endregion
 
@@ -234,8 +240,9 @@ namespace SafeFolder
         private void InitializeTrayMenu()
         {
             notifyIcon1.ContextMenu = new ContextMenu();
-            notifyIcon1.ContextMenu.MenuItems.Add(new MenuItem("Show Safe Folder", ShowSafeFolder));
-            notifyIcon1.ContextMenu.MenuItems.Add(new MenuItem("Show Configuration", ShowConfigurationForm));
+            notifyIcon1.ContextMenu.MenuItems.Add(new MenuItem("Open Safe Folder", ShowSafeFolder));
+            notifyIcon1.ContextMenu.MenuItems.Add(new MenuItem("Configurations", ShowConfigurationForm));
+            notifyIcon1.ContextMenu.MenuItems.Add(new MenuItem("File Settings Report", ShowFileReportForm));
             notifyIcon1.ContextMenu.MenuItems.Add("-");
             notifyIcon1.ContextMenu.MenuItems.Add(new MenuItem("Quit Safe Folder", Exit));
         }
