@@ -242,7 +242,7 @@ namespace SafeFolder
             notifyIcon1.ContextMenu = new ContextMenu();
             notifyIcon1.ContextMenu.MenuItems.Add(new MenuItem("Open Safe Folder", ShowSafeFolder));
             notifyIcon1.ContextMenu.MenuItems.Add(new MenuItem("Configurations", ShowConfigurationForm));
-            notifyIcon1.ContextMenu.MenuItems.Add(new MenuItem("File Settings Report", ShowFileReportForm));
+            //notifyIcon1.ContextMenu.MenuItems.Add(new MenuItem("File Settings Report", ShowFileReportForm));
             notifyIcon1.ContextMenu.MenuItems.Add("-");
             notifyIcon1.ContextMenu.MenuItems.Add(new MenuItem("Quit Safe Folder", Exit));
         }

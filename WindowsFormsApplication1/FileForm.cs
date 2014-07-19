@@ -32,19 +32,13 @@ namespace SafeFolder
 
         private void btnAddAddress_Click(object sender, EventArgs e)
         {
-            var address = new AddressBook
-            {
-                EmailAddress = txtEmailAddress.Text
-            };
-
-            _addressBookManager.SaveAddress(address);
-            LoadAddressList();
-
-            txtEmailAddress.Text = "";
+            AddAddress();
         }
 
         private void btnSaveFile_Click(object sender, EventArgs e)
         {
+            AddAddress();
+
             var addresses = new List<AddressBook>();
             var file = new File
             {
@@ -77,6 +71,16 @@ namespace SafeFolder
            
         }
 
+        private void checkAllAddresses_CheckedChanged(object sender, EventArgs e)
+        {
+            var checkBox = (CheckBox)sender;
+
+            for (var x = 0; x < lstRecipients.Items.Count; x++)
+            {
+                lstRecipients.SetItemChecked(x, checkBox.Checked);
+            }
+        }
+
         #region Private Methods
         private void LoadAddressList()
         {
@@ -107,6 +111,22 @@ namespace SafeFolder
             }
 
             return list;
+        }
+
+        private void AddAddress()
+        {
+            if (!string.IsNullOrEmpty(txtEmailAddress.Text))
+            {
+                var address = new AddressBook
+                {
+                    EmailAddress = txtEmailAddress.Text
+                };
+
+                _addressBookManager.SaveAddress(address);
+                LoadAddressList();
+
+                txtEmailAddress.Text = "";
+            }
         }
 
         #endregion

@@ -54,11 +54,14 @@ namespace SafeFolder.Data.Repositories
 
             using (var data = new SafeFolderEntities())
             {
-                if (data.Configurations.Any())
+                if (data.Configurations != null)
                 {
-                    foreach (var config in data.Configurations)
+                    if (data.Configurations.Any())
                     {
-                        configList.Add(HydrateEntity(config));
+                        foreach (var config in data.Configurations)
+                        {
+                            configList.Add(HydrateEntity(config));
+                        }
                     }
                 }
 

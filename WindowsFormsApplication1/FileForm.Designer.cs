@@ -40,12 +40,13 @@
             this.canForwardCheck = new System.Windows.Forms.CheckBox();
             this.canModifyCheck = new System.Windows.Forms.CheckBox();
             this.canCopyCheck = new System.Windows.Forms.CheckBox();
+            this.checkAllAddresses = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // lstRecipients
             // 
             this.lstRecipients.FormattingEnabled = true;
-            this.lstRecipients.Location = new System.Drawing.Point(84, 44);
+            this.lstRecipients.Location = new System.Drawing.Point(84, 63);
             this.lstRecipients.Name = "lstRecipients";
             this.lstRecipients.Size = new System.Drawing.Size(197, 139);
             this.lstRecipients.TabIndex = 0;
@@ -69,7 +70,7 @@
             // 
             // btnSaveFile
             // 
-            this.btnSaveFile.Location = new System.Drawing.Point(358, 161);
+            this.btnSaveFile.Location = new System.Drawing.Point(408, 179);
             this.btnSaveFile.Name = "btnSaveFile";
             this.btnSaveFile.Size = new System.Drawing.Size(75, 23);
             this.btnSaveFile.TabIndex = 3;
@@ -113,7 +114,7 @@
             this.canDeleteCheck.Checked = true;
             this.canDeleteCheck.CheckState = System.Windows.Forms.CheckState.Checked;
             this.canDeleteCheck.Enabled = false;
-            this.canDeleteCheck.Location = new System.Drawing.Point(358, 65);
+            this.canDeleteCheck.Location = new System.Drawing.Point(404, 63);
             this.canDeleteCheck.Name = "canDeleteCheck";
             this.canDeleteCheck.Size = new System.Drawing.Size(79, 17);
             this.canDeleteCheck.TabIndex = 7;
@@ -126,7 +127,7 @@
             this.canForwardCheck.Checked = true;
             this.canForwardCheck.CheckState = System.Windows.Forms.CheckState.Checked;
             this.canForwardCheck.Enabled = false;
-            this.canForwardCheck.Location = new System.Drawing.Point(358, 99);
+            this.canForwardCheck.Location = new System.Drawing.Point(295, 86);
             this.canForwardCheck.Name = "canForwardCheck";
             this.canForwardCheck.Size = new System.Drawing.Size(86, 17);
             this.canForwardCheck.TabIndex = 8;
@@ -139,7 +140,7 @@
             this.canModifyCheck.Checked = true;
             this.canModifyCheck.CheckState = System.Windows.Forms.CheckState.Checked;
             this.canModifyCheck.Enabled = false;
-            this.canModifyCheck.Location = new System.Drawing.Point(358, 82);
+            this.canModifyCheck.Location = new System.Drawing.Point(404, 86);
             this.canModifyCheck.Name = "canModifyCheck";
             this.canModifyCheck.Size = new System.Drawing.Size(79, 17);
             this.canModifyCheck.TabIndex = 9;
@@ -152,18 +153,32 @@
             this.canCopyCheck.Checked = true;
             this.canCopyCheck.CheckState = System.Windows.Forms.CheckState.Checked;
             this.canCopyCheck.Enabled = false;
-            this.canCopyCheck.Location = new System.Drawing.Point(358, 48);
+            this.canCopyCheck.Location = new System.Drawing.Point(295, 63);
             this.canCopyCheck.Name = "canCopyCheck";
             this.canCopyCheck.Size = new System.Drawing.Size(72, 17);
             this.canCopyCheck.TabIndex = 10;
             this.canCopyCheck.Text = "Can Copy";
             this.canCopyCheck.UseVisualStyleBackColor = true;
             // 
+            // checkAllAddresses
+            // 
+            this.checkAllAddresses.AutoSize = true;
+            this.checkAllAddresses.Checked = true;
+            this.checkAllAddresses.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkAllAddresses.Location = new System.Drawing.Point(87, 41);
+            this.checkAllAddresses.Name = "checkAllAddresses";
+            this.checkAllAddresses.Size = new System.Drawing.Size(120, 17);
+            this.checkAllAddresses.TabIndex = 11;
+            this.checkAllAddresses.Text = "Check/Uncheck All";
+            this.checkAllAddresses.UseVisualStyleBackColor = true;
+            this.checkAllAddresses.CheckedChanged += new System.EventHandler(this.checkAllAddresses_CheckedChanged);
+            // 
             // FileForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(509, 197);
+            this.ClientSize = new System.Drawing.Size(509, 214);
+            this.Controls.Add(this.checkAllAddresses);
             this.Controls.Add(this.canCopyCheck);
             this.Controls.Add(this.canModifyCheck);
             this.Controls.Add(this.canForwardCheck);
@@ -203,5 +218,6 @@
         private System.Windows.Forms.CheckBox canForwardCheck;
         private System.Windows.Forms.CheckBox canModifyCheck;
         private System.Windows.Forms.CheckBox canCopyCheck;
+        private System.Windows.Forms.CheckBox checkAllAddresses;
     }
 }

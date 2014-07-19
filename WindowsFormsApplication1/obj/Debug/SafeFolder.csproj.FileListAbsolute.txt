@@ -13,11 +13,7 @@ C:\Users\jabe\Documents\Visual Studio 2013\Projects\WindowsFormsApplication1\Win
 C:\Users\jabe\Documents\Visual Studio 2013\Projects\WindowsFormsApplication1\WindowsFormsApplication1\obj\Debug\SafeFolder.SafeFolderForm.resources
 C:\Users\jabe\Documents\Visual Studio 2013\Projects\WindowsFormsApplication1\WindowsFormsApplication1\obj\Debug\SafeFolder.Properties.Resources.resources
 C:\Users\jabe\Documents\Visual Studio 2013\Projects\WindowsFormsApplication1\WindowsFormsApplication1\obj\Debug\SafeFolder.csproj.GenerateResource.Cache
-C:\Users\jabe\Documents\Visual Studio 2013\Projects\WindowsFormsApplication1\WindowsFormsApplication1\bin\Debug\Model.Designer.cs
-C:\Users\jabe\Documents\Visual Studio 2013\Projects\WindowsFormsApplication1\WindowsFormsApplication1\bin\Debug\Model.edmx.diagram
 C:\Users\jabe\Documents\Visual Studio 2013\Projects\WindowsFormsApplication1\WindowsFormsApplication1\bin\Debug\Microsoft.Win32.TaskScheduler.dll
-C:\Users\jabe\Documents\Visual Studio 2013\Projects\WindowsFormsApplication1\WindowsFormsApplication1\bin\Debug\SafeFolder.mdf
-C:\Users\jabe\Documents\Visual Studio 2013\Projects\WindowsFormsApplication1\WindowsFormsApplication1\bin\Debug\SafeFolder_log.ldf
 C:\Users\jabe\Documents\Visual Studio 2013\Projects\WindowsFormsApplication1\WindowsFormsApplication1\bin\Debug\SafeFolder.exe.config
 C:\Users\jabe\Documents\Visual Studio 2013\Projects\WindowsFormsApplication1\WindowsFormsApplication1\bin\Debug\SafeFolder.exe.manifest
 C:\Users\jabe\Documents\Visual Studio 2013\Projects\WindowsFormsApplication1\WindowsFormsApplication1\bin\Debug\SafeFolder.application
@@ -42,3 +38,7 @@ C:\Users\jabe\Documents\Visual Studio 2013\Projects\WindowsFormsApplication1\Win
 C:\Users\jabe\Documents\Visual Studio 2013\Projects\WindowsFormsApplication1\WindowsFormsApplication1\obj\Debug\SafeFolder.application
 C:\Users\jabe\Documents\Visual Studio 2013\Projects\WindowsFormsApplication1\WindowsFormsApplication1\obj\Debug\SafeFolder.exe
 C:\Users\jabe\Documents\Visual Studio 2013\Projects\WindowsFormsApplication1\WindowsFormsApplication1\obj\Debug\SafeFolder.pdb
+C:\Users\jabe\Documents\Visual Studio 2013\Projects\WindowsFormsApplication1\WindowsFormsApplication1\bin\Debug\Model.Designer.cs
+C:\Users\jabe\Documents\Visual Studio 2013\Projects\WindowsFormsApplication1\WindowsFormsApplication1\bin\Debug\Model.edmx.diagram
+C:\Users\jabe\Documents\Visual Studio 2013\Projects\WindowsFormsApplication1\WindowsFormsApplication1\bin\Debug\SafeFolder.mdf
+C:\Users\jabe\Documents\Visual Studio 2013\Projects\WindowsFormsApplication1\WindowsFormsApplication1\bin\Debug\SafeFolder_log.ldf
