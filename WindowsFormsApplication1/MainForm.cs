@@ -42,6 +42,7 @@ namespace SafeFolder
         private void SafeFolder_Load(object sender, EventArgs e)
         {
             InitializeSafeFolder();
+            LimitOneConfiguration();
         }
 
         private void SafeFolder_Resize(object sender, EventArgs e)
@@ -56,16 +57,15 @@ namespace SafeFolder
         private void saveConfigurationBtn_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(configName.Text) || string.IsNullOrEmpty(localPath.Text) ||
-                string.IsNullOrEmpty(emailAddress.Text) || string.IsNullOrEmpty(servicePath.Text))
+                string.IsNullOrEmpty(emailAddress.Text))
             {
                 MessageBox.Show("You must complete all fields.");
             }
             else
             {
                 SaveConfiguration();
-                //ClearFields();
-
                 InitializeSafeFolder();
+                LimitOneConfiguration();
             }
         }
 
@@ -170,6 +170,9 @@ namespace SafeFolder
             //    e.Cancel = true;
             //    Hide();
             //}
+            
+            e.Cancel = true;
+            Hide();
         }
         #endregion
 
@@ -299,6 +302,14 @@ namespace SafeFolder
                 lastName.Text = owner.LastName;
                 emailAddress.Text = owner.EmailAddress;
                 password.Text = owner.Password;
+            }
+        }
+
+        private void LimitOneConfiguration()
+        {
+            if (Grid.RowCount > 0)
+            {
+                saveConfigurationBtn.Enabled = false;
             }
         }
 
